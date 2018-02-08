@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Qiniu</id>
+    <version>6.2.1.1</version>
+    <authors>qiniu</authors>
+    <owners>qiniu</owners>
+    <licenseUrl>http://www.opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/qiniu/csharp-sdk</projectUrl>
+    <iconUrl>http://assets.qiniu.com/qiniu-55x41.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>csharp-sdk for qiniu cloud storage</description>
+    <releaseNotes>see https://github.com/qiniu/csharp-sdk/blob/develop/CHANGELOG.md</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>qiniu c#</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="6.0.0.0" />
+    </dependencies>
+  </metadata>
+</package>
