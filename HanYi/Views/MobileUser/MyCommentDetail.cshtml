@@ -1,0 +1,149 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "收到的评论详情";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    var list = ViewBag.list as List<comment>;
+    comment itemQA = new comment();
+    if (list == null)
+    {
+        list = new List<comment>();
+    }
+    else if (list.Count > 0)
+    {
+        itemQA = list[0];
+    }
+}
+<div class="myanswerwrap">
+    <div class="myanswer">
+        <div class="headertop">
+            <a class="arrow" href="@Url.Action("MyComment", "MobileUser")">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+            </a>
+            <span class="title">收到的评论</span>
+        </div>
+        <div class="myanswerbody">
+            @if (list.Count > 0)
+{
+    foreach (var cm in list)
+    {
+        <a id="itemcomment" data-classid="@(cm.classid)" data-id="@(cm.id)" data-name="@(cm.user.name)" href="javascript:;" class="item  flex-h flex-vc" style="background-color:transparent;">
+            <div class="leftC flex1">
+                <div class="ck_select">
+                    <div class="head" style="background-image: url(@(cm.user.photo)); background-size: 100%;"></div>
+                    <div class="qades">
+                        <div class="name fl">@(cm.user.name) - @(cm.classes.courses.name)</div>
+                        <div class="date fl">@(cm.date.HasValue ? cm.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                        <div class="V clearboth">
+                            @{   double i = 0;
+
+                                           i += (cm.c1 + cm.c2 + cm.c3 + cm.c4 + cm.c5 + cm.c6 + cm.c7 + cm.c8 + cm.c9) / 9.0;
+
+
+                                           if (i >= 1)
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/stg.png">
+                                           }
+                                           else
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/str1.png">
+                                           }
+                                           if (i >= 2)
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/stg.png">
+                                           }
+                                           else
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/str1.png">
+                                           }
+                                           if (i >= 3)
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/stg.png">
+                                           }
+                                           else
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/str1.png">
+                                           }
+                                           if (i >= 4)
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/stg.png">
+                                           }
+                                           else
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/str1.png">
+                                           }
+                                           if (i >= 5)
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/stg.png">
+                                           }
+                                           else
+                                           {
+                                        <img class="ms" data-value="1" src="/assets/img/str1.png">
+                                           }
+                            }
+                        </div>
+                    </div>
+                    @*<i class="iconfont fr" style="color: #EA5B5B;">&#xe60c;</i>*@
+                </div>
+                <div class="content">
+                    @(cm.content)
+                </div>
+            </div>
+            @*<div class="per_arrow"></div>*@
+        </a>
+        if (cm.commentsub != null && cm.commentsub.Count > 0)
+        {
+                        <div class="myanswerbodyDetail  flex-h flex-vc">
+                            <div class="detailListLeft">
+                            </div>
+                            <div class="detailList flex1" style="margin-right:2rem;">
+                                @{
+                        cm.commentsub.Sort((x, y) => -x.id.CompareTo(y.id));
+                        foreach (var smsub in cm.commentsub)
+                        {
+                            <dl data-name="answerlist">
+                                <dd>
+                                    <div class="ck_select clearfix">
+                                        <div class="alhead" style="background-image: url(@(smsub.user != null ? smsub.user.photo : smsub.teacher.header)); background-size: 100%;"></div>
+                                        <div class="alqades">
+                                            <div class="name">
+                                                @(smsub.user != null ? smsub.user.name : smsub.teacher.name)
+                                                @if (smsub.teacher != null)
+                                                {
+                                                    <i class="iconfont teacher_icon">&#xe615;</i>
+                                                }
+                                            </div>
+                                            <div class="date">@(smsub.date.HasValue ? smsub.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        @(smsub.content)
+                                    </div>
+                                </dd>
+
+                            </dl>
+                        }
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+<div id="Comment" style="display:block;">
+    <input type="hidden" id="itemid" value="@(itemQA.id)" />
+    <input type="hidden" id="classid" value="@(itemQA.classid)" />
+    <div class="bottomfixd clearfix">
+        <div class="clearfix flex-h flex-hc flex-vc">
+            <textarea id="txtdetail" rows="1" cols="20" class="textare flex1" placeholder="@("@")@(itemQA.user != null ? itemQA.user.name : "")"></textarea>
+            <div id="btn_send" class="send_txt font-size-16" onclick="">回复</div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/assets/js/mobileuser/mycommentdetail.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

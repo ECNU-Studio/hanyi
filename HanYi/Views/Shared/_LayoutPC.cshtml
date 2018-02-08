@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>时时课课</title>
+    <link href="~/assets/css/pcdownload.css?v=1.1" rel="stylesheet" />
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    @RenderSection("css", false)
+    @RenderSection("styles", required: false)
+    <!-- END PAGE LEVEL STYLES -->
+</head>
+<body>
+    <div class="logo-wrap">
+        <img src="~/assets/img/pc/u36.png" />
+    </div>
+    <div class="oprate">
+        <a onclick="sysExit();" href="javascript:;">退出</a>
+    </div>
+    <div style="margin-top: 70px;width:100%;">
+        @RenderBody()
+    </div>
+    <script src="~/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="~/assets/js/common.js?vertion=@(ViewBag.version)"></script>
+    <script>
+        function sysExit() {
+            if (window.confirm('确定退出\n【时时课课】？') == true) {
+                var paras = {
+                };
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(paras),
+                    url: "/Account/LoginOut",
+                    dataType: "json",
+                    contentType: 'application/json'
+                }).success(function (res) {
+                    window.location.href = "@(Url.Action("LoginPC", "Account"))";//服务器
+                }).error(function (xhr, status) {
+                });
+            }
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

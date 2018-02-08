@@ -1,0 +1,82 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<users>;
+    if (list == null)
+    {
+        list = new List<users>();
+    }
+
+}
+@if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input type="checkbox" name="user" class="js-check-all" /></label>
+                    </div>
+                </th>
+                <th width="">姓名</th>
+                <th width="">账户</th>
+                <th width="">邮箱</th>
+                <th width="">手机</th>
+                <th width="">密码</th>
+                <th width="">部门</th>
+                <th width="">职能</th>
+                <th>所上课程</th>
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td>
+                        <div class="ck_select clearfix">
+                            <label><input type="checkbox" data-value="@(item.id)" name="user" class="checkbox" /></label>
+                        </div>
+                    </td>
+                    <td title="@(item.name)"  >
+                        <a href="#" class="update-user" data-value="@(item.id)" data-name="@(item.name)" data-username="@(item.username)"  data-email="@(item.email)" data-department="@(item.department)" data-tel="@(item.tel)">   @(item.name)</a> 
+                    </td>
+                    <td title="@(item.username)">
+                        @(item.username)
+                    </td>
+                    <td title="@(item.email)">
+                        @(item.email)
+                    </td>
+                    <td title="@(item.tel)">
+                        @(item.tel)
+                    </td>                   
+                    <td class="">
+                        <div class="clearfix">
+                            <a href="javascript:void(0)" onclick="PWSet(this,'密码将重置为默认密码：abc123,确定重置？',@(item.id))">重置</a>
+                        </div>
+                    </td>
+                    <td title="@(item.department)">
+                        @(item.department)
+                    </td>
+                    <td title="@(item.position)">
+                        @(item.position)
+                    </td>
+                    <td>
+                        <div class="tcolor">
+                            @if(item.classstudent != null && item.classstudent.Count > 0)
+                            {
+                                foreach(var citem in item.classstudent)
+                                {
+                                     <a href="@Url.Action("CoursesInfo", "Courses", new { id = citem.classes.courses.id })" class="mg5px">@(citem.classes.courses.name)</a>
+                                }
+                            }
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}

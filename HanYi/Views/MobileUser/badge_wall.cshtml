@@ -1,0 +1,198 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "勋章墙";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    users user = ViewBag.user as users;
+    if (user == null)
+    {
+        user = new users();
+    }
+
+    var xueshi = ViewBag.xueshi as List<medal>;
+    var chengji = ViewBag.chengji as List<medal>;
+    var kecheng = ViewBag.kecheng as List<medal>;
+    var tianshu = ViewBag.tianshu as List<medal>;
+    var medaluser = ViewBag.medaluser as List<medaluser>;
+    var classes = ViewBag.classes as List<medaluser>;
+    if (classes == null)
+    {
+        classes = new List<medaluser>();
+    }
+    int totalScore = ViewBag.totalScore;
+}
+<div class="badgewallwrap">
+    <div class="badgewall">
+        <div class="headertop">
+            <a class="arrow" href="@Url.Action("PerCenter", "MobileUser")">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+            </a>
+            <span class="title">勋章墙</span>
+        </div>
+        <section class="item">
+            <div class="title"><em>学习课程</em><span class="sub_title">（已获得@(ViewBag.kechengnum)枚）</span></div>
+            @for (int i = 0; i < kecheng.Count; i++)
+            {
+
+                var item = kecheng[i];
+                if (i == 0 || i == 3 || i == 6)
+                {
+                    @Html.Raw("<div class=\"onewrap flex-h flex-vc\">")
+                }
+
+                <div class="flex1">
+
+                    <img src="@( medaluser.Any(p => p.medalid == item.id) ? item.pichave : item.picno)" />
+
+                </div>
+                if (i == 2 || i == 5 || i == 8)
+                {
+                    @Html.Raw("</div>")
+                }
+            }
+
+        </section>
+        <section class="item">
+            <div class="title"><em>连续天数</em><span class="sub_title">（已获得@(ViewBag.tianshunum)枚）</span></div>
+            @for (int i = 0; i < tianshu.Count; i++)
+            {
+
+                var item = tianshu[i];
+                if (i == 0 || i == 3 || i == 6)
+                {
+                    @Html.Raw("<div class=\"onewrap flex-h flex-vc\">")
+                }
+
+                <div class="flex1">
+
+                    <img src="@( medaluser.Any(p => p.medalid == item.id) ? item.pichave : item.picno)" />
+
+                </div>
+                if (i == 2 || i == 5 || i == 8)
+                {
+                    @Html.Raw("</div>")
+                }
+            }
+        </section>
+        <section class="item">
+            <div class="title"><em>成绩排名</em><span class="sub_title">（已获得@(ViewBag.chengjinum)枚）</span></div>
+            @for (int i = 0; i < chengji.Count; i++)
+            {
+
+                var item = chengji[i];
+                if (i == 0 || i == 3 || i == 6)
+                {
+                    @Html.Raw("<div class=\"onewrap flex-h flex-vc\">")
+                }
+
+                <div class="flex1">
+
+                    <img src="@( medaluser.Any(p => p.medalid == item.id) ? item.pichave : item.picno)" />
+
+                </div>
+                if (i == 2 || i == 5 || i == 8)
+                {
+                    @Html.Raw("</div>")
+                }
+            }
+        </section>
+        <section class="item">
+            <div class="title"><em>累计学分</em><span class="sub_title">（已获得@(ViewBag.classnum)枚）</span></div>
+            <div class="onewrap flex-h flex-vc">
+                @if (totalScore >= 40)
+                {
+                    <div class="flex1">
+                        <img src="~/assets/img/score/Score40.png" />
+                        <div class="walltext">
+                            总分
+                        </div>
+                    </div>
+                }
+                else if (totalScore > 0)
+                {
+                    <div class="flex1">
+                        <img src="~/assets/img/score/Score@(totalScore.ToString("00")).png" />
+                        <div class="walltext">
+                            总分
+                        </div>
+                    </div>
+                }
+                @for (var classnum = 0; classnum < classes.Count && classnum < 2; classnum++)
+                {
+                    var item = classes[classnum];
+                    <div class="flex1">
+                        <img src="~/assets/img/score/ScoreSingle@(item.classes.hour).png" />
+                        <div class="walltext">
+                            @(item.classes.courses.name)
+                        </div>
+                    </div>
+                }
+                @if (classes.Count < 2)
+                {
+                    for (var j = 0; j < 2 - classes.Count; j++)
+                    {
+                        <div class="flex1"></div>
+                    }
+                }
+            </div>
+            @if (classes.Count > 2)
+            {
+                for (int j = 2, i = j - 2; i < classes.Count; i++)
+                {
+
+                    var item = classes[j];
+                    if (i == 0 || i == 3 || i == 6)
+                    {
+                        @Html.Raw("<div class=\"onewrap flex-h flex-vc\">")
+                    }
+
+                    <div class="flex1">
+                        <img src="~/assets/img/score/ScoreSingle@(item.classes.hour).png" />
+                        <div class="walltext">
+                            @(item.classes.courses.name)
+                        </div>
+                    </div>
+                    if (i == 2 || i == 5 || i == 8)
+                    {
+                        @Html.Raw("</div>")
+                    }
+                }
+            }
+        </section>
+
+        @*<section class="item">
+                        <div class="title"><em>已完成课程</em><span class="sub_title">（已获得@(ViewBag.classnum)枚）</span></div>
+                            @{
+                                var classnum = 0;
+                                for (classnum = 0; classnum < classes.Count; classnum++)
+                                {
+                                    if (classnum % 3 == 0)
+                                    {
+                                        @Html.Raw("<div class=\"onewrap flex-h flex-vc\">");
+                                    }
+
+                                    <div class="flex1">
+                                        <img src="@(classes[classnum].classes.courses.honor)" />
+                                        <div class="walltext">
+                                            @(classes[classnum].classes.courses.name)
+                                        </div>
+                                    </div>
+
+                                    if (classnum % 3 == 2)
+                                    {
+                                        @Html.Raw("</div>");
+                                    }
+
+                                }
+                                if (classnum % 3 != 0)
+                                {
+                                    for (int j = classnum % 3; j < 3; j++)
+                                    {
+                                        @Html.Raw(" <div class=\"flex1\"></div>");
+                                    }
+                                    @Html.Raw("</div>");
+                                }
+                            }
+
+            </section>*@
+    </div>
+</div>

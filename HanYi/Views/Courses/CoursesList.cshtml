@@ -1,0 +1,62 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<courses>;
+    if (list == null)
+    {
+        list = new List<courses>();
+    }
+
+}
+@if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input name="group" type="checkbox" class="js-check-all"></label>
+                    </div>
+                </th>
+                <th width="180px">课程名称</th>
+                <th width="180px">培训师</th>
+                <th>简介</th>
+                <th width="48px"></th>
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td>
+                        <div class="ck_select clearfix">
+                            <label><input data-value="@(item.id)" name="group" type="checkbox" class="checkbox" /></label>
+                        </div>
+                    </td>
+                    <td title="">
+                        @(item.name)
+                    </td>
+                    <td title="">
+                       @(item.teacher.name)
+                    </td>
+                    <td >
+                        <div title="@(item.coursesabstract)" class=" clearfix ellipsis"> @(item.coursesabstract)</div>
+                       
+                    </td>
+                    
+                    <td class="">
+                        @*<div class="fl btn_add">
+                                <a href="javascript:void(0)"></a>
+                            </div>*@
+                        <div class="edit_btn">
+                            <a href="@Url.Action("CoursesInfo", "Courses", new { id = item.id })">管理</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}

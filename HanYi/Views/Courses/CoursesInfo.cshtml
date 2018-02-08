@@ -1,0 +1,258 @@
+﻿@using Entity.Entity;
+@{
+    
+    var model = ViewBag.model as courses;
+    if(model == null)
+    {
+        model = new courses();
+    }
+    ViewBag.Title = "课程----基本信息----" + model.name;
+}
+@section styles{
+<link href="~/assets/plugins/uploadify/uploadify.css" rel="stylesheet" />
+    <style>
+        #picList, #picList_xz { border-radius: 50%; }
+        #picList img, #picList_xz img { width: 100px; height: 100px; }
+
+    </style>
+}
+<div class="content">
+    <div class="c_title">
+        <h5>@(ViewBag.Title)</h5>
+    </div>
+    <div class="c_inner_wraper" id="form">
+        <div class="back_s margin_pace"><a href="@Url.Action("Index", "Courses", new { back = "1" })">< 返回课程</a></div>
+        <div class="tab_ul margin_pace">
+            <ul class="clearfix tab_show">
+                <li class="active">
+                    <a href="javascript:;" data-href="#div_01" data-toggle="tab">基本信息</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_02" data-toggle="tab">目录与下载</a>
+                </li>
+                @*<li class="">
+                    <a href="#div_03" data-toggle="tab">班级与学员</a>
+                </li>
+                <li class="">
+                    <a href="#div_04" data-toggle="tab">课程模块</a>
+                </li>
+                <li class="">
+                    <a href="#div_05" data-toggle="tab">问答</a>
+                </li>
+                <li class="">
+                    <a href="#div_06" data-toggle="tab">评价</a>
+                </li>
+                <li class="">
+                    <a href="#div_07" data-toggle="tab">相册</a>
+                </li>
+                <li class="">
+                    <a href="#div_08" data-toggle="tab">学员进度与成绩</a>
+                </li>*@
+            </ul>
+        </div>
+        <!--tab切换-->
+        <div class="tab-content">
+            <div id="div_01" class="tab-pane active">
+                <div class="frame_wrap edit_wrap"  style="padding-top: 0; border:none">
+                    <input type="hidden" id="coursesid" value="@(ViewBag.coursesid)" />
+                    <ul class="edit_ul">
+                        <li class="col-12">
+                            <div class="title">课程名称：</div>
+                            <div class="value" style="position:relative;">
+                                <div class="fl"><div class="Text_long"><input id="name" value="@(model.name)" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                            </div>
+                            <div class="bitian">*</div>
+                        </li>
+                        <li class="multirow">
+                            <div class="title" style="width:60px;">简介：</div>
+                            <div class="value" style="width: 240px;">
+                                <textarea style="width: 225px;" class="Textarea_lt vali-Required" id="coursesabstract">@(model.coursesabstract)</textarea>
+                            </div>
+                            <div class="bitian">*</div>
+                        </li>
+                        <li class="multirow">
+                            <div class="title">简介附件：</div>
+                            <div class="value" style="position: relative; margin-top: 0; width: 72px;">
+                                <div class="fl">
+                                    <div class="btn_upload" id="pic_jj" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                    <input type="file" id="fileupload_jj" name="fileupload" />
+                                    <input id="cover_jj" data-for="pic_jj" value="" placeholder="" class="Text_lt" type="hidden" />
+                                    <input type="hidden" id="name_jj" value="@(model.abstractFilename)" />
+                                    <input type="hidden" id="coverurl_jj" value="@(model.abstractFile)" />
+                                    <input type="hidden" id="filesize_jj" value="@(model.abstractFilesize)" />
+                                </div>
+                            </div>
+                            <div id="picList_jj" style="@(!string.IsNullOrEmpty(model.abstractFile) ? "display: block;" : "display: none;") clear: both;">                               
+                                <div>
+                                    <em>@(model.abstractFilename)</em>
+                                    <a class="del_btn_jj" href="javascript:void(0)"></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-12">
+                            <div class="title" style="width:60px;">培训师：</div>
+                            <div class="value" style="position:relative">
+                                <div class="fl">
+                                    <div class="Text_middle">
+                                        <input id="teacherid_input" placeholder="" class="Text_lt " type="text" value="@(model.teacher != null ? model.teacher.name : "")">
+                                    </div>
+                                </div>
+                                <ul class="DropList" id="DropRes" style="width: 122px; float: left; display: none;"></ul>
+                                <input id="teacherid" placeholder="" class="Text_lt vali-Required" data-for="teacherid_input" type="hidden" value="@(model.teacherid != 0 ? model.teacherid.ToString() : "")">
+                                <div class="bitian">*</div>
+                            </div>
+                        </li>
+                        <li class="col-12 multirow">
+                            <div class="title" style="width:60px;">封面：</div>
+                            <div class="value" style="position: relative; margin-top: 0; width: 72px;">
+                                <div class="fl">
+                                    <div class="btn_upload" id="pic" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                    <input type="file" id="fileupload" name="fileupload" />
+                                    <input id="cover" data-for="pic" value="@(model.cover)" placeholder="" class="Text_lt vali-Required" type="hidden" />
+                                </div>
+                            </div>
+                            <div class="bitian">*</div>
+                            <div id="picList" style="@(!string.IsNullOrEmpty(model.cover) ? "" : "display: none;") clear: both; margin: 50px 50px 20px 50px;">
+                                <div class="upload_img">
+                                    <img src="@(model.cover)" />
+                                    <a href="javascript:void(0)" class="close"></a>
+                                </div>
+                            </div>
+                        </li>
+                        @*<li class="col-12 multirow">
+                            <div class="title" style="width:60px;">勋章图：</div>
+                            <div class="value" style="position: relative; margin-top: 0; width: 72px;">
+                                <div class="fl">
+                                    <div class="btn_upload" id="pic_xz" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                    <input type="file" id="fileupload_xz" name="fileupload" />
+                                    <input id="honor" data-for="pic_xz" value="@(model.honor)" placeholder="" class="Text_lt vali-Required" type="hidden" />
+                                </div>
+                            </div>
+                            <div class="bitian">*</div>
+                            <div id="picList_xz" style="@(!string.IsNullOrEmpty(model.honor) ? "" : "display: none;") clear: both; margin: 50px 50px 20px 50px;">
+                                <div class="upload_img">
+                                    <img src="@(model.honor)" />
+                                    <a href="javascript:void(0)" class="close"></a>
+                                </div>
+                            </div>
+                        </li>*@
+                    </ul>
+                    <div class="clearboth"></div>
+                    <div class="new_btn_frame fl">
+                        <div class="save btn" id="savebtn"><a href="javascript:void(0)">保存</a></div>
+                        <div class="clearboth"></div>
+                    </div>
+                </div>  
+            </div>
+            <div id="div_02" class="tab-pane">
+                <div class="margin_pace">
+                    <div class="clearfix">
+                        <div class="clearfix">
+                            <div class="fun_btn fl">
+                                <a class="btn_show mr_20px" href="javascript:;" id="addMain">添加章节</a>
+                                <a class="btn_show mr_20px" href="javascript:void" id="delMain">删除</a>
+                        @*<a class="btn_show mr_20px" href="javascript:void">复制</a>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb_30px clearfix">
+                        <div id="res_main">
+                            
+                        </div>
+                    </div>
+                    <div class="clearboth"></div>
+                    <div class="new_btn_frame fl">
+                        <div class="save btn" id="savebtn_zj"><a href="javascript:void(0)">保存</a></div>
+                        <div class="clearboth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*添加资料弹出框*@
+<div class="frame_panel" id="open_panel" style="display:none;">
+    <div class="frame_box" style="width: 500px; left: 50%; top: 20%;margin-left:-250px;">
+        <div class="frame_close" onclick="$(this).parent().parent().hide(); CloseAllErrorTip();"></div>
+        <div class="frame_title">添加资料</div>
+        <div id="content">
+            <div class="frame_wrap edit_wrap" style="padding-top:0;">
+                <ul class="edit_ul">
+                    <li class="col-12">
+                        <div class="title">标题：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="name_zl" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12 multirow">
+                        <div class="title">资料：</div>
+                        <div class="value" style="position: relative; margin-top: 0; width: 72px;">
+                            <div class="fl">
+                                <div class="btn_upload" id="pic_zl" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                <input type="file" id="fileupload_zl" name="fileupload" />
+                                <input id="cover_zl" data-for="pic_zl" value="" placeholder="" class="Text_lt vali-Required" type="hidden" />
+                                <input type="hidden" id="coverurl_zl" value=""/>
+                                <input type="hidden" id="filesize_zl" value="" />
+                            </div>
+                        </div>
+                        <div class="bitian">*</div>
+                        <div id="picList_zl" style="display: none; clear: both;">
+                            <div></div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn_zl"><a href="javascript:void(0)">保存</a></div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="frame_panel" id="open_panel_link" style="display:none;">
+    <div class="frame_box" style="width: 500px; left: 50%; top: 20%;margin-left:-250px;">
+        <div class="frame_close" onclick="$(this).parent().parent().hide(); CloseAllErrorTip();"></div>
+        <div class="frame_title">添加外链</div>
+        <div id="content">
+            <div class="frame_wrap edit_wrap" style="padding-top:0;">
+                <ul class="edit_ul">
+                    <li class="col-12">
+                        <div class="title">标题：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="name_zl_link" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">外链：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="cover_zl_link" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                </ul>
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn_zl_link"><a href="javascript:void(0)">保存</a></div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/assets/plugins/uploadify/jquery.uploadify.min.js"></script>
+    <script src="~/assets/plugins/uploadify/swfobject.js"></script>
+<script src="~/assets/js/course/courses.js?v=@(ViewBag.version)"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

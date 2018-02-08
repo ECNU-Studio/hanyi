@@ -1,0 +1,102 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<catalog>;
+    if (list == null)
+    {
+        list = new List<catalog>();
+    }
+}
+@if (list.Count > 0)
+{
+    foreach (var item in list)
+    {
+        <div class="graph_cont clearfix">
+            <label><input type="checkbox" name="graph_cont" data-id="@(item.id)"></label>
+            <div class="fl graph_detail">
+                <div class="clearfix">
+                    <input class="gtxt vali-Required" data-id="@(item.id)" type="text" value="@(item.name)" autocomplete="off">
+                    <div class="gtxt_small_btn">
+                        <a class="btn_show" href="javascript:;" data-name="gtxt">章节</a>
+                    </div>
+                </div>
+                @if (item.subcatalog != null && item.subcatalog.Count > 0)
+                {
+                    foreach (var subcatalogItem in item.subcatalog)
+                    {
+                        <div data-name="gtxt_samll_wrap" data-id="@(subcatalogItem.id)" data-catalogid="@(subcatalogItem.catalogid)">
+                            <div class="clearfix" data-name="gtxt_small">
+                                <input class="gtxt_small vali-Required" type="text" value="@(subcatalogItem.name)" autocomplete="off">
+                                <div class="green_btn" style="display:inline-block;"><a href="javascript:void(0)">资料</a></div>
+                                <div class="green_btn_link" style="display:inline-block;"><a href="javascript:void(0)">外链</a></div>
+                                <div class="green_btn_del">
+                                    <a class="btn_show" href="javascript:void">删除</a>
+                                </div>
+                            </div>
+                            <div class="d_m clearfix">
+                                @if (subcatalogItem.subcatalogattachment != null && subcatalogItem.subcatalogattachment.Count > 0)
+                                {
+                                    foreach (var attachItem in subcatalogItem.subcatalogattachment.OrderBy(l => l.id))
+                                    {
+                                        <div class="dml fl" data-type="@(attachItem.type)" data-id="@(attachItem.id)" data-size=@(attachItem.size) data-subcatalogid="@(attachItem.subcatalogid)">
+                                            <div class="dt">
+                                                <a href="@(attachItem.path)" target="_blank">@(attachItem.name)</a>
+                                            </div>
+                                            <div class="fr">
+                                                <a class="del_btn" href="javascript:void(0)"></a>
+                                            </div>
+                                            <input type="hidden" value="@(attachItem.path)">
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="graph_cont clearfix ">
+        <label><input type="checkbox" name="graph_cont"></label>
+        <div class="fl graph_detail">
+            <div class="clearfix">
+                <input class="gtxt vali-Required" type="text" autocomplete="off">
+                <div class="gtxt_small_btn">
+                    <a class="btn_show" href="javascript:;" data-name="gtxt">章节</a>
+                </div>
+            </div>
+            <div data-name="gtxt_samll_wrap">
+                <div class="clearfix" data-name="gtxt_small">
+                    <input class="gtxt_small vali-Required" type="text" autocomplete="off">
+                    <div class="green_btn" style="display:inline-block;"><a href="javascript:void(0)">资料</a></div>
+                    <div class="green_btn_link" style="display:inline-block;"><a href="javascript:void(0)">外链</a></div>
+                    <div class="green_btn_del">
+                        <a class="btn_show" href="javascript:void">删除</a>
+                    </div>
+                </div>
+                <div class="d_m clearfix">
+                    @*<div class="dml fl">
+                            <div class="dt">
+                                <p>文件</p>
+                            </div>
+                            <div class="fr">
+                                <a class="del_btn" href="javascript:void(0)"></a>
+                            </div>
+                        </div>
+
+                        <div class="dml fl">
+                            <div class="dt">
+                                <p>文件222222</p>
+                            </div>
+                            <div class="fr">
+                                <a class="del_btn" href="javascript:void(0)"></a>
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+}

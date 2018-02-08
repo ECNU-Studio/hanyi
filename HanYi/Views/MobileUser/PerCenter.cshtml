@@ -1,0 +1,170 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    users user = ViewBag.user as users;
+    var company = ViewBag.company as companys;
+    if (user == null)
+    {
+        user = new users();
+    }
+    if (company == null)
+    {
+        company = new companys();
+    }
+    List<medaluser> medaluser = ViewBag.medaluser;
+    if (medaluser == null)
+    {
+        medaluser = new List<medaluser>();
+    }
+}
+<div style="padding-bottom:7rem;">
+    <div class="box_wraper flex-h flex-hw ">
+        <div class="com_logo">
+            @if (!string.IsNullOrEmpty(company.cover))
+            {
+                <img src="@(company.cover)" />
+            }
+            else
+            {
+                <img src="/assets/img/00.png" />
+            }
+        </div>
+    </div>
+
+    <div class="box_wraper flex-h flex-hw ">
+
+        <div class="per_conter clearfix  flex-v  flex-vw">
+            <a href="@Url.Action("Information", "MobileUser")" class="per_msg flex-h flex-vc">
+
+                <div class="peri_head">
+                    <img src="@(!string.IsNullOrEmpty(user.photo) ? user.photo : "/assets/img/defaultAvatar.png")" />
+                </div>
+                <div class="per_detail flex1">
+                    <h3>@(user.name)</h3>
+                    @*<h5>@(company.name)</h5>*@
+                    <h5>@(user.department)</h5>
+                    <h5>@(user.position)</h5>
+                    @*<h5><em>@(user.position)</em><em>@(user.username)</em></h5>*@
+                </div>
+                <div class="per_arrow"></div>
+            </a>
+            <div class="wall_cont">
+                <a href="javascript:;" class="medal-wall" data-href="@Url.Action("badge_wall", "MobileUser")">
+                    <div style="height:30px;position:relative;">
+                        <em class="fl" style="height:18px;line-height:18px;">勋章墙</em>
+                        <i data-for="ljxs" data-item="bz" class="help_icon"></i>
+                        <div class="med_arrow"></div>
+                    </div>
+
+                    <div class="wall-img flex-h flex-vc">
+                        @foreach (var item in medaluser)
+                        {
+                            <div class="imgwrap flex1">
+                                @if(item.type == 2)
+                                {
+                                     <img src="~/assets/img/score/ScoreSingle@(item.classes.hour).png" />
+                                }
+                                else
+                                {
+                                     <img src="@(item.medal.pichave)" />  
+                                }
+                                        <div class="walltext">
+                                    @{
+                            var textContent = "";
+                            if (item.medal == null)
+                            {
+                                textContent = item.classes.courses.name;
+                            }
+                            else
+                            {
+                                switch (item.medal.type)
+                                {
+                                    case medaltype.XUESHI:
+                                        textContent = "累计学分";
+                                        break;
+                                    case medaltype.TIANSHU:
+                                        textContent = "连续天数";
+                                        break;
+                                    case medaltype.CHENGJI:
+                                        textContent = "成绩排名";
+                                        break;
+                                    case medaltype.KECHENG:
+                                        textContent = "学习课程";
+                                        break;
+                                }
+                            }
+
+                                    }
+                                    @(textContent)
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </a>
+
+            </div>
+            <div class="list_show">
+                <ul id="list_show">
+                    <li><a href="@Url.Action("ScoreRank", "MobileUser")"><div>成绩与排名</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("MyAnswer", "MobileUser")"><div>收到的问答</div>
+                        @if (user.new_ans)
+                        {
+                            <i class="tip"></i> 
+                        }                          
+                        <div class="item_arrow"></div></a>
+                    <div class="clearboth"></div>
+                    </li>
+                    @*<li><a href="@Url.Action("MyComment", "MobileUser")"><div>收到的评论</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>*@
+                    <li><a href="@Url.Action("Settings", "MobileUser")"><div>设置</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("ChangePW", "MobileUser")"><div>修改密码</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("Guidelines", "MobileUser")"><div>使用指南</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("AboutUs", "MobileUser")"><div>关于我们</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    @*<li><a href="@Url.Action("Intro", "MobileUser")"><div>平台介绍</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("Help", "MobileUser")"><div>功能介绍</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("Cartoon", "MobileUser")"><div>宣传动画</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>*@
+
+                
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dialogwrap" id="ljxs">
+    <div class="dialog">
+        <h1 class="title">勋章墙规则</h1>
+        <p>勋章墙共分为"学习课程、连续天数、成绩排名、累计学分"四个板块。
+        <br />
+            其中."学习课程、连续天数、成绩排名"三个板块的勋章在达到相应要求后会依次点亮。<br />
+        "累积学分"板块中，学员在完成每项课程后会获得相应学分的勋章及相加总学分勋章。<br />
+            您所获得的所有勋章可以在"个人中心"中点击“勋章墙”查看。
+        </p>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $("[data-item='bz']").click(function (e) {
+            e.stopPropagation();
+            var $this = $(this), id = $this.attr("data-for");
+            $(".dialogwrap").hide();
+            $("#" + id).show();
+        });
+
+        $(".medal-wall").click(function (e) {
+            e.stopPropagation();
+            var $this = $(this), href = $this.attr("data-href");
+            location.href = href;
+        });
+        $(".dialogwrap").click(function () {
+            $(this).hide();
+        });
+        $("li a").click(function () {
+            $(this).find("i.tip").hide();
+            if ($(this).find("i.tip").length > 0)
+                $("i.tip").hide();
+        });
+
+         
+    </script>
+}

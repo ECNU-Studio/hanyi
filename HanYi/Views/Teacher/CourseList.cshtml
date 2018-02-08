@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "CourseList";
+}
+
+ 
+
+@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<courses>;
+    if (list == null)
+    {
+        list = new List<courses>();
+    }
+
+}
+@if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="200px">课程名称</th>
+                <th width="180px">简介</th>
+                <th>班级</th>
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td title="">
+                        @(item.name)
+                    </td>
+                    <td title="">
+                        @(item.coursesabstract)
+                    </td>
+                    <td>
+                        <div class=" ">
+                            <a href="javascript:void(0)">@(item.classes == null ? 0 : item.classes.Count)</a>
+                        </div>
+                        
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}

@@ -1,0 +1,44 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<ScoresView>;
+    if (list == null)
+    {
+        list = new List<ScoresView>();
+    }
+
+}
+@if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable" id="score_table">
+            <tr class="fixThead">
+
+                <th width="100px">姓名</th>
+                <th width="100px">手机</th>
+                <th width="100px">分数</th>
+
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+
+                    <td title="">
+                        @(item.user.name)
+                    </td>
+                    <td title="">
+                        @(item.user.tel)
+                    </td>
+                    <td title="">
+                        <input placeholder="成绩" data-value="@(item.userid)" class="Text_lt  vali-Number" type="text" value="@(item.score.HasValue?item.score.Value.ToString("#0.##"):"")">
+                    </td>
+
+                </tr>
+            }
+        </table>
+    </div>
+    
+    @(ViewBag.Pager)
+     
+}
+ 

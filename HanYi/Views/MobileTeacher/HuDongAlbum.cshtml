@@ -1,0 +1,97 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "HuDong";
+    Layout = null;
+    List<album> albums = ViewBag.albums as List<album>;
+    if (albums == null)
+    {
+        albums = new List<album>();
+    }
+
+}
+
+
+
+  
+
+<div id="xiangce_content" class="content"  >
+    <ul class="clearfix QAwrap" style="padding:0 2rem;">
+        @for (int i = 0; i < albums.Count; i++)
+        {
+            var item = albums[i];
+            <li style="@(i > 2 ? "display:none" : "") ">
+                <div class="ck_select">
+                    <div class="header" style="background-image: url(@(item.user != null ? item.user.photo : item.teacher.header)); background-size: 100%;"></div>
+                    <div class="qades">
+                        <div class="name">
+                            @(item.user != null ? item.user.name : item.teacher.name)
+                            @if (item.teacher != null)
+                            {
+                                <i class="iconfont teacher_icon">&#xe615;</i>
+                            }
+                        </div>
+                        <div class="date">@(item.date.HasValue ? item.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                    </div>
+
+                </div>
+                <div class="content">
+                    @(item.content)
+                </div>
+@if (!string.IsNullOrEmpty(item.pic1) || !string.IsNullOrEmpty(item.pic2) || !string.IsNullOrEmpty(item.pic3) || !string.IsNullOrEmpty(item.pic4) || !string.IsNullOrEmpty(item.pic5) || !string.IsNullOrEmpty(item.pic6))
+{
+                <dl data-name="Photolist" class="photolist clearfix PhotoSwipe_Album">
+                    @if (item.pic1 != null && item.pic1 != "")
+                    {
+                        var WH = (item.pic1.Split('?').Length >= 2 ? item.pic1.Split('?')[1] : "400X600");
+                        <dd style="width: 6rem; ">
+                            <img data-size="@(WH)" src="@(item.pic1)" style="width: 6rem;height: 6rem;" />
+                        </dd>
+                    }
+
+                    @if (item.pic2 != null && item.pic2 != "")
+                    {
+                        var WH = (item.pic2.Split('?').Length >= 2 ? item.pic2.Split('?')[1] : "400X600");
+                        <dd style="width: 6rem; ">
+                            <img data-size="@(WH)" src="@(item.pic2)" style="width: 6rem;height: 6rem;" />
+                        </dd>
+                    }
+                    @if (item.pic3 != null && item.pic3 != "")
+                    {
+                        var WH = (item.pic3.Split('?').Length >= 2 ? item.pic3.Split('?')[1] : "400X600");
+                        <dd style="width: 6rem; ">
+                            <img data-size="@(WH)" src="@(item.pic3)" style="width: 6rem;height: 6rem;" />
+                        </dd>
+                    }
+                    @if (item.pic4 != null && item.pic4 != "")
+                    {
+                        var WH = (item.pic4.Split('?').Length >= 2 ? item.pic4.Split('?')[1] : "400X600");
+                        <dd style="width: 6rem; ">
+                            <img data-size="@(WH)" src="@(item.pic4)" style="width: 6rem;height: 6rem;" />
+                        </dd>
+                    }
+                    @if (item.pic5 != null && item.pic5 != "")
+                    {
+                        var WH = (item.pic5.Split('?').Length >= 2 ? item.pic5.Split('?')[1] : "400X600");
+                        <dd style="width: 6rem; ">
+                            <img data-size="@(WH)" src="@(item.pic5)" style="width: 6rem;height: 6rem;" />
+                        </dd>
+                    }
+                    @if (item.pic6 != null && item.pic6 != "")
+                    {
+                        var WH = (item.pic6.Split('?').Length >= 2 ? item.pic6.Split('?')[1] : "400X600");
+                        <dd style="width: 6rem; ">
+                            <img data-size="@(WH)" src="@(item.pic6)" style="width: 6rem;height: 6rem;" />
+                        </dd>
+                    }
+                </dl>
+}
+            </li>
+        }
+        @if (albums.Count > 2)
+        {
+            <a href="javascript:;" class="show_all">查看更多</a>
+        }
+    </ul>
+
+</div>
+

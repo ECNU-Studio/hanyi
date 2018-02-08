@@ -1,0 +1,30 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "收到的问答";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+<div class="myanswerwrap">
+    <div class="myanswer">
+        <div class="headertop">
+            <a class="arrow" href="@Url.Action("PerCenter", "MobileUser")">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+            </a>
+            <span class="title">收到的问答</span>
+        </div>
+        <div class="myanswerbody">
+            <div class="input_sear">
+                <input id="content" class="" type="text" value="" />
+                <i>&#xe631;</i>
+            </div>
+            <div id="res">
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="~/assets/js/mobileuser/MyAnswer.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

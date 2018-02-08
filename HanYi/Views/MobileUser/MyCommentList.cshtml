@@ -1,0 +1,34 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<comment>;
+    if (list == null)
+    {
+        list = new List<comment>();
+    }
+}
+@if (list.Count > 0)
+{
+    foreach (var item in list)
+    {
+        <a href="@Url.Action("MyCommentDetail", "MobileUser", new { id = item.id })" class="item  flex-h flex-vc">
+            <div class="leftC flex1">
+                <div class="ck_select">
+                    <div class="head" style="background-image: url(@(item.user.photo)); background-size: 100%;background-reapeat:norepeat;"></div>
+                    <div class="qades">
+                        <div class="name">@(item.user.name) - @(item.classes.courses.name)</div>
+                        <div class="date">@(item.date.HasValue ? item.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                    </div>
+                </div>
+                <div class="content">
+                    @(item.content)
+                </div>
+            </div>
+            <div class="per_arrow"></div>
+        </a>
+    }
+}
+else
+{
+    <div class="noData">暂无相关信息</div>
+}

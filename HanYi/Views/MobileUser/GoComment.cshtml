@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "评论";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+<div class="gocommentwrap">
+    <input type="hidden" id="classid" value="@(ViewBag.classid)" />
+    <div class="gocomment">
+        <div class="headertop">
+            <a class="arrow" href="@(ViewBag.backUrl)">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+            </a>
+            <span class="title">评价</span>
+        </div>
+        <div class="gocommentbody" style="margin-top:1rem;">
+            <section class="item">
+                <h3>培训内容</h3>
+                <ul class="clearfix">
+                    <li>
+                        <div class="name">1.培训的时间安排非常适宜？</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">2.培训的内容安排有序，便于学习？</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">3.讲义材料非常有用？</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section class="item">
+                <h3>培训师</h3>
+                <ul class="clearfix">
+                    <li>
+                        <div class="name">4.训师准备非常充分？</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">5.培训师对此次课程主题十分了解在行？</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">6.培训过程中会鼓励全员参与和互动？</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section class="item">
+                <h3>培训效果</h3>
+                <ul class="clearfix">
+                    <li>
+                        <div class="name">7.这次培训对我非常有帮助？</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">8.培训后能让人对相关知识有很清晰的理解？</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="name">9.请给出这次培训的总体评分：</div>
+                        <div class="starwrap">
+                            <img class="ms" data-value="1" src="/assets/img/str1.png">
+                            <img class="ms" data-value="2" src="/assets/img/str1.png">
+                            <img class="ms" data-value="3" src="/assets/img/str1.png">
+                            <img class="ms" data-value="4" src="/assets/img/str1.png">
+                            <img class="ms" data-value="5" src="/assets/img/str1.png">
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                @*<textarea id="txtContent" style="width: 95%; border-radius: 8px; padding: 2%; border-color: #ccc;font-size:1.5rem;" placeholder="请写下您的评语" rows="8"></textarea>*@
+                <a class="btn_submit">提交</a>
+            </section>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(".ms").click(function () {
+            var $this = $(this), $item = $this.closest(".starwrap");
+            $(".ms", $item).attr("src", "/assets/img/str1.png");
+            if ($(this).attr("data-value") == "5") {
+                $item.attr("data-value",$(this).attr("data-value"));
+                $(".ms", $item).attr("src", "/assets/img/stg.png");
+            }
+            else {
+                $item.attr("data-value",$(this).attr("data-value"));
+                $(this).next().prevAll().attr("src", "/assets/img/stg.png");
+            }
+        });
+
+        $(".btn_submit").click(function () {
+            var res = {}, arr = [];
+            var isTure = true;
+            $(".starwrap").each(function (index, item) {
+                var $this = $(this),dataVal = $this.attr("data-value") || 0;
+                if (dataVal == 0) {
+                    showMsg("请对第”" + (index + 1) + "“进行评价");
+                    isTure = false;
+                    return false;
+                } else {
+                    arr.push(dataVal);
+                }
+            });
+            var content = "";//$("#txtContent").val();
+            //if (content == "") {
+            //    showMsg("请填写您的评语");
+            //    return false;
+            //}
+            if (!isTure) {
+                return;
+            }
+            res = {
+                classid:$("#classid").val(),
+                content: content,
+                c1: arr[0],
+                c2: arr[1],
+                c3: arr[2],
+                c4: arr[3],
+                c5: arr[4],
+                c6: arr[5],
+                c7: arr[6],
+                c8: arr[7],
+                c9: arr[8]
+            }
+            showloading("");
+            var paras = {
+                model: (res),
+            };
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(paras),
+                url: "/MobileUser/PostGoComment",
+                dataType: "json",
+                contentType: 'application/json'
+            }).success(function (res) {
+                if (res.success) {
+                    showMsg("评论成功");
+                    window.location.href = '@(ViewBag.backUrl)';
+                } else {
+                    showMsg(res.message);
+                }
+                hideloading();
+            }).error(function (xhr, status) {
+                hideloading();
+            });
+
+        });
+
+    </script>
+}

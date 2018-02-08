@@ -1,0 +1,117 @@
+﻿
+ @using Entity.Entity;
+@{
+    Layout = null;
+    var listcm = ViewBag.listcm as List<classmodels>;
+    if (listcm == null)
+    {
+        listcm = new List<classmodels>();
+    }
+
+    var listuser = ViewBag.listuser as List<users>;
+    if (listuser == null)
+    {
+        listuser = new List<users>();
+    }
+
+    var listss = ViewBag.listss as List<studystate>;
+    if (listss == null)
+    {
+        listss = new List<studystate>();
+    }
+    var listcc = ViewBag.listcc as List<comment>;
+    if(listcc==null)
+    {
+        listcc = new List<comment>();
+    }
+}
+@if (listuser.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable" id="state_table">
+            <tr class="fixThead">
+
+                <th width="100px">姓名</th>
+                <th width="100px">手机</th>
+                @foreach (var item in listcm)
+                {
+                     <th width="100px">@(item.title+"("+ item.type+")")</th>
+                }
+                
+            </tr>
+            @foreach (var item in listuser)
+            {
+                <tr class="row">
+
+                    <td title="">
+                        @(item.name)
+                    </td>
+                    <td title="">
+                        @(item.tel)
+                    </td>
+                    @foreach (var itemcm in listcm)
+                    {
+                        var ss = listss.Where(p => p.userid == item.id && p.modelid == itemcm.id).FirstOrDefault();
+                         <td title="">
+                             @if(itemcm.type=="勾选")
+                             {
+                                <div class="ck_select clearfix" style="float:none">
+                                    <label><input data-value="@(item.id)" data-mid="@(itemcm.id)"  name="studystate" type="checkbox" class="checkbox" @(ss!=null&&ss.isfinish.HasValue && ss.isfinish.Value ? "checked='checked'" : "") /></label>
+                                </div>
+                             }
+                             else if (itemcm.type == "打分")
+                             {
+                                <input name="studyinput" style="width:80px"  placeholder="打分" class="Text_lt " data-value="@(item.id)" data-mid="@(itemcm.id)" type="text" value="@(ss!=null&&ss.score.HasValue? ss.score.Value.ToString("##.##") :"")">
+                             }
+                             else if(itemcm.type == "测试")
+                             {
+                                 <div class="ck_select clearfix" style="float:none">
+                                    <label> 
+                                         @(ss!=null&&ss.isfinish.HasValue && ss.isfinish.Value ? "已完成" : "未完成")   
+                                         @(ss != null && ss.score.HasValue && ss.score.Value>0 ? "("+ss.score.Value.ToString("##.##")+")" : "")
+                                    </label>
+                                </div>
+                             }
+                             else if(itemcm.type == "问卷")
+                             {
+                                  <div class="ck_select clearfix" style="float:none">
+                                    <label> 
+                                         @(ss!=null&&ss.isfinish.HasValue && ss.isfinish.Value ? "已完成" : "未完成")                                            
+                                    </label>
+                                  </div>
+                             }
+                             else if(itemcm.type=="评价")
+                             {
+                                var score = 0.0;
+                                var cc = listcc.Where(p => p.userid == item.id).FirstOrDefault();
+                                if (cc != null)
+                                {
+                                    score = (cc.c1 + cc.c2 + cc.c3 + cc.c4 + cc.c5 + cc.c6 + cc.c7 + cc.c8 + cc.c9) / 9.0;
+                                }
+                               <div class="ck_select clearfix" style="float:none">
+                                    <label> 
+                                         @(cc != null ? "已完成" : "未完成")  
+                                         @("("+score.ToString("##.##")+")")                                          
+                                    </label>
+                                  </div>
+                             }
+                             else
+                             {
+                                <input name="studystate"    placeholder="@(itemcm.type)" data-value="@(item.id)" disabled="disabled" data-mid="@(itemcm.id)" class="Text_lt " type="text" value="@(ss!=null&&ss.score.HasValue? ss.score.Value.ToString("##.##") :"")">
+                             }
+
+                        </td>
+                        
+                        
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+
+    @(ViewBag.Pager)
+
+}
+
+
+

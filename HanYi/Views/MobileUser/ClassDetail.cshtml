@@ -1,0 +1,648 @@
+﻿@using Entity.Entity;
+@using HanYi.Util;
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    var modle = ViewBag.modle as classes;
+    if (modle == null)
+    {
+        modle = new classes();
+
+    }
+    else
+    {
+        //ViewBag.Title = modle.courses.name;
+    }
+    qa newqa = ViewBag.newqa as qa;
+    if (newqa == null)
+    {
+        newqa = new qa();
+    }
+    album newalbum = ViewBag.newalbum as album;
+    if (newalbum == null)
+    {
+        newalbum = new album();
+    }
+    List<studystate> studyState = ViewBag.studyState;
+    if (studyState == null)
+    {
+        studyState = new List<studystate>();
+    }
+    List<classaddress> classaddressList = ViewBag.classAddress;
+    if (classaddressList == null)
+    {
+        classaddressList = new List<classaddress>();
+    }
+
+}
+@section styles{
+    <style>
+        .nav { display: none; }
+
+        .top_back { color: #666666; position: relative; width: 100%; height: 40px; background-color: #fff; }
+
+        .top_back a { font-size: 12px; background: url(../../assets/img/toleft.png) no-repeat 0 center; background-size: 10px 14px; padding-left: 20px; line-height: 40px; margin-left: 10px; left: 0px; width: 40px; height: 40px; display: block; float: left; }
+
+        .top_back a:hover { background-color: #666; }
+        .top_back div { margin: 0 auto; width: 200px; text-align: center; height: 40px; line-height: 40px; }
+
+        #markWrap .mark, #markWrapQrcode .mark { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1300; background-color: rgba(0,0,0, .8); filter: alpha(opacity=80); -moz-opacity: 0.8; opacity: 0.8; display: block; }
+
+        #markWrap .content { position: fixed; bottom: 0; width: 100%; z-index: 1301; text-align: center; background-color: #e6e6e8; }
+
+        #markWrap .content li { line-height: 55px; color: #090909; font-size: 16px; background-color: #fff; }
+        #markWrapPic { background-color: #ebebeb; }
+        #markWrapPic .leftBtn { background: url(/assets/img/msya/leftBtn.png) no-repeat; background-size: contain; display: inline-block; float: left; padding: 15px 10px; border-radius: 8px; color: #fff; width: 90px; height: 40px; text-align: center; margin-left: 0px; }
+
+        #markWrapPic .showimg { text-align: center; width: 80px; height: 80px; /*background-color: #EBEBEC;*/ padding: 10px; float: left; position: relative; overflow: hidden; }
+
+        #markWrapPic .showimg .deletebtn { width: 30px; height: 30px; position: absolute; right: 12px; top: 3px; }
+
+        #annulus text { font-size: 14px !important; }
+        .tab-content .hudong .content .QAwrap .lineTwo::after { margin: 0 !important; }
+    </style>
+    <script src="~/assets/plugins/photoswipe/photoswipe-ui-default.js"></script>
+    <script src="~/assets/plugins/photoswipe/photoswipe-ui-default.min.js"></script>
+    <script src="~/assets/plugins/photoswipe/photoswipe.js"></script>
+    <script src="~/assets/plugins/photoswipe/photoswipe.min.js"></script>
+    <link href="~/assets/plugins/photoswipe/photoswipe.css" rel="stylesheet" />
+
+}
+<section id="classdetial" style="position:relative;height:100%;">
+    <div id="gallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+
+        <div class="pswp__scroll-wrap">
+
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+
+            <div class="pswp__ui pswp__ui--hidden">
+
+                <div class="pswp__top-bar">
+
+                    <div class="pswp__counter"></div>
+
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip">
+                    </div>
+                </div>
+
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="headertop">
+        <a class="arrow" href="@Url.Action("Index", "MobileUser")">
+            <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+        </a>
+        <span class="title">@(modle.courses.name)</span>
+    </div>
+    <input id="type" value="@(ViewBag.type)" hidden="hidden" />
+    <input id="id" value="@(modle.id)" hidden="hidden" />
+    <input id="username" value="@(ViewBag.username)" type="hidden" />
+    <ul class="indextab">
+        <li>
+            <a data-href="#div_01" href="javascript:;" data-toggle="tab">
+                <h5>课程信息</h5>
+            </a>
+        </li>
+        <li>
+            <a data-href="#div_02" href="javascript:;" data-toggle="tab">
+
+                <h5>学习旅程</h5>
+            </a>
+        </li>
+        <li>
+            <a data-href="#div_03" href="javascript:;" data-toggle="tab">
+
+                <h5>互动社区</h5>
+            </a>
+        </li>
+        <li>
+            <a data-href="#div_04" href="javascript:;" data-toggle="tab">
+
+                <h5>班级排名</h5>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+
+        <div id="div_01" class="tab-pane " style="padding-bottom: 2rem;">
+            <div class="lable">课程简介</div>
+            <div class="space_show" style="@(!string.IsNullOrEmpty(modle.courses.abstractFile) ? "padding-bottom:0;" : "")">
+                <div class="intro">@Html.Raw(!string.IsNullOrEmpty(modle.courses.coursesabstract) ? modle.courses.coursesabstract.Replace("{换行}", "<br/>") : "")</div>
+                <div class="last-attach" style="@(!string.IsNullOrEmpty(modle.courses.abstractFile) ? "display:block;" : "display:none;")">
+                    <div class="attach">
+                        <a href="@(modle.courses.abstractFile)" style="display:inline-block;">
+                            @{
+                                switch (CommonBLL.GetFileType(modle.courses.abstractFile))
+                                {
+                                    case CommonBLL.FileType.DOC:
+                                        <i class="doc">&#xe63a;</i>
+                                        break;
+                                    case CommonBLL.FileType.PDF:
+                                    <i class="pdf">&#xe627;</i>
+                                        break;
+                                    case CommonBLL.FileType.TXT:
+                                    <i class="txt">&#xe627;</i>
+                                        break;
+                                    case CommonBLL.FileType.EXECL:
+                                    <i class="execl">&#xe684;</i>
+                                        break;
+                                    case CommonBLL.FileType.Video:
+                                    <i class="video"></i>
+                                        break;
+                                    case CommonBLL.FileType.Audio:
+                                    <i class="audio"></i>
+                                        break;
+                                    case CommonBLL.FileType.PPT:
+                                    <i class="ppt"></i>
+                                        break;
+                                }
+                            }
+                            <div class="right">
+                                <div class="name">@(modle.courses.abstractFilename)</div>
+                                <div class="size">@CommonBLL.CountSize(modle.courses.abstractFilesize.HasValue ? modle.courses.abstractFilesize.Value : 0)</div>
+                            </div>
+                        </a>
+                        <div class="clearboth"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="lable">培训师</div>
+            <div class="space_show" style="@(classaddressList.Count == 0 ? "border:none;":"")@(!string.IsNullOrEmpty(modle.courses.teacher.cv) ? "padding-bottom:0;" : "")">
+                <!--<a href="@Url.Action("Information", "MobileUser")" class="per_msg flex-h flex-vc">
+
+                    <div class="peri_head">
+                    </div>
+                    <div class="per_detail flex1">
+                    </div>
+                </a>-->
+                <div class="clearfix">
+                    <div class="pei_cont clearfix">
+                        <img src="@(!string.IsNullOrEmpty(modle.courses.teacher.header) ? modle.courses.teacher.header : "/assets/img/defaultAvatar.png")" />
+                        <div class="title">
+                            <span style="font-size:1.5rem; line-height:3.8rem;">@(modle.courses.teacher.name)</span>
+                            <!--<span>培训师</span>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro">@(!string.IsNullOrEmpty(modle.courses.teacher.introduce) ? modle.courses.teacher.introduce.Replace("{换行}", "\n") : "") </div>
+                <div class="last-attach" style="@(!string.IsNullOrEmpty(modle.courses.teacher.cv) ? "display:block;" : "display:none;")">
+                    <div class="attach">
+                        <a href="@(modle.courses.teacher.cv)" style=" display:inline-block;">
+                            @{
+                                switch (CommonBLL.GetFileType(modle.courses.teacher.cv))
+                                {
+                                    case CommonBLL.FileType.DOC:
+                                        <i class="doc">&#xe63a;</i>
+                                        break;
+                                    case CommonBLL.FileType.PDF:
+                                    <i class="pdf">&#xe627;</i>
+                                        break;
+                                    case CommonBLL.FileType.TXT:
+                                    <i class="txt">&#xe627;</i>
+                                        break;
+                                    case CommonBLL.FileType.EXECL:
+                                    <i class="execl">&#xe684;</i>
+                                        break;
+                                    case CommonBLL.FileType.Video:
+                                    <i class="video"></i>
+                                        break;
+                                    case CommonBLL.FileType.Audio:
+                                    <i class="audio"></i>
+                                        break;
+                                    case CommonBLL.FileType.PPT:
+                                    <i class="ppt"></i>
+                                        break;
+                                }
+                            }
+                            <div class="right">
+                                <div class="name">个人履历</div>
+                                <div class="size"></div>
+                            </div>
+                        </a>
+                        <div class="clearboth"></div>
+                    </div>
+                </div>
+                @*<div class="attach" style="margin-left: 0; display:none;">
+                        <a href="@(modle.courses.teacher.cv)">
+                            @{
+                                switch (CommonBLL.GetFileType(modle.courses.teacher.cv))
+                                {
+                                    case CommonBLL.FileType.DOC:
+                                        <i class="doc">&#xe63a;</i>
+                                        break;
+                                    case CommonBLL.FileType.PDF:
+                                    <i class="pdf">&#xe627;</i>
+                                        break;
+                                    case CommonBLL.FileType.TXT:
+                                    <i class="txt">&#xe627;</i>
+                                        break;
+                                    case CommonBLL.FileType.EXECL:
+                                    <i class="execl">&#xe684;</i>
+                                        break;
+                                    case CommonBLL.FileType.Video:
+                                    <i class="video"></i>
+                                        break;
+                                    case CommonBLL.FileType.Audio:
+                                    <i class="audio"></i>
+                                        break;
+                                    case CommonBLL.FileType.PPT:
+                                    <i class="ppt"></i>
+                                        break;
+                                }
+                            }
+                            <div class="right">
+                                <div>个人履历</div>
+                                <div></div>
+                            </div>
+                        </a>
+                        <div class="clearboth"></div>
+                    </div>*@
+            </div>
+            @if (classaddressList.Count > 0)
+            {
+                <div class="lable">线下授课</div>
+                <div class="space_show xian_msg">
+                    @for (int j = 0; j < classaddressList.Count; j++)
+                    {
+                        var addressItem = classaddressList[j];
+                        <ul class="xian_course" style="@(j > 0 ? "margin-top:1.5rem;border-top:1px solid #ccc;padding-top:0.5rem;":"")">
+                            <li>
+                                <span class="title"><i class="iconfont" style="font-size: 1.5rem; margin-right: 0.5rem; color: #24b1bb;">&#xe634;</i></span>
+                                <span class="value">@(addressItem.datebegin.HasValue ? addressItem.datebegin.Value.ToString("yyyy-MM-dd HH:mm") : "")</span>
+                            </li>
+                            <li>
+                                <span class="title"><i class="iconfont" style="font-size: 1.5rem; margin-right: 0.5rem; color: #24b1bb;">&#xe635;</i></span>
+                                <span class="value">@(addressItem.address)</span>
+                            </li>
+                        </ul>
+                    }
+
+                </div>
+            }
+
+            @*<div class="lable">课程模块说明</div>
+            <div class="space_show" style="border-bottom:0px;">
+                <div class="intro">该课程由多个模块组成，每个模块占不同的比例，所有完成模块的比例相加就是该课程的进度，课程总成绩按照模块比例计算。</div>
+            </div>*@
+            @*<div style="width:100%;margin-top:40px;">
+
+
+                    <svg style="width:100%;height:250px">
+                    </svg>
+                </div>*@
+            @*@if (!string.IsNullOrEmpty(ViewBag.svgData))
+            {
+                <div style="width:100%; margin-top:-5rem;" class="flex-v flex-vc">
+                    <input id="svg_data" value="@(ViewBag.svgData)" hidden="hidden" />
+                    <svg id="annulus" viewBox="0 0 320 320" style="width: 320px; height: 350px;"></svg>
+                </div>
+            }*@
+        </div>
+
+        <div id="div_02" class="tab-pane quest_test" style="padding-bottom: 2rem;">
+
+
+            @{
+                if (modle.classmodels != null)
+                {
+                    var classmodelsList = modle.classmodels.Where(l => (!string.IsNullOrEmpty(l.path) && (l.path.IndexOf("sojump.") > -1 || l.path.IndexOf(".wjx.") > -1))).Where(l => l.title.Contains("课前")).OrderBy(l => l.id).ToList();
+                    if (classmodelsList != null && classmodelsList.Count > 0)
+                    {
+                        <div class="q_cont">
+                            @{
+                        for (int i = 0; i < classmodelsList.Count; i++)
+                        {
+                            var url = classmodelsList[i].path;
+                            //if (url.IndexOf("sojump.") == -1 && url.IndexOf(".wjx.") == -1)
+                            if (!(url.IndexOf("sojump.") > -1 || url.IndexOf(".wjx.") > -1))
+                            {
+                                continue;
+                            }
+                            if (!classmodelsList[i].title.Contains("课前"))
+                            {
+                                continue;
+                            }
+                            <div class="lable">@(classmodelsList[i].title)</div>
+                                <div class="intro">@(classmodelsList[i].name)</div>
+                            //跳转问卷星链接：课程ID_模块ID_用户id
+                            url = url + "?sojumpparm=" + ViewBag.classid + "_" + classmodelsList[i].id + "_" + ViewBag.userid;
+                            if (studyState.Any(p => p.modelid == classmodelsList[i].id))
+                            {
+                                if (classmodelsList[i].type == "问卷")
+                                {
+                                    <a href="javascript:;" class="normal_btn" style="background-color:#ccc;">已完成</a>
+                                }
+                                else if (classmodelsList[i].type == "测试")
+                                {
+                                    var temp = studyState.Where(l => l.modelid == classmodelsList[i].id).First();
+                                    <a href="javascript:;" class="socre">@(temp.score)<em class="num">分</em></a>
+                                }
+                            }
+                            else
+                            {
+                                <a href="@(url)" class="normal_btn">@(classmodelsList[i].type)</a>
+
+                            }
+
+
+                            if (i < classmodelsList.Count - 1)
+                            {
+                                <div class="line"></div>
+                            }
+                        }
+                            }
+                        </div>
+                    }
+                }
+            }
+
+            <div class="lable">课程目录</div>
+            <div class="space_show" style="padding-bottom:0;">
+                @if (modle.courses.catalog != null)
+                {
+                    foreach (var item1 in modle.courses.catalog)
+                    {
+                <div class="title">@(item1.name)</div>
+                        if (item1.subcatalog != null)
+                        {
+                            foreach (var item2 in item1.subcatalog)
+                            {
+                <div class="subtitle" style="@(!(item2.subcatalogattachment != null && item2.subcatalogattachment.Count > 0) ? "margin-bottom:1.5rem":"")">@(item2.name)</div>
+                                if (item2.subcatalogattachment != null && item2.subcatalogattachment.Count > 0)
+                                {
+                                    foreach (var item3 in item2.subcatalogattachment)
+                                    {
+                <div class="last-attach">
+                    <div class="attach">
+                        @if (item3.type == "link")
+                        {
+                            <a href="@(item3.path)" style="display: inline-block;">
+                                <i class="h5icon"></i>
+                                <div class="right">
+                                    <div class="name" style="height:32px;line-height:32px;">@(item3.name)</div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@(item3.path)" style="display:inline-block;">
+                            @{
+                                        switch (CommonBLL.GetFileType(item3.name))
+                                        {
+                                            case CommonBLL.FileType.DOC:
+                                                    <i class="doc">&#xe63a;</i>
+                                                break;
+                                            case CommonBLL.FileType.PDF:
+                                                    <i class="pdf">&#xe627;</i>
+                                                break;
+                                            case CommonBLL.FileType.TXT:
+                                                    <i class="txt">&#xe627;</i>
+                                                break;
+                                            case CommonBLL.FileType.EXECL:
+                                                    <i class="execl">&#xe684;</i>
+                                                break;
+                                            case CommonBLL.FileType.Video:
+                                                    <i class="video"></i>
+                                                break;
+                                            case CommonBLL.FileType.Audio:
+                                                    <i class="audio"></i>
+                                                break;
+                                            case CommonBLL.FileType.PPT:
+                                                    <i class="ppt"></i>
+                                                break;
+                                        }
+                            }
+                            @*<div class="filetype1"></div>*@
+                            <div class="right">
+                                <div class="name">@(item3.name)</div>
+                                <div class="size">@CommonBLL.CountSize(item3.size.HasValue ? item3.size.Value : 0)</div>
+                            </div>
+                        </a>
+                        }
+                        
+                        <div class="clearboth"></div>
+                    </div>
+                </div>
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+            </div>
+
+            @{
+                if (modle.classmodels != null)
+                {
+
+                    var classmodelsList = modle.classmodels.Where(l => (!string.IsNullOrEmpty(l.path) && (l.path.IndexOf("sojump.") > -1 || l.path.IndexOf(".wjx.") > -1))).Where(l => !l.title.Contains("课前")).OrderBy(l => l.id).ToList();
+                    if (classmodelsList != null && classmodelsList.Count > 0)
+                    {
+                        <div class="q_cont">
+                            @{
+                        for (int i = 0; i < classmodelsList.Count; i++)
+                        {
+                            var url = classmodelsList[i].path;
+                            //if (url.IndexOf("sojump.") == -1 && url.IndexOf(".wjx.") == -1)
+                            if (!(url.IndexOf("sojump.") > -1 || url.IndexOf(".wjx.") > -1))
+                            {
+                                continue;
+                            }
+                            if (classmodelsList[i].title.Contains("课前"))
+                            {
+                                continue;
+                            }
+                            <div class="lable">@(classmodelsList[i].title)</div>
+                                <div class="intro">@(classmodelsList[i].name)</div>
+                            //跳转问卷星链接：课程ID_模块ID_用户id
+                            url = url + "?sojumpparm=" + ViewBag.classid + "_" + classmodelsList[i].id + "_" + ViewBag.userid;
+                            if (studyState.Any(p => p.modelid == classmodelsList[i].id))
+                            {
+                                if (classmodelsList[i].type == "问卷")
+                                {
+                                    <a href="javascript:;" class="normal_btn" style="background-color:#ccc;">已完成</a>
+                                }
+                                else if (classmodelsList[i].type == "测试")
+                                {
+                                    var temp = studyState.Where(l => l.modelid == classmodelsList[i].id).First();
+                                    <a href="javascript:;" class="socre">@(temp.score)<em class="num">分</em></a>
+                                }
+                            }
+                            else
+                            {
+                                <a href="@(url)" class="normal_btn">@(classmodelsList[i].type)</a>
+                            }
+                            if (i < classmodelsList.Count - 1)
+                            {
+                                <div class="line"></div>
+                            }
+                        }
+                            }
+                        </div>
+                    }
+
+                }
+
+            }
+
+            <div class="lable">课程评价<em style="margin-left:0.5rem;font-weight: normal; font-size: 1.2rem; color: #797979; ">(课程结束后可以评价)</em></div>
+
+            <div class="hudong" style="background-color: transparent; ">
+                @*<div id="pingjia_head" class="head" style="display: none;">
+                        <div class="title">评价</div>
+                        <div class="down-arr item-arr"></div>
+                    </div>*@
+                <div id="hudong_comment" class="clearfix">
+
+                </div>
+            </div>
+        </div>
+        <div id="div_03" class="tab-pane" style="padding:0 0 3rem 0; margin-top:1rem;">
+            <div class="hudong">
+                <div id="wenda_head" class="head">
+                    <div class="title">问答</div>
+                    <div class="down-arr item-arr"></div>
+                </div>
+                <div id="wenda_new" class="new_ans">
+                    @if (newqa != null && newqa.id > 0)
+                    {
+                        <div class="ck_select clearfix">
+                            <span class="new_ans_name">最新</span>
+                            <span>@(newqa.user != null ? newqa.user.name : newqa.teacher.name)：</span>
+                            <span>@(newqa.content)</span>
+                        </div>
+                        @*@("最新问答：" + newqa.content)*@
+                    }
+                </div>
+                <div id="hudong_qa" class="clearfix">
+
+                </div>
+            </div>
+
+            <div class="hudong">
+                <div id="xiangce_head" class="head">
+                    <div class="title">相册</div>
+                    <div class="down-arr item-arr"></div>
+                </div>
+                <div id="xiangce_new" class="new_ans">
+                    @if (newalbum.id > 0)
+                    {
+                        <div class="ck_select clearfix">
+                            <span class="new_ans_name">最新</span>
+                            <span>@(newalbum.user != null ? newalbum.user.name : newalbum.teacher.name)：</span>
+                            <span>@(newalbum.content)</span>
+                        </div>
+                        <dl data-name="Photolist" class="photolist_album clearfix PhotoSwipe_Album">
+                            @if (!string.IsNullOrEmpty(newalbum.pic1))
+                            {
+                                var WH = (newalbum.pic1.Split('?').Length >= 2 ? newalbum.pic1.Split('?')[1] : "400X600");
+                                <dd style="width: 6rem; ">
+                                    <img data-size="@(WH)" src="@(newalbum.pic1)" style="width: 6rem;height: 6rem;" />
+                                </dd>
+                            }
+
+                            @if (!string.IsNullOrEmpty(newalbum.pic2))
+                            {
+                                var WH = (newalbum.pic2.Split('?').Length >= 2 ? newalbum.pic2.Split('?')[1] : "400X600");
+                                <dd style="width: 6rem; ">
+                                    <img data-size="@(WH)" src="@(newalbum.pic2)" style="width: 6rem;height: 6rem;" />
+                                </dd>
+                            }
+                            @if (!string.IsNullOrEmpty(newalbum.pic3))
+                            {
+                                var WH = (newalbum.pic3.Split('?').Length >= 2 ? newalbum.pic3.Split('?')[1] : "400X600");
+                                <dd style="width: 6rem; ">
+                                    <img data-size="@(WH)" src="@(newalbum.pic3)" style="width: 6rem;height: 6rem;" />
+                                </dd>
+                            }
+                            @if (!string.IsNullOrEmpty(newalbum.pic4))
+                            {
+                                var WH = (newalbum.pic4.Split('?').Length >= 2 ? newalbum.pic4.Split('?')[1] : "400X600");
+                                <dd style="width: 6rem; ">
+                                    <img data-size="@(WH)" src="@(newalbum.pic4)" style="width: 6rem;height: 6rem;" />
+                                </dd>
+                            }
+                            @if (!string.IsNullOrEmpty(newalbum.pic5))
+                            {
+                                var WH = (newalbum.pic5.Split('?').Length >= 2 ? newalbum.pic5.Split('?')[1] : "400X600");
+                                <dd style="width: 6rem; ">
+                                    <img data-size="@(WH)" src="@(newalbum.pic5)" style="width: 6rem;height: 6rem;" />
+                                </dd>
+                            }
+                            @if (!string.IsNullOrEmpty(newalbum.pic6))
+                            {
+                                var WH = (newalbum.pic6.Split('?').Length >= 2 ? newalbum.pic6.Split('?')[1] : "400X600");
+                                <dd style="width: 6rem; ">
+                                    <img data-size="@(WH)" src="@(newalbum.pic6)" style="width: 6rem;height: 6rem;" />
+                                </dd>
+                            }
+                        </dl>
+                    }
+                </div>
+                <div id="hudong_album" class="clearfix">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="div_04" class="tab-pane" style="padding:0;">
+        </div>
+    </div>
+    <div id="Comment">
+        <div class="line" style="width:100%;margin :0 0 0 0;"></div>
+        <input id="upToken" value="@(ViewBag.upToken)" hidden="hidden" />
+        <input id="hideImgURLList" type="hidden" />
+        <input id="type" hidden="hidden" />
+        <input id="classid" value="@(ViewBag.classid)" hidden="hidden" />
+        <input id="itemid" hidden="hidden" />
+        <input id="touserid" type="hidden" value="" />
+        <input id="totype" type="hidden" value="-1" />
+
+        <div class="bottomfixd clearfix">
+            <div class="clearfix flex-h flex-vc">
+                <div id="btn_add" class="add" onclick="">
+                    <i class="iconfont" style="font-size:2rem">&#xe60e;</i>
+                </div>
+                <textarea id="txtdetail" rows="1" cols="20" class="textare flex1" placeholder="发表下课堂感受吧"></textarea>
+                <div id="btn_send" class="send_txt" onclick="">发送</div>
+            </div>
+        </div>
+        <div id="markWrapPic" class="clearfix activeRep">
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script src="http://cdn.staticfile.org/Plupload/2.1.1/moxie.js"></script>
+    <script src="http://cdn.staticfile.org/Plupload/2.1.1/plupload.dev.js"></script>
+    <script src="~/assets/plugins/qinui/qiniu.js"></script>
+    <script src="~/assets/js/MobileUser/classdetail.js"></script>
+    <script>
+        pagejs.init();
+
+    </script>
+} 

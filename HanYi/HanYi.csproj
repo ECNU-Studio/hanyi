@@ -1,0 +1,692 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{95F79CEE-EA99-4151-8C63-1E794CEF1286}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HanYi</RootNamespace>
+    <AssemblyName>HanYi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Excel, Version=2.1.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Qiniu.4.0">
+      <HintPath>..\packages\Qiniu.6.2.1.1\lib\Net40\Qiniu.4.0.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Oauth\" />
+    <Folder Include="Views\Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ClassController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\EnterpriseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MobileTeacherController.cs" />
+    <Compile Include="Controllers\MobileUserController.cs" />
+    <Compile Include="Controllers\OauthController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\SSKKPCController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UploadFile\ImageResult.cs" />
+    <Compile Include="UploadFile\ImageUtil.cs" />
+    <Compile Include="UploadFile\Uploader.cs" />
+    <Compile Include="UploadFile\UploaderBatch.cs" />
+    <Compile Include="UploadFile\UploaderExcel.cs" />
+    <Compile Include="Util\CommonBLL.cs" />
+    <Compile Include="Util\EcanRMB.cs" />
+    <Compile Include="Util\Pager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\Cartoon.mp4" />
+    <Content Include="assets\css\css.css" />
+    <Content Include="assets\css\jquery.control.css" />
+    <Content Include="assets\css\main.css" />
+    <Content Include="assets\css\mobile.css" />
+    <Content Include="assets\css\mobilet.css" />
+    <Content Include="assets\css\pcdownload.css" />
+    <Content Include="assets\img\00.png" />
+    <Content Include="assets\img\01.jpeg" />
+    <Content Include="assets\img\01.jpg" />
+    <Content Include="assets\img\02.jpg" />
+    <Content Include="assets\img\03.jpg" />
+    <Content Include="assets\img\1.png" />
+    <Content Include="assets\img\10.png" />
+    <Content Include="assets\img\8-1.png" />
+    <Content Include="assets\img\8.png" />
+    <Content Include="assets\img\add.png" />
+    <Content Include="assets\img\arr-l.svg" />
+    <Content Include="assets\img\arr-r.svg" />
+    <Content Include="assets\img\arrdown.svg" />
+    <Content Include="assets\img\arrup.svg" />
+    <Content Include="assets\img\background.jpg" />
+    <Content Include="assets\img\badgewall\blue\blue01.png" />
+    <Content Include="assets\img\badgewall\blue\blue02.png" />
+    <Content Include="assets\img\badgewall\blue\blue03.png" />
+    <Content Include="assets\img\badgewall\blue\blue04.png" />
+    <Content Include="assets\img\badgewall\blue\blue05.png" />
+    <Content Include="assets\img\badgewall\blue\blue06.png" />
+    <Content Include="assets\img\badgewall\blue\blue07.png" />
+    <Content Include="assets\img\badgewall\blue\blue08.png" />
+    <Content Include="assets\img\badgewall\blue\blue09.png" />
+    <Content Include="assets\img\badgewall\blue\blue10.png" />
+    <Content Include="assets\img\badgewall\blue\blue11.png" />
+    <Content Include="assets\img\badgewall\blue\blue12.png" />
+    <Content Include="assets\img\badgewall\blue\blue13.png" />
+    <Content Include="assets\img\badgewall\blue\blue14.png" />
+    <Content Include="assets\img\badgewall\blue\blue15.png" />
+    <Content Include="assets\img\badgewall\blue\blue16.png" />
+    <Content Include="assets\img\badgewall\blue\blue17.png" />
+    <Content Include="assets\img\badgewall\blue\blue18.png" />
+    <Content Include="assets\img\badgewall\blue\blue19.png" />
+    <Content Include="assets\img\badgewall\blue\blue20.png" />
+    <Content Include="assets\img\badgewall\blue\blue21.png" />
+    <Content Include="assets\img\badgewall\blue\blue22.png" />
+    <Content Include="assets\img\badgewall\blue\blue23.png" />
+    <Content Include="assets\img\badgewall\blue\blue24.png" />
+    <Content Include="assets\img\badgewall\blue\blue25.png" />
+    <Content Include="assets\img\badgewall\blue\blue26.png" />
+    <Content Include="assets\img\badgewall\blue\blue27.png" />
+    <Content Include="assets\img\badgewall\blue\blue28.png" />
+    <Content Include="assets\img\badgewall\blue\blue29.png" />
+    <Content Include="assets\img\badgewall\blue\blue30.png" />
+    <Content Include="assets\img\badgewall\blue\blue31.png" />
+    <Content Include="assets\img\badgewall\blue\blue32.png" />
+    <Content Include="assets\img\badgewall\blue\blue33.png" />
+    <Content Include="assets\img\badgewall\blue\blue34.png" />
+    <Content Include="assets\img\badgewall\blue\blue35.png" />
+    <Content Include="assets\img\badgewall\blue\blue36.png" />
+    <Content Include="assets\img\badgewall\classHour.png" />
+    <Content Include="assets\img\badgewall\days.png" />
+    <Content Include="assets\img\badgewall\grandtotal.png" />
+    <Content Include="assets\img\badgewall\gray\gray01.png" />
+    <Content Include="assets\img\badgewall\gray\gray02.png" />
+    <Content Include="assets\img\badgewall\gray\gray03.png" />
+    <Content Include="assets\img\badgewall\gray\gray04.png" />
+    <Content Include="assets\img\badgewall\gray\gray05.png" />
+    <Content Include="assets\img\badgewall\gray\gray06.png" />
+    <Content Include="assets\img\badgewall\gray\gray07.png" />
+    <Content Include="assets\img\badgewall\gray\gray08.png" />
+    <Content Include="assets\img\badgewall\gray\gray09.png" />
+    <Content Include="assets\img\badgewall\gray\gray10.png" />
+    <Content Include="assets\img\badgewall\gray\gray11.png" />
+    <Content Include="assets\img\badgewall\gray\gray12.png" />
+    <Content Include="assets\img\badgewall\gray\gray13.png" />
+    <Content Include="assets\img\badgewall\gray\gray14.png" />
+    <Content Include="assets\img\badgewall\gray\gray15.png" />
+    <Content Include="assets\img\badgewall\gray\gray16.png" />
+    <Content Include="assets\img\badgewall\gray\gray17.png" />
+    <Content Include="assets\img\badgewall\gray\gray18.png" />
+    <Content Include="assets\img\badgewall\gray\gray19.png" />
+    <Content Include="assets\img\badgewall\gray\gray20.png" />
+    <Content Include="assets\img\badgewall\gray\gray21.png" />
+    <Content Include="assets\img\badgewall\gray\gray22.png" />
+    <Content Include="assets\img\badgewall\gray\gray23.png" />
+    <Content Include="assets\img\badgewall\gray\gray24.png" />
+    <Content Include="assets\img\badgewall\gray\gray25.png" />
+    <Content Include="assets\img\badgewall\gray\gray26.png" />
+    <Content Include="assets\img\badgewall\gray\gray27.png" />
+    <Content Include="assets\img\badgewall\gray\gray28.png" />
+    <Content Include="assets\img\badgewall\gray\gray29.png" />
+    <Content Include="assets\img\badgewall\gray\gray30.png" />
+    <Content Include="assets\img\badgewall\gray\gray31.png" />
+    <Content Include="assets\img\badgewall\gray\gray32.png" />
+    <Content Include="assets\img\badgewall\gray\gray33.png" />
+    <Content Include="assets\img\badgewall\gray\gray34.png" />
+    <Content Include="assets\img\badgewall\gray\gray35.png" />
+    <Content Include="assets\img\badgewall\gray\gray36.png" />
+    <Content Include="assets\img\badgewall\Ranking.png" />
+    <Content Include="assets\img\badgewall\Completed.png" />
+    <Content Include="assets\img\defaultAvatar.png" />
+    <Content Include="assets\img\chess.png" />
+    <Content Include="assets\img\close.png" />
+    <Content Include="assets\img\control\1.png" />
+    <Content Include="assets\img\control\32px.png" />
+    <Content Include="assets\img\control\arrow_r.png" />
+    <Content Include="assets\img\control\arrow_t.png" />
+    <Content Include="assets\img\control\btn_add_icon.png" />
+    <Content Include="assets\img\control\btn_back_icon.png" />
+    <Content Include="assets\img\control\btn_bp.png" />
+    <Content Include="assets\img\control\btn_circle.png" />
+    <Content Include="assets\img\control\btn_download_icon_1.png" />
+    <Content Include="assets\img\control\btn_edit_icon.png" />
+    <Content Include="assets\img\control\btn_logo.png" />
+    <Content Include="assets\img\control\btn_relate_icon.png" />
+    <Content Include="assets\img\control\btn_save_icon.png" />
+    <Content Include="assets\img\control\btn_search_icon.png" />
+    <Content Include="assets\img\control\btn_statics_icon.png" />
+    <Content Include="assets\img\control\btn_switch_h.png" />
+    <Content Include="assets\img\control\btn_switch_l.png" />
+    <Content Include="assets\img\control\btn_upload_icon.png" />
+    <Content Include="assets\img\control\calendar.png" />
+    <Content Include="assets\img\control\checkbox.png" />
+    <Content Include="assets\img\control\checkbox_1.png" />
+    <Content Include="assets\img\control\checked.png" />
+    <Content Include="assets\img\control\checked_1.png" />
+    <Content Include="assets\img\control\del.png" />
+    <Content Include="assets\img\control\downarrow.png" />
+    <Content Include="assets\img\control\dropdown.png" />
+    <Content Include="assets\img\control\horizontal-decrement-arrow.png" />
+    <Content Include="assets\img\control\horizontal-increment-arrow.png" />
+    <Content Include="assets\img\control\hr.png" />
+    <Content Include="assets\img\control\icon_checked.png" />
+    <Content Include="assets\img\control\icon_checking.png" />
+    <Content Include="assets\img\control\icon_closeframe.png" />
+    <Content Include="assets\img\control\icon_date.png" />
+    <Content Include="assets\img\control\icon_editmany.png" />
+    <Content Include="assets\img\control\icon_fail.png" />
+    <Content Include="assets\img\control\icon_success.png" />
+    <Content Include="assets\img\control\input-spinner.gif" />
+    <Content Include="assets\img\control\l.png" />
+    <Content Include="assets\img\control\menu_bottom.png" />
+    <Content Include="assets\img\control\menu_right.png" />
+    <Content Include="assets\img\control\message_close.jpg" />
+    <Content Include="assets\img\control\message_close.png" />
+    <Content Include="assets\img\control\mlogo_active.png" />
+    <Content Include="assets\img\control\mlogo_bmgl.png" />
+    <Content Include="assets\img\control\mlogo_hdzlgl.png" />
+    <Content Include="assets\img\control\mlogo_sygl.png" />
+    <Content Include="assets\img\control\mlogo_xtsz.png" />
+    <Content Include="assets\img\control\mlogo_zxgl.png" />
+    <Content Include="assets\img\control\mlogo_zzglcx.png" />
+    <Content Include="assets\img\control\next_1.png" />
+    <Content Include="assets\img\control\pager_l.png" />
+    <Content Include="assets\img\control\pager_r.png" />
+    <Content Include="assets\img\control\pre_1.png" />
+    <Content Include="assets\img\control\r.png" />
+    <Content Include="assets\img\control\radio.png" />
+    <Content Include="assets\img\control\tip_icon.png" />
+    <Content Include="assets\img\control\tree-icons.png" />
+    <Content Include="assets\img\control\ui-icons.png" />
+    <Content Include="assets\img\control\upload-hover.png" />
+    <Content Include="assets\img\control\upload.png" />
+    <Content Include="assets\img\control\zedie.png" />
+    <Content Include="assets\img\control\zhankai.png" />
+    <Content Include="assets\img\dblank_head_.png" />
+    <Content Include="assets\img\export-hover.png" />
+    <Content Include="assets\img\export.png" />
+    <Content Include="assets\img\fbzp.png" />
+    <Content Include="assets\img\file\h5_icon.svg" />
+    <Content Include="assets\img\file\video.svg" />
+    <Content Include="assets\img\file\audio.svg" />
+    <Content Include="assets\img\file\excel.svg" />
+    <Content Include="assets\img\file\pdf.svg" />
+    <Content Include="assets\img\file\ppt.svg" />
+    <Content Include="assets\img\file\word.svg" />
+    <Content Include="assets\img\gif004.gif" />
+    <Content Include="assets\img\help.png" />
+    <Content Include="assets\img\help\help-1.jpg" />
+    <Content Include="assets\img\help\help-2.jpg" />
+    <Content Include="assets\img\intro\intro-1.jpg" />
+    <Content Include="assets\img\intro\intro-2.jpg" />
+    <Content Include="assets\img\intro\intro-3.jpg" />
+    <Content Include="assets\img\intro\intro-4.jpg" />
+    <Content Include="assets\img\intro\intro_n1.jpg" />
+    <Content Include="assets\img\intro\intro_n1_01.jpg" />
+    <Content Include="assets\img\intro\intro_n2.jpg" />
+    <Content Include="assets\img\intro\intro_n3.jpg" />
+    <Content Include="assets\img\intro\intro_n4.jpg" />
+    <Content Include="assets\img\intro\intro_n5.jpg" />
+    <Content Include="assets\img\intro\intro_n6.jpg" />
+    <Content Include="assets\img\intro\intro_n7.jpg" />
+    <Content Include="assets\img\larrow.gif" />
+    <Content Include="assets\img\liustar.png" />
+    <Content Include="assets\img\Loadding.png" />
+    <Content Include="assets\img\login_back.jpg" />
+    <Content Include="assets\img\login_back.png" />
+    <Content Include="assets\img\login_back1.png" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\logo_e.png" />
+    <Content Include="assets\img\logo_z.png" />
+    <Content Include="assets\img\password.png" />
+    <Content Include="assets\img\password1.png" />
+    <Content Include="assets\img\pc\u36.png" />
+    <Content Include="assets\img\pj_xx.png" />
+    <Content Include="assets\img\pj_xx_hover.png" />
+    <Content Include="assets\img\s.png" />
+    <Content Include="assets\img\score\Score01.png" />
+    <Content Include="assets\img\score\Score02.png" />
+    <Content Include="assets\img\score\Score03.png" />
+    <Content Include="assets\img\score\Score04.png" />
+    <Content Include="assets\img\score\Score05.png" />
+    <Content Include="assets\img\score\Score06.png" />
+    <Content Include="assets\img\score\Score07.png" />
+    <Content Include="assets\img\score\Score08.png" />
+    <Content Include="assets\img\score\Score09.png" />
+    <Content Include="assets\img\score\Score10.png" />
+    <Content Include="assets\img\score\Score11.png" />
+    <Content Include="assets\img\score\Score12.png" />
+    <Content Include="assets\img\score\Score13.png" />
+    <Content Include="assets\img\score\Score14.png" />
+    <Content Include="assets\img\score\Score15.png" />
+    <Content Include="assets\img\score\Score16.png" />
+    <Content Include="assets\img\score\Score17.png" />
+    <Content Include="assets\img\score\Score18.png" />
+    <Content Include="assets\img\score\Score19.png" />
+    <Content Include="assets\img\score\Score20.png" />
+    <Content Include="assets\img\score\Score21.png" />
+    <Content Include="assets\img\score\Score22.png" />
+    <Content Include="assets\img\score\Score23.png" />
+    <Content Include="assets\img\score\Score24.png" />
+    <Content Include="assets\img\score\Score25.png" />
+    <Content Include="assets\img\score\Score26.png" />
+    <Content Include="assets\img\score\Score27.png" />
+    <Content Include="assets\img\score\Score28.png" />
+    <Content Include="assets\img\score\Score29.png" />
+    <Content Include="assets\img\score\Score30.png" />
+    <Content Include="assets\img\score\Score31.png" />
+    <Content Include="assets\img\score\Score32.png" />
+    <Content Include="assets\img\score\Score33.png" />
+    <Content Include="assets\img\score\Score34.png" />
+    <Content Include="assets\img\score\Score35.png" />
+    <Content Include="assets\img\score\Score36.png" />
+    <Content Include="assets\img\score\Score37.png" />
+    <Content Include="assets\img\score\Score38.png" />
+    <Content Include="assets\img\score\Score39.png" />
+    <Content Include="assets\img\score\Score40.png" />
+    <Content Include="assets\img\score\ScoreSingle1.png" />
+    <Content Include="assets\img\score\ScoreSingle2.png" />
+    <Content Include="assets\img\score\ScoreSingle3.png" />
+    <Content Include="assets\img\score\ScoreSingle4.png" />
+    <Content Include="assets\img\score\ScoreSingle5.png" />
+    <Content Include="assets\img\score\ScoreSingle6.png" />
+    <Content Include="assets\img\sear_btn.png" />
+    <Content Include="assets\img\simpleloading.gif" />
+    <Content Include="assets\img\simpleloading1.gif" />
+    <Content Include="assets\img\stg.png" />
+    <Content Include="assets\img\str1.png" />
+    <Content Include="assets\img\toleft.png" />
+    <Content Include="assets\img\toright.png" />
+    <Content Include="assets\img\u6718.png" />
+    <Content Include="assets\img\u99.png" />
+    <Content Include="assets\img\user.png" />
+    <Content Include="assets\img\user1.png" />
+    <Content Include="assets\img\username.png" />
+    <Content Include="assets\img\w.png" />
+    <Content Include="assets\img\warrow.gif" />
+    <Content Include="assets\img\w_logo.png" />
+    <Content Include="assets\img\xzq_1.png" />
+    <Content Include="assets\img\xzq_2.png" />
+    <Content Include="assets\img\xzq_3.png" />
+    <Content Include="assets\js\account\loginteacher.js" />
+    <Content Include="assets\js\account\login.js" />
+    <Content Include="assets\js\account\loginuser.js" />
+    <Content Include="assets\js\admin\index.js" />
+    <Content Include="assets\js\class\classInfo.js" />
+    <Content Include="assets\js\class\index.js" />
+    <Content Include="assets\js\common.js" />
+    <Content Include="assets\js\course\courses.js" />
+    <Content Include="assets\js\course\index.js" />
+    <Content Include="assets\js\enterprise\EnterpriseInfo.js" />
+    <Content Include="assets\js\enterprise\index.js" />
+    <Content Include="assets\js\home\changepwd.js" />
+    <Content Include="assets\js\jquery-1.10.2.min.js" />
+    <Content Include="assets\js\jquery-ui-timepicker-addon.js" />
+    <Content Include="assets\js\jquery.control.js" />
+    <Content Include="assets\js\jquery.easing.1.3.js" />
+    <Content Include="assets\js\mobileteacher\classdetail.js" />
+    <Content Include="assets\js\mobileteacher\index.js" />
+    <Content Include="assets\js\mobileteacher\MyAnswer.js" />
+    <Content Include="assets\js\mobileteacher\myanswerdetail.js" />
+    <Content Include="assets\js\mobileteacher\MyComment.js" />
+    <Content Include="assets\js\mobileteacher\mycommentdetail.js" />
+    <Content Include="assets\js\mobileteacher\settings.js" />
+    <Content Include="assets\js\mobileuser\classdetail.js" />
+    <Content Include="assets\js\mobileuser\index.js" />
+    <Content Include="assets\js\mobileuser\MyAnswer.js" />
+    <Content Include="assets\js\mobileuser\myanswerdetail.js" />
+    <Content Include="assets\js\mobileuser\MyComment.js" />
+    <Content Include="assets\js\mobileuser\mycommentdetail.js" />
+    <Content Include="assets\js\mobileuser\settings.js" />
+    <Content Include="assets\js\pc\index.js" />
+    <Content Include="assets\js\pc\loginbg.js" />
+    <Content Include="assets\js\tab.js" />
+    <Content Include="assets\js\teacher\index.js" />
+    <Content Include="assets\js\teacher\teacherinfo.js" />
+    <Content Include="assets\img\key.png" />
+    <Content Include="assets\img\logout.png" />
+    <Content Include="assets\plugins\photoswipe\14985868676_4b802b932a_m.jpg" />
+    <Content Include="assets\plugins\photoswipe\14985871946_86abb8c56f_m.jpg" />
+    <Content Include="assets\plugins\photoswipe\15008465772_383e697089_m.jpg" />
+    <Content Include="assets\plugins\photoswipe\15008518202_b016d7d289_m.jpg" />
+    <Content Include="assets\plugins\photoswipe\15008867125_68a8ed88cc_m.jpg" />
+    <Content Include="assets\plugins\photoswipe\default-skin\default-skin.css" />
+    <Content Include="assets\plugins\photoswipe\default-skin\default-skin.png" />
+    <Content Include="assets\plugins\photoswipe\default-skin\default-skin.svg" />
+    <Content Include="assets\plugins\photoswipe\default-skin\preloader.gif" />
+    <Content Include="assets\plugins\photoswipe\photoswipe-ui-default.js" />
+    <Content Include="assets\plugins\photoswipe\photoswipe-ui-default.min.js" />
+    <Content Include="assets\plugins\photoswipe\photoswipe.css" />
+    <Content Include="assets\plugins\photoswipe\photoswipe.js" />
+    <Content Include="assets\plugins\photoswipe\photoswipe.min.js" />
+    <Content Include="assets\plugins\picShowBig.js" />
+    <Content Include="assets\plugins\qinui\plupload.full.min.js" />
+    <Content Include="assets\plugins\qinui\qiniu.js" />
+    <Content Include="assets\plugins\qinui\qiniu.min.js" />
+    <Content Include="assets\plugins\qinui\zh_CN.js" />
+    <Content Include="assets\plugins\swiperjs\swiper.css" />
+    <Content Include="assets\plugins\swiperjs\swiper.js" />
+    <Content Include="assets\plugins\uploadify\jquery.uploadify.js" />
+    <Content Include="assets\plugins\uploadify\jquery.uploadify.min.js" />
+    <Content Include="assets\plugins\uploadify\swfobject.js" />
+    <Content Include="assets\plugins\uploadify\uploadify-cancel.png" />
+    <Content Include="assets\plugins\uploadify\uploadify.css" />
+    <Content Include="assets\plugins\uploadify\uploadify.swf" />
+    <Content Include="crossdomain.xml" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="mobileview\HtmlPage1.html" />
+    <Content Include="mobileview\Login.html" />
+    <Content Include="mobileview\PerCenter.html" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
+    <None Include="Properties\PublishProfiles\zhengshi.pubxml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{e756e0e8-9d61-480b-95d1-9429fbe68446}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ltchina.Core.Weixin\Ltchina.Core.Weixin.csproj">
+      <Project>{8bc9511b-76aa-499a-9a40-03a0a9a56e8e}</Project>
+      <Name>Ltchina.Core.Weixin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <Content Include="assets\icomoon.ttf" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Views\Enterprise\Index.cshtml" />
+    <Content Include="Views\Enterprise\EnterpriseList.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\TeacherList.cshtml" />
+    <Content Include="Views\Enterprise\EnterpriseInfo.cshtml" />
+    <Content Include="Views\Enterprise\EnterpriseUserList.cshtml" />
+    <Content Include="Views\Enterprise\EnterpriseCourseList.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Courses\CoursesList.cshtml" />
+    <Content Include="Views\Courses\CoursesInfo.cshtml" />
+    <Content Include="Views\Class\Index.cshtml" />
+    <Content Include="Views\Class\ClassList.cshtml" />
+    <Content Include="Views\Courses\GetCatalog.cshtml" />
+    <Content Include="Views\Class\CompanyUsers.cshtml" />
+    <Content Include="Views\Class\ClassInfo.cshtml" />
+    <Content Include="Views\Class\UserList.cshtml" />
+    <Content Include="Views\Class\ClassModelsList.cshtml" />
+    <Content Include="Views\Class\SearchScore.cshtml" />
+    <Content Include="Views\Class\SearchState.cshtml" />
+    <Content Include="Views\Teacher\TeacherInfo.cshtml" />
+    <Content Include="Views\Teacher\CourseList.cshtml" />
+    <Content Include="Views\Shared\_LayoutMobile.cshtml" />
+    <Content Include="Views\MobileUser\Index.cshtml" />
+    <Content Include="Views\MobileUser\CourseList.cshtml" />
+    <Content Include="Views\Account\LoginUser.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\LoginTeacher.cshtml" />
+    <Content Include="Views\MobileTeacher\Index.cshtml" />
+    <Content Include="Views\MobileUser\ClassDetail.cshtml" />
+    <Content Include="Views\MobileUser\PerCenter.cshtml" />
+    <Content Include="Views\MobileUser\Information.cshtml" />
+    <Content Include="Views\MobileUser\MarkOrder.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\MobileUser\badge_wall.cshtml" />
+    <Content Include="Views\MobileUser\ScoreRank.cshtml" />
+    <Content Include="Views\MobileUser\Settings.cshtml" />
+    <Content Include="Views\MobileUser\MyAnswer.cshtml" />
+    <Content Include="Views\MobileUser\MyAnswerDetail.cshtml" />
+    <Content Include="Views\MobileUser\MyComment.cshtml" />
+    <Content Include="Views\MobileUser\MyCommentDetail.cshtml" />
+    <Content Include="Views\MobileUser\Help.cshtml" />
+    <Content Include="Views\MobileUser\Intro.cshtml" />
+    <Content Include="Views\MobileUser\GoComment.cshtml" />
+    <Content Include="Views\Class\SearchQA.cshtml" />
+    <Content Include="Views\Class\SearchComment.cshtml" />
+    <Content Include="Views\Class\SearchAlbum.cshtml" />
+    <Content Include="Views\Class\SearchClassRank.cshtml" />
+    <Content Include="Views\MobileUser\MyAnswerList.cshtml" />
+    <Content Include="Views\MobileUser\MyCommentList.cshtml" />
+    <Content Include="Views\MobileUser\HuDongQA.cshtml" />
+    <Content Include="Views\MobileUser\HuDongComment.cshtml" />
+    <Content Include="Views\MobileUser\HuDongAlbum.cshtml" />
+    <Content Include="Views\MobileUser\HuDongQAKeyWord.cshtml" />
+    <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
+    <Content Include="Views\MobileTeacher\CourseList.cshtml" />
+    <Content Include="Views\MobileTeacher\ClassDetail.cshtml" />
+    <Content Include="Views\MobileTeacher\MarkOrder.cshtml" />
+    <Content Include="Views\MobileTeacher\HuDongAlbum.cshtml" />
+    <Content Include="Views\MobileTeacher\HuDongComment.cshtml" />
+    <Content Include="Views\MobileTeacher\HuDongQA.cshtml" />
+    <Content Include="Views\MobileTeacher\HuDongQAKeyWord.cshtml" />
+    <Content Include="Views\MobileTeacher\PerCenter.cshtml" />
+    <Content Include="Views\MobileTeacher\Settings.cshtml" />
+    <Content Include="Views\MobileTeacher\Information.cshtml" />
+    <Content Include="Views\MobileTeacher\MyAnswer.cshtml" />
+    <Content Include="Views\MobileTeacher\MyAnswerList.cshtml" />
+    <Content Include="Views\MobileTeacher\MyAnswerDetail.cshtml" />
+    <Content Include="Views\MobileTeacher\MyComment.cshtml" />
+    <Content Include="Views\MobileTeacher\MyCommentList.cshtml" />
+    <Content Include="Views\MobileTeacher\MyCommentDetail.cshtml" />
+    <Content Include="Views\MobileTeacher\Help.cshtml" />
+    <Content Include="Views\MobileTeacher\Intro.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\AdminList.cshtml" />
+    <Content Include="Views\Home\ChangePwd.cshtml" />
+    <Content Include="Views\MobileUser\HuDongCommentList.cshtml" />
+    <Content Include="Views\MobileUser\ChangePW.cshtml" />
+    <Content Include="Views\MobileTeacher\ChangePW.cshtml" />
+    <Content Include="Views\Class\AddressList.cshtml" />
+    <Content Include="Views\MobileUser\Cartoon.cshtml" />
+    <Content Include="Views\SSKKPC\Index.cshtml" />
+    <Content Include="Views\Account\LoginPC.cshtml" />
+    <Content Include="Views\Shared\_LayoutPC.cshtml" />
+    <Content Include="Views\SSKKPC\CourseList.cshtml" />
+    <Content Include="Views\SSKKPC\ClassDetail.cshtml" />
+    <Content Include="Views\MobileTeacher\Cartoon.cshtml" />
+    <Content Include="Views\MobileUser\Guidelines.cshtml" />
+    <Content Include="Views\MobileUser\AboutUs.cshtml" />
+    <Content Include="Views\MobileUser\Interaction.cshtml" />
+    <Content Include="Views\MobileUser\MedalWall.cshtml" />
+    <Content Include="Views\MobileUser\ModuleRule.cshtml" />
+    <Content Include="Views\Account\Logout.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>21238</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:21236/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

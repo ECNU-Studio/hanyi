@@ -1,0 +1,94 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    ViewBag.Title = "SearchClassRank";
+
+    var listrank = ViewBag.listrank as List<ClassRankView>;
+    if(listrank==null)
+    {
+        listrank = new List<ClassRankView>();
+    }
+    var listcm = ViewBag.listcm as List<classmodels>;
+    if(listcm==null)
+    {
+        listcm = new List<classmodels>();
+    }
+}
+
+ @if (listrank.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable" id="score_table">
+            <tr class="fixThead">
+                <th width="40px">排名</th>
+                <th>姓名</th>                 
+                <th>分数</th>
+                @foreach(var item in listcm)
+                {
+                     <th  >@(item.title)(@(item.type))</th>
+                }
+                <th width="100px">评价</th>
+            </tr>
+            @{var index = 0;} 
+            @foreach (var rank in listrank)
+            {
+                index++;
+                <tr class="row">
+                    <td title="">
+                        @(index)
+                    </td>
+                    <td title="">
+                        @(rank.username)
+                    </td>
+                    <td title="">
+                        @(rank.score.ToString("##.##"))
+                    </td>
+                    
+                    @foreach (var itemcm in listcm)
+                    {
+                        var temprv = rank.list.Where(p => p.id == itemcm.id).FirstOrDefault();
+                        if (temprv == null)
+                        { temprv = new ClassRankView.classScore(); }
+                         <td title="">
+                             @if (itemcm.type == "勾选")
+                             {
+                                 @*@(rank.gouxuan)*@   
+                                 @(temprv.score)
+                             }
+                             else if (itemcm.type == "打分"  )
+                             {
+                                 @*@rank.dafen*@
+                                 @temprv.score
+                             }
+                             else if (itemcm.type == "测试"  )
+                             {
+                                 @*@rank.ceshi*@ 
+                                 @temprv.score
+                             }
+                             else if (itemcm.type == "问卷")
+                             {
+                                 @*@rank.wenjuan*@
+                                 @temprv.score 
+                             }
+
+                          </td>
+                    }
+                    @{var temprv1 = rank.list.Where(p => p.id ==0).FirstOrDefault();
+                    <td title="">
+                        @if(temprv1!=null)
+                        {
+                             @*@(rank.pingjia)*@
+                             @temprv1.score 
+                        }
+                       
+                    </td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+
+    @(ViewBag.Pager)
+
+}
+

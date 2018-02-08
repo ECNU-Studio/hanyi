@@ -1,0 +1,266 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<comment>;
+    if (list == null)
+    {
+        list = new List<comment>();
+    }
+    double total = ViewBag.total;
+    double total1 = ViewBag.total1;
+    double total2 = ViewBag.total2;
+    double total3 = ViewBag.total3;
+}
+<div class="total_pl">
+    <div class="head">
+        <h1 class="title">所有评论</h1>
+        <em class="count">(@(list.Count))</em>
+    </div>
+    <div class="clearfix">
+        <div class="numwrap">
+            <em class="num">@((total * 2).ToString("#0.##"))</em>
+            <div class="V">
+                @{
+                    if (total >= 1)
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                    }
+                    else
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                    }
+                    if (total >= 2)
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                    }
+                    else
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                    }
+                    if (total >= 3)
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                    }
+                    else
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                    }
+                    if (total >= 4)
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                    }
+                    else
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                    }
+                    if (total >= 5)
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                    }
+                    else
+                    {
+                        <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                    }
+                }
+            </div>
+        </div>
+        <div class="detailwrap">
+            <ul class="clearfix">
+                <li>
+                    <div class="T width6">培训内容</div>
+                    <div class="V">
+                        @{
+                            if (total1 >= 1)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total1 >= 2)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total1 >= 3)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total1 >= 4)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total1 >= 5)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                        }
+                    </div>
+                </li>
+                <li>
+                    <div class="T width6">培训师</div>
+                    <div class="V">
+                        @{
+                            if (total2 >= 1)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total2 >= 2)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total2 >= 3)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total2 >= 4)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total2 >= 5)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                        }
+                    </div>
+                </li>
+                <li>
+                    <div class="T width6">培训效果</div>
+                    <div class="V">
+                        @{
+                            if (total3 >= 1)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total3 >= 2)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total3 >= 3)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total3 >= 4)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                            if (total3 >= 5)
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx_hover.png">
+                            }
+                            else
+                            {
+                                <img class="ms" data-value="1" src="/assets/img/pj_xx.png">
+                            }
+                        }
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="clearfix margin_btn">
+    <div class="fun_btn fl">
+        <a class="btn_show mr_20px" href="javascript:void" data-all="no" data-href="#div_04" name="AllSelect">全选</a>
+        <a class="btn_show mr_20px" href="javascript:void" data-href="#div_04" name="AllDel">删除</a>
+    </div>
+</div>
+<ul class="clearfix QAwrap">
+    @if (list.Count > 0)
+    {
+        var i = 0;
+        foreach (var item in list)
+        {
+            <li>
+                <div class="ck_select clearfix">
+                    <label><input name="group@(item.id)" data-parentid="@(item.id)" type="checkbox" class="js-check-all" /></label>
+                    <span>@(item.user.name)</span>
+                    <span>@(item.content)</span>
+                    @if (item.commentsub != null && item.commentsub.Count > 0)
+                    {
+                        if (i == 0)
+                        {
+                            <i class="arr-R rot-r270">收起</i>
+                        }
+                        else
+                        {
+                            <i class="arr-R rot-r90">展开</i>
+                        }
+                    }
+                </div>
+                @if (item.commentsub != null && item.commentsub.Count > 0)
+                {
+                    <dl data-name="answerlist" style="@(i == 0 ? "" : "display:none;")">
+                        @foreach (var itemsub in item.commentsub)
+                        {
+                            <dd>
+                                <div class="ck_select clearfix">
+                                    <label><input data-id="@(itemsub.id)" name="group@(item.id)" type="checkbox" class="checkbox" /></label>
+                                    <span>@(itemsub.user==null?itemsub.teacher.name: itemsub.user.name)</span>
+                                    <span>@(itemsub.content)</span>
+                                </div>
+                            </dd>
+                        }
+                    </dl>
+                }
+            </li>
+                i++;
+        }
+    }
+    else
+    {
+        <li class="noData">暂无相关数据</li>
+    }
+</ul>

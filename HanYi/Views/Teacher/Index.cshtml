@@ -1,0 +1,124 @@
+﻿@using HanYi.Util;
+@{
+    ViewBag.Title = "培训师";
+}
+@section styles{
+    <style>
+        .edit_wrap .edit_ul > li .title { width:43px;}
+    </style>
+}
+<div class="content">
+    <div class="c_title">
+        <h5>@(ViewBag.Title)</h5>
+    </div>
+    <div class="c_inner_wraper">
+        <div class="margin_btn clearfix">
+            <div class="fun_btn fl">
+                <a class="btn_show mr_20px" href="javascript:void" id="showAdd">添加培训师</a>
+                <a class="btn_show mr_20px" href="javascript:void" id="btn_del">删除</a>
+            </div>
+        </div>
+        <div class="sep_line"></div>
+        <div class="searchwrap" id="form">
+            <div class="table_tit">
+                <h5 class="fl">搜索结果</h5>
+            </div>
+            <div id="res">
+
+            </div>
+        </div>
+    </div>
+</div>
+@*添加培训师弹出框*@
+<div class="frame_panel" id="open_panel" style="display:none;">
+    <div class="frame_box" style="width: 400px; left: 50%; top: 20%;margin-left:-200px;">
+        <div class="frame_close" onclick="$(this).parent().parent().hide(); CloseAllErrorTip();"></div>
+        <div class="frame_title">添加培训师</div>
+        <div id="content">
+            <div class="frame_wrap edit_wrap" style="padding-top:0;">
+                <ul class="edit_ul">
+                    <li class="col-12">
+                        <div class="title">姓名：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="name" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title" >帐号：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="username" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title" >密码：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="password" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title"  >Email：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="email" value="" placeholder="" class="Text_lt vali-Required vali-Email" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">手机：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="phone" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">微信：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="weixin" value="" placeholder="" class="Text_lt " type="text" autocomplete="off" /></div></div>
+                        </div>
+
+                    </li>
+                    <li class="multirow">
+                        <div class="title" >简介：</div>
+                        <div class="value" style="width: 240px;">
+                            <textarea style="width: 225px;" class="Textarea_lt vali-Required" id="introduce"></textarea>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12" style="display:none;">
+                        <div class="title">简历：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl">
+                                <div class="btn_upload" id="pic" style="width:84px;"><a href="javascript:void(0);">请选择文件</a></div>
+                                <input type="file" id="fileupload" name="fileupload" />
+                                <input id="cv" value="" placeholder="" class="Text_lt  " type="text" hidden="hidden" />
+                            </div>                        
+                        </div>
+                        <div class="bitian">*</div>
+                        <div id="url_cv" class="value clearboth" style="margin:0 0 0 57px;">
+                           
+                        </div>
+                    </li>
+                    
+                </ul>
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn"><a href="javascript:void(0)">保存</a></div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/assets/plugins/uploadify/jquery.uploadify.min.js"></script>
+    <script src="~/assets/plugins/uploadify/swfobject.js"></script>
+    <script src="~/assets/js/teacher/index.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}
+
+

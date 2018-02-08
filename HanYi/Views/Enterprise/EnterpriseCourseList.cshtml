@@ -1,0 +1,46 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<classes>;
+    if (list == null)
+    {
+        list = new List<classes>();
+    }
+
+}
+@if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="200px">课程名称</th>
+                <th width="180px">培训师</th>
+                <th>学员人数</th>
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td title="">
+                        @(item.courses.name)
+                    </td>
+                    <td title="">
+                        @(item.courses.teacher.name)
+                    </td>
+                    <td>
+                        <div class="tcolor fl">
+                            <a href="javascript:void(0)">@(item.classstudent == null ? 0 : item.classstudent.Count)</a>
+                        </div>
+                        <div class="fr edit_btn">
+                            <a href="@(Url.Action("ClassInfo", "Class", new { id = item.id }))">进入课程编辑</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}

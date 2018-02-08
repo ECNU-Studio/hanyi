@@ -1,0 +1,79 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<companys>;
+    if(list == null)
+    {
+        list = new List<companys>();
+    }
+    
+}
+@if(list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input name="group" type="checkbox" class="js-check-all" /></label>
+                    </div>
+                </th>
+                <th>名称</th>
+                <th>账号</th>
+                <th>邮箱</th>
+                <th>法人</th>
+                <th>企业地址</th>
+                <th width="48px"></th>
+            </tr>
+            @foreach(var item in list)
+            {
+                <tr class="row">
+                    <td>
+                        <div class="ck_select clearfix">
+                            <label><input data-value="@(item.id)" name="group" type="checkbox" class="checkbox" /></label>
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis " title="@item.name">
+                            @(item.name)
+                            @*<input type="text" autocomplete="off" class="inputtext" value="@(item.name)" name="" />*@
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@item.account">
+                            @(item.account)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@item.email">
+                            @(item.email)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix" title="@item.legalperson">
+                            @(item.legalperson)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@item.address">
+                            @(item.address)
+                        </div>
+                    </td>
+                    <td class="">
+                        @*<div class="fl btn_add">
+                            <a href="javascript:void(0)"></a>
+                        </div>*@
+                        <div class="fr edit_btn">
+                            <a href="@Url.Action("EnterpriseInfo", "Enterprise", new { id = item.id })">管理</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}

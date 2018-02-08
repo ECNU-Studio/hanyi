@@ -1,0 +1,58 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+    teacheres teacher = ViewBag.teacher;
+     
+}
+<div style="padding-bottom:7rem;">
+
+    <div class="box_wraper flex-h flex-hw ">
+
+        <div class="per_conter clearfix  flex-v  flex-vw">
+            <a href="@Url.Action("Information", "MobileTeacher")" class="per_msg flex-h flex-vc">
+
+                <div class="peri_head">
+                    <img src="@(!string.IsNullOrEmpty(teacher.header) ? teacher.header : "/assets/img/defaultAvatar.png")" />
+                </div>
+                <div class="per_detail flex1">
+                    <h3>@(teacher.name)</h3>
+                    <h5><em>@(!string.IsNullOrEmpty(teacher.introduce) ? teacher.introduce.Replace("{换行}", "\n") : "")</em></h5>
+                </div>
+                <div class="per_arrow"></div>
+            </a>
+
+            <div class="list_show">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("MyAnswer", "MobileTeacher")">
+                            <div>收到的问答</div>
+                            @if (teacher.new_ans)
+                            {
+                                <i class="tip"></i>
+                            }
+
+                            <div class="item_arrow"></div>
+                        </a><div class="clearboth"></div>
+                    </li>
+                    <li><a href="@Url.Action("MyComment", "MobileTeacher")"><div>收到的评论</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("Settings", "MobileTeacher")"><div>设置</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("ChangePW", "MobileTeacher")"><div>修改密码</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("Intro", "MobileTeacher")"><div>平台介绍</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("Help", "MobileTeacher")"><div>功能介绍</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                    <li><a href="@Url.Action("Cartoon", "MobileTeacher")"><div>宣传动画</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+   
+        $("li a").click(function () {
+            $(this).find("i.tip").hide();
+            if ($(this).find("i.tip").length > 0)
+                $("i.tip").hide();
+        });
+    </script>
+}

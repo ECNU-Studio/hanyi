@@ -1,0 +1,353 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "HuDong";
+    Layout = null;
+
+    List<comment> comments = ViewBag.comments as List<comment>;
+    if (comments == null)
+    {
+        comments = new List<comment>();
+    }
+
+    double total = ViewBag.total;
+    double total1 = ViewBag.total1;
+    double total2 = ViewBag.total2;
+    double total3 = ViewBag.total3;
+}
+
+
+ <div id="pingjia_new" class="new_ans">
+    <div class="total_pl">
+
+        <div style="padding:2rem 2rem 0 2rem;">
+            <span> 所有评论(@(comments.Count)) </span>  
+            
+        </div>
+        @*<div class="numwrap" style="margin:0 0 0 0 ">
+
+            </div>*@
+
+    </div>
+</div>
+
+<div id="pingjia_content" class="content" >
+    <div class="clearfix" style="margin-top: 2rem;padding: 0 2rem;">
+        <div class="numwrap">
+            <div class="num" style="margin-left:1rem; display:block; font-size:2.5rem; margin:1rem 0; color:#24b1bb;">
+                 @((total * 2).ToString("#0.#"))
+            </div>
+            <div class="V" style="display:inline-block">
+                @{
+                    if (total >= 1)
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe609;</i>
+                    }
+                    else
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                    }
+                    if (total >= 2)
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe609;</i>
+                    }
+                    else
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                    }
+                    if (total >= 3)
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe609;</i>
+                    }
+                    else
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                    }
+                    if (total >= 4)
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe609;</i>
+                    }
+                    else
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                    }
+                    if (total >= 5)
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe609;</i>
+                    }
+                    else
+                    {
+                        <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                    }
+                }
+
+            </div>
+
+        </div>
+        <div class="detailwrap">
+            <ul class="clearfix">
+                <li>
+                    <div class="T width6">培训内容</div>
+                    <div class="V">
+                        @{
+                            if (total1 >= 1)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total1 >= 2)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total1 >= 3)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total1 >= 4)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total1 >= 5)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                        }
+                    </div>
+                </li>
+                <li>
+                    <div class="T width6">培训师</div>
+                    <div class="V">
+                        @{
+                            if (total2 >= 1)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total2 >= 2)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total2 >= 3)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total2 >= 4)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total2 >= 5)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                        }
+                    </div>
+                </li>
+                <li>
+                    <div class="T width6">培训效果</div>
+                    <div class="V">
+                        @{
+                            if (total3 >= 1)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total3 >= 2)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total3 >= 3)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total3 >= 4)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (total3 >= 5)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                        }
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <ul class="clearfix QAwrap">
+
+        @{
+            for (int j = 0; j < comments.Count; j++)
+            {
+                var cm = comments[j];
+                <li class="pingjia" style="@(j > 2 ? "display:none;" : "")" data-id="@cm.id" data-name="@(cm.anonymous ? "匿名" : cm.user.name)">
+                    <div class="mainlayer">
+                        <div class="baseinfo  clearfix">
+                            <div class="ck_select">
+                                <div class="header" style="background-image: url(@(cm.anonymous ? "../../assets/img/defaultAvatar.png" : cm.user.photo)); background-size: 100%;"></div>
+                                <div class="qades">
+                                    <div class="name fl">
+                                        @(cm.anonymous ? "匿名" : cm.user.name)
+                                    </div>
+                                    <div class="date fl">@(cm.date.HasValue ? cm.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                                    <div class="V clearboth">
+
+                                        @{   double i = 0;
+
+                                           i += (cm.c1 + cm.c2 + cm.c3 + cm.c4 + cm.c5 + cm.c6 + cm.c7 + cm.c8 + cm.c9) / 9.0;
+
+
+                                           if (i >= 1)
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                           }
+                                           else
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                           }
+                                           if (i >= 2)
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                           }
+                                           else
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                           }
+                                           if (i >= 3)
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                           }
+                                           else
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                           }
+                                           if (i >= 4)
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                           }
+                                           else
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                           }
+                                           if (i >= 5)
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                           }
+                                           else
+                                           {
+                                            <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                           }
+                                        }
+
+                                    </div>
+
+                                </div>
+                                <i class="iconfont fr" style="color: #EA5B5B; display: none; ">&#xe60c;</i>
+                            </div>
+                            <div class="content" style="display:none;">
+                                @(cm.content)
+                            </div>
+                        </div>
+                    </div>
+
+                    @{
+                if (false&& cm.commentsub != null && cm.commentsub.Count > 0)
+                {
+                    cm.commentsub.Sort((x, y) => -x.id.CompareTo(y.id));
+                    <div class="sublayer">
+                        <dl class="clearfix flex-h flex-hc">
+                            <dd class="sublayer-left"></dd>
+                            <dd class="clearfix flex1" style="border-top: 1px solid #ccc;"></dd>
+                        </dl>
+                        @foreach (var smsub in cm.commentsub)
+                        {
+                            <dl data-name="answerlist" class="answerlist clearfix flex-h flex-hc">
+                                <dd class="sublayer-left"></dd>
+                                <dd class="clearfix flex1 sublayer-right">
+                                    <div class="baseinfo  parent-item answerlist clearfix">
+                                        <div class="ck_select clearfix">
+                                            <div class="alhead" style="background-image: url(@(smsub.user!=null?smsub.user.photo:smsub.teacher.header)); background-size: 100%;"></div>
+                                            <div class="alqades">
+                                                <div class="name">@(smsub.user != null ? smsub.user.name : smsub.teacher.name)</div>
+                                                <div class="date">@(smsub.date.HasValue ? smsub.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            @(smsub.content)
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        }
+                    </div>
+                }
+                    }
+
+
+                </li>
+            }
+        }
+        @if (comments.Count > 2)
+        {
+            <a href="javascript:;" class="show_all">查看更多</a>
+        }
+    </ul>
+
+</div>
+

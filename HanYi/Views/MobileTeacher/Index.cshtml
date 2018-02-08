@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "班级中心";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+}
+
+ 
+
+<div style="padding-bottom:7rem;">
+    <ul class="clearfix" id="res"></ul>
+    <div class="load_more" style=" margin-top:20px">
+        <a href="javascript:void(0)" onclick="loadMore()"></a>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/assets/js/mobileteacher/index.js"></script>
+
+    <script>
+        pagejs.init();
+    </script>
+}

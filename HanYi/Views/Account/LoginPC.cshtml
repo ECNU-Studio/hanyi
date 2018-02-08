@@ -1,0 +1,126 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>时时课课</title>
+    <link href="~/assets/css/pcdownload.css" rel="stylesheet" />
+</head>
+<body style="background-color:#fff;">
+    <div class="logo-wrap">
+        <img src="~/assets/img/pc/u36.png" />
+    </div>
+    <div id="canvas-container"></div>
+    <div class="login-wrapper">
+        <div class="title">时时课课</div>
+        <ul class="ul-iframe">
+            <li>
+                <div class="input_bg" style="border-bottom:none;">
+                    <input type="text" id="username" value="@(ViewBag.username)" placeholder="用户名" autocomplete="off" />
+                </div>
+            </li>
+            <li>
+                <div class="input_bg">
+                    <input type="password" id="password" value="@(ViewBag.pwd)" placeholder="密码" autocomplete="off" />
+                </div>
+            </li>
+            <li class="clearfix">
+                <div class="check_psd">
+                    <div class="check-wrap">
+                        <input type="checkbox" id="b" @(ViewBag.check == null ? "checked" : ViewBag.check) />
+                        <label for="b">记住密码</label>
+                    </div>
+                </div>
+                @*<a href="javascript:void(0)" class="forget_psd">忘记密码？</a>*@
+            </li>
+            <li style="margin-top:15px;">
+                <div class="login_btn">
+                    <a href="javascript:void(0)" id="alogin" onclick="login(this)">登录</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="~/assets/js/jquery-1.10.2.min.js"></script>
+<script src="~/assets/js/pc/loginbg.js"></script>
+<script type="text/javascript">
+    /*保存中的样式*/
+    var saving = function (savebtnid, text) {
+        if (typeof (text) == "undefined" || text == null) {
+            text = "保存中...";
+        }
+        $("#" + savebtnid).text(text);
+        if ($("#" + savebtnid + ' .mask_btn').length > 0) {
+            $('.mask_btn').show();
+        }
+        else {
+            var $mask = '<div class="mask_btn" style="width:126px;height:36px;top:-36px;"></div>';
+            $("#" + savebtnid).after($mask);
+        }
+    }
+    var endsaveing = function (savebtnid, text) {
+        if (typeof (text) == "undefined" || text == null) {
+            text = "保存中";
+        }
+        $("#" + savebtnid).text(text);
+        $('.mask_btn').hide();
+    }
+    $(function () {
+        var bg = new LogBackground({
+            circleColor: "rgba(49,210,142,0.8)",
+            lineColor: "rgba(49,210,142,1)",
+            canvasOpacity: 0.2,
+            circleNum: 40
+        });
+
+        $('#username').focus();
+        $("#password").keydown(function (event) {
+            if (event.keyCode == 13) {
+                login($("#alogin"));
+            }
+        });
+    });
+    var login = function (obj) {
+        var userName = $("#username").val();
+        var password = $("#password").val();
+        var b = $("#b").attr("checked") == "checked" ? true : false;
+        if (userName == "") {
+            alert("用户名不能为空");
+            return false;
+        }
+        if (password == "") {
+            alert("密码不能为空");
+            return false;
+        }
+        saving("alogin", "登录中...");
+        var rqData = "phone=" + userName;
+        rqData += "&password=" + password;
+        rqData += "&b=" + b;
+        $.ajax({
+            type: "POST",
+            data: rqData,
+            url: "/Account/PostLoginPC",
+            success: function (res) {
+                if (res.success) {
+                    location.href = res.url;
+                } else {
+                    alert(res.message);
+                }
+                endsaveing("alogin", "登录");
+            },
+            error: function (res) {
+                alert(res.message);
+                endsaveing("alogin", "登录");
+            }
+        });
+    }
+</script>
+

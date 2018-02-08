@@ -1,0 +1,110 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "修改密码";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+    users user = ViewBag.user as users;
+    if (user == null)
+    {
+        user = new users();
+    }
+}
+@section styles{
+    <style>
+        .informationwrap .information .info li .t { width: 23%; }
+        .informationwrap .information .info li .v { width: 76%; }
+    </style>
+}
+<div class="informationwrap">
+    <div class="information">
+        <div class="headertop">
+            <a class="arrow" href="@Url.Action("PerCenter", "MobileTeacher")">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+            </a>
+            <span class="title">修改密码</span>
+        </div>
+        <div class="spline"></div>
+        <div id="eidtInfo">
+            <ul class="info clearfix">
+                <li>
+                    <div class="t">原密码</div>
+                    <div class="v">
+                        <div><input id="oldPW" class="text-input" type="password" value="" /></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="t">新密码</div>
+                    <div class="v">
+                        <div><input id="newPW" class="text-input" type="password" value="" /></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="t">确认密码</div>
+                    <div class="v">
+                        <div><input id="newPW_1" class="text-input" type="password" value="" /></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="btnwrap clearfix">
+                <div class="btn" id="sava_info">保存</div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+
+        $(function () {
+
+            $("#sava_info").click(function () {
+                var oldPW = $("#oldPW").val();
+                var newPW = $("#newPW").val();
+                var newPW_1 = $("#newPW_1").val();
+
+                if (oldPW == "") {
+                    showMsg("原密码不能为空");
+                    return;
+                }
+                if (newPW == "") {
+                    showMsg("新密码不能为空");
+                    return;
+                }
+                if (newPW_1 == "") {
+                    showMsg("确认密码不能为空");
+                    return;
+                }
+
+                if (newPW != newPW_1) {
+                    showMsg("新密码与确认密码不一致");
+                    return;
+                }
+
+                showloading("");
+                var paras = {
+                    oldPW: oldPW,
+                    newPW: newPW
+                };
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(paras),
+                    url: "/MobileTeacher/PostSavePW",
+                    dataType: "json",
+                    contentType: 'application/json'
+                }).success(function (res) {
+                    if (res.success) {
+                        showMsg("操作成功！");
+                        window.location.href = "/MobileTeacher/PerCenter";
+                    } else {
+                        showMsg(res.message);
+                    }
+                    hideloading();
+                }).error(function (xhr, status) {
+                    hideloading();
+                });
+            });
+
+
+
+        });
+
+    </script>
+}

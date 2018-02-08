@@ -1,0 +1,67 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<classaddress>;
+    if (list == null)
+    {
+        list = new List<classaddress>();
+    }
+}
+
+@if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input name="groupaddress" type="checkbox" class="js-check-all" /></label>
+                    </div>
+                </th>
+               
+                <th> 开课时间</th>
+                <th> 日程</th>                
+                <th> 上课地址 </th>
+                <th width="48px"></th>
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td>
+                        <div class="ck_select clearfix">
+                            <label><input data-value="@(item.id)" name="groupaddress" type="checkbox" class="checkbox" /></label>
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@(item.datebegin.HasValue?item.datebegin.Value.ToString("yyyy-MM-dd HH:mm"):"")">
+                          @(item.datebegin.HasValue ? item.datebegin.Value.ToString("yyyy-MM-dd HH:mm") : "")
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix" title="@(item.period)">
+                            @(item.period)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@(item.address)">
+                            @(item.address)
+                        </div>
+                    </td>
+                   
+                    <td title="">
+                        <div class="fr edit_btn">
+                            <a href="#" class="edit-address" data-id="@item.id" data-period="@item.period" data-address="@item.address" data-datebegin="@(item.datebegin.HasValue ? item.datebegin.Value.ToString("yyyy-MM-dd HH:mm") : "")">管理</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}
+

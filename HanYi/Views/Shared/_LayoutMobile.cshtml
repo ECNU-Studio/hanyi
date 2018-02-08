@@ -1,0 +1,148 @@
+﻿ @{
+     //action和controller用来高亮当前左菜单
+     var action = ViewContext.RouteData.Route.GetRouteData(this.Context).Values["action"].ToString().ToLower();
+     var controller = ViewContext.RouteData.Route.GetRouteData(this.Context).Values["controller"].ToString().ToLower();
+ 
+     List<string> arrNav = new List<string>();
+     arrNav.Add("help");
+     arrNav.Add("intro");
+     arrNav.Add("classdetail");
+     arrNav.Add("gocomment");
+     arrNav.Add("loginuser");
+     arrNav.Add("loginteacher");
+     arrNav.Add("myanswerdetail");
+     arrNav.Add("mycommentdetail");
+     arrNav.Add("settings");
+     arrNav.Add("information");
+     arrNav.Add("myanswer");
+     arrNav.Add("mycomment");
+     ViewBag.version = 1.4;     
+}
+<!DOCTYPE html>
+<div id="beforebox-overlay">
+    <div id="beforebox-loading">
+        <div class=""></div>
+    </div>
+</div>
+<div id="load_shows">
+    <div class="load_loading">
+        <p></p>
+    </div>
+</div>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta charset="utf-8" />
+    <title>时时课课</title>
+    <link href="~/assets/css/mobile.css?vertion=@(ViewBag.version)" rel="stylesheet" />
+    <link href="~/assets/css/jquery.control.css" rel="stylesheet" />
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    @RenderSection("css", false)
+    @RenderSection("styles", required: false)
+    <!-- END PAGE LEVEL STYLES -->
+</head>
+<body>
+    <section id="bodywrap">
+        @RenderBody()
+    </section>
+    
+    @if(!arrNav.Contains(action))
+    {
+        <div class="nav">
+            <ul class="clearfix">
+                <li id="nav_index" class="@(action == "index" ? "current" : "")">
+                    <a href="@(Url.Action("Index", "MobileUser"))">
+                        @if(action == "index")
+                        {
+                            <i class="iconfont nav_icon">&#xe604;</i>
+                        }
+                        else
+                        {
+                            <i class="iconfont nav_icon">&#xe603;</i>
+                        }
+                        <h5>课程中心</h5>
+                    </a>
+                </li>
+                <li id="nav_task" class="@(action != "index" ? "current" : "")">
+                    <a href="@(Url.Action("PerCenter", "MobileUser"))" style="position:relative;">
+                        @if (action != "index")
+                        {
+                            <i class="iconfont nav_icon">&#xe62b;</i>
+                        }
+                        else
+                        {
+                            <i class="iconfont nav_icon">&#xe605;</i>
+                        }
+                        <h5>个人中心</h5>
+                        @if (ViewBag.hasTip == true)
+                        {
+                            <i class="tip"></i> 
+                        }
+                    </a>
+                </li>
+
+                @*<li id="nav_elitist"  >
+                    <a href="javascript:;">
+                        <i class="iconfont nav_icon">&#xe607;</i>
+                        <h5>关于我们</h5>
+                    </a>
+                    <dl class="navSec clearfix">
+                        <dd><a style="font-size:1.5rem;" href="@(Url.Action("Intro", "MobileUser"))">平台介绍</a></dd>
+                        <dd style="border-bottom:none;"><a style="font-size:1.5rem;" href="@(Url.Action("Help", "MobileUser"))">功能介绍</a></dd>
+                        <dd><a style="font-size:1.5rem;" href="@(Url.Action("Cartoon", "MobileUser"))">宣传动画</a></dd>
+                    </dl>
+                </li>*@
+
+            </ul>
+        </div>
+    }
+    
+
+    <div class="to-top-action">
+        <i class="iconfont scroll_top" >&#xe630;</i>
+    </div>
+
+    <script src="~/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="~/assets/js/common.js?vertion=@(ViewBag.version)"></script>
+    <script src="~/assets/js/jquery.control.js"></script>
+    <script>
+        $(function () {
+            if ($("#nav_elitist").length > 0) {
+                var $this = $("#nav_elitist");
+                $this.click(function () {
+                    if (!$this.hasClass("current")) {
+                        $(".nav li").removeClass("current");
+                        $this.addClass("current");
+                        $("#nav_elitist .navSec").toggle();
+                        $("#nav_elitist .nav_icon").html("&#xe62f;");
+                    } else {
+                        $(".nav li").removeClass("current");
+                        $("#nav_elitist .navSec").toggle();
+                        $("#nav_elitist .nav_icon").html("&#xe607;");
+                    }
+                });
+            }
+            $('.scroll_top').click(function () {
+                $('html,body').animate({ scrollTop: '0px' }, 500, function () {
+                    $(".to-top-action").hide();
+                });
+            });
+            $(document).scroll(function () {
+                var scrollValue = $(window).scrollTop();
+                if (scrollValue > window.innerHeight) {
+                    $(".to-top-action").show();
+                } else {
+                    $(".to-top-action").hide();
+                }
+            });
+        });
+        
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,104 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "CourseList";
+    Layout = null;
+    var list = ViewBag.list as List<classes>;
+    if (list == null)
+    {
+        list = new List<classes>();
+    }
+}
+<input type="hidden" id="total" value="@(ViewBag.total)" />
+@if (list.Count > 0)
+{
+    foreach (var item in list)
+    {
+        <li>
+            <div class="hot4 halfsize"></div>
+            <a class="item" href="@(Url.Action("ClassDetail", "MobileTeacher", new { id = item.id }))">
+                <div class="left"><div class="icon_01" style="background-image:url(@(item.courses.cover));background-size:100%;background-repeat: no-repeat;"></div></div>
+                <div class="middle">
+                    <h2>@(item.companys.name)(学员 @(item.classstudent.Count))</h2>
+                    <div class="mark_wraper">
+                        <div class="clearboth"></div>
+                    </div>
+                    <h6>@Html.Raw(item.courses.name.Replace("/", "<br/>"))</h6>
+                    <div class="V">
+                        @if (item.comment != null && item.comment.Count > 0)
+                        {
+                            double i = 0;
+                            foreach (var cm in item.comment)
+                            {
+                                i += (cm.c1 + cm.c2 + cm.c3 + cm.c4 + cm.c5 + cm.c6 + cm.c7 + cm.c8 + cm.c9) / 9.0;
+                            }
+                            i = i / item.comment.Count;
+                            if (i >= 1)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (i >= 2)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (i >= 3)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (i >= 4)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (i >= 5)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                        }
+                        else
+                        {
+                            <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            <i class="iconfont ms" data-value="2">&#xe60a;</i>
+                            <i class="iconfont ms" data-value="3">&#xe60a;</i>
+                            <i class="iconfont ms" data-value="4">&#xe60a;</i>
+                            <i class="iconfont ms" data-value="5">&#xe60a;</i>
+                        }
+
+                    </div>
+                </div>
+                <div class="right"></div>
+                <div class="clearboth"></div>
+
+            </a>
+
+
+        </li>
+    }
+}
+else
+{
+    <li class="noData_mobile" style="padding:20px 0 ;">暂无课程</li>
+}
+@*</ul>*@
+
+
+
+ 

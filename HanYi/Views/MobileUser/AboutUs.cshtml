@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+
+<div class="headertop">
+    <a class="arrow" href="@Url.Action("PerCenter", "MobileUser")">
+        <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+    </a>
+    <span class="title">关于我们</span>
+</div>
+<div class="list_show">
+    <ul>
+        <li><a href="@Url.Action("Intro", "MobileUser")"><div>平台介绍</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+        <li><a href="@Url.Action("Cartoon", "MobileUser")"><div>宣传动画</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+    </ul>
+</div>
+

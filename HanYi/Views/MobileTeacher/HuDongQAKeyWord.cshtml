@@ -1,0 +1,192 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "HuDong";
+    Layout = null;
+
+    List<qa> qas = ViewBag.qas as List<qa>;
+    if (qas == null)
+    {
+        qas = new List<qa>();
+    }
+}
+
+
+
+@*<div style="padding: 0 2rem;" class="clearfix">
+        <div class="input_sear" style="margin: 2rem 0 1.5rem 0;float:left;width:75%">
+            <input id="searchword" class="" type="text" value="" />
+            <i id="searchQA">&#xe631;</i>
+        </div>
+        <div id="btn_tiwen" class="btn_add font-size-16" style="margin: 2rem 0 1.5rem 0rem; float:right; background-color: #094270; color: white; height: 2.8rem; line-height: 2.7rem; border-radius:5px; " onclick="">提问</div>
+    </div>*@
+
+
+<ul id="listqa" class="clearfix QAwrap">
+    @for (int i = 0; i < qas.Count; i++)
+    {
+        var item = qas[i];
+
+        <li class="wenda" style="@(i > 2 ? "display:none" : "")" data-id="@(item.id)" data-name="@(item.user != null ? item.user.name : item.teacher.name)">
+            <div class="mainlayer">
+                <div class="baseinfo parent-item clearfix">
+                    <div class="ck_select">
+                        <div class="header" style="background-image: url(@(item.user != null ? item.user.photo : item.teacher.header)); background-size: 100%;"></div>
+                        <div class="qades">
+                            <div class="name">
+                                @(item.user != null ? item.user.name : item.teacher.name)
+                                @if (item.teacher != null)
+                                {
+                                    <i class="iconfont teacher_icon">&#xe615;</i>
+                                }
+                            </div>
+                            <div class="date">@(item.date.HasValue ? item.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                        </div>
+                        @*<i class="iconfont fr" style="color: #EA5B5B;">&#xe60c;</i>*@
+                    </div>
+                    <div class="content">
+                        @(item.content)
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(item.pic1) || !string.IsNullOrEmpty(item.pic2) || !string.IsNullOrEmpty(item.pic3) || !string.IsNullOrEmpty(item.pic4) || !string.IsNullOrEmpty(item.pic5) || !string.IsNullOrEmpty(item.pic6))
+                {
+                    <dl data-name="Photolist" class="photolist clearfix PhotoSwipe_QA">
+                        @if (!string.IsNullOrEmpty(item.pic1))
+                        {
+                            var WH = (item.pic1.Split('?').Length >= 2 ? item.pic1.Split('?')[1] : "400X600");
+                            <dd style="width: 6rem; ">
+                                <img data-size="@(WH)" src="@(item.pic1)" style="width: 6rem;height: 6rem;">
+                            </dd>
+                        }
+                        @if (!string.IsNullOrEmpty(item.pic2))
+                        {
+                            var WH = (item.pic2.Split('?').Length >= 2 ? item.pic2.Split('?')[1] : "400X600");
+                            <dd style="width: 6rem; ">
+                                <img data-size="@(WH)" src="@(item.pic2)" style="width: 6rem;height: 6rem;">
+                            </dd>
+                        }
+                        @if (!string.IsNullOrEmpty(item.pic3))
+                        {
+                            var WH = (item.pic3.Split('?').Length >= 2 ? item.pic3.Split('?')[1] : "400X600");
+                            <dd style="width: 6rem; ">
+                                <img data-size="@(WH)" src="@(item.pic3)" style="width: 6rem;height: 6rem;">
+                            </dd>
+                        }
+                        @if (!string.IsNullOrEmpty(item.pic4))
+                        {
+                            var WH = (item.pic4.Split('?').Length >= 2 ? item.pic4.Split('?')[1] : "400X600");
+                            <dd style="width: 6rem; ">
+                                <img data-size="@(WH)" src="@(item.pic4)" style="width: 6rem;height: 6rem;">
+                            </dd>
+                        }
+                        @if (!string.IsNullOrEmpty(item.pic5))
+                        {
+                            var WH = (item.pic5.Split('?').Length >= 2 ? item.pic5.Split('?')[1] : "400X600");
+                            <dd style="width: 6rem; ">
+                                <img data-size="@(WH)" src="@(item.pic5)" style="width: 6rem;height: 6rem;">
+                            </dd>
+                        }
+                        @if (!string.IsNullOrEmpty(item.pic6))
+                        {
+                            var WH = (item.pic6.Split('?').Length >= 2 ? item.pic6.Split('?')[1] : "400X600");
+                            <dd style="width: 6rem; ">
+                                <img data-size="@(WH)" src="@(item.pic6)" style="width: 6rem;height: 6rem;">
+                            </dd>
+                        }
+                    </dl>
+                }
+            </div>
+            @{
+        if (item.qasub != null && item.qasub.Count > 0)
+        {
+            item.qasub.Sort((x, y) => -x.id.CompareTo(y.id));
+            <div class="sublayer">
+                <dl class="clearfix flex-h flex-hc" style="padding-right:2rem;">
+                    <dd class="sublayer-left"></dd>
+                    <dd class="clearfix flex1" style="border-top: 1px solid #ccc;"></dd>
+                </dl>
+                @foreach (var qasub in item.qasub)
+                {
+                    <dl data-name="answerlist" data-atname="@(qasub.user != null ? qasub.user.name : qasub.teacher.name)" data-attype=@(qasub.user != null ? 1 : 0) data-atid="@(qasub.user != null ? qasub.user.id : qasub.teacher.id)" class="answerlist clearfix flex-h flex-hc">
+                        <dd class="sublayer-left"></dd>
+                        <dd class="clearfix flex1 sublayer-right">
+                            <div class="baseinfo  parent-item answerlist clearfix">
+                                <div class="ck_select clearfix">
+                                    <div class="alhead" style="background-image: url(@(qasub.user != null ?qasub.user.photo : qasub.teacher.header)); background-size: 100%;"></div>
+                                    <div class="alqades">
+                                        <div class="name">@(qasub.user != null ? qasub.user.name : qasub.teacher.name)</div>
+                                        <div class="date">@(qasub.date.HasValue ? qasub.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    @{
+                                        if (qasub.touserid.HasValue)
+                                        {
+                                                    @("@" + qasub.touser.name + "：")
+                                        }
+                                        else if (qasub.toteacherid.HasValue)
+                                        {
+                                                    @("@" + qasub.toteacher.name + "：")
+                                        }
+                                    }
+                                    @(qasub.content)
+                                </div>
+                            </div>
+                            <dl data-name="Photolist" class="photolist clearfix PhotoSwipe_QA">
+                                @if (!string.IsNullOrEmpty(qasub.pic1))
+                                {
+                                    var WH = (qasub.pic1.Split('?').Length >= 2 ? qasub.pic1.Split('?')[1] : "400X600");
+                                    <dd style="width: 6rem; ">
+                                        <img data-size="@(WH)" src="@(qasub.pic1)" style="width: 6rem;height: 6rem;">
+                                    </dd>
+                                }
+                                @if (!string.IsNullOrEmpty(qasub.pic2))
+                                {
+                                    var WH = (qasub.pic2.Split('?').Length >= 2 ? qasub.pic2.Split('?')[1] : "400X600");
+                                    <dd style="width: 6rem; ">
+                                        <img data-size="@(WH)" src="@(qasub.pic2)" style="width: 6rem;height: 6rem;">
+                                    </dd>
+                                }
+                                @if (!string.IsNullOrEmpty(qasub.pic3))
+                                {
+                                    var WH = (qasub.pic3.Split('?').Length >= 2 ? qasub.pic3.Split('?')[1] : "400X600");
+                                    <dd style="width: 6rem; ">
+                                        <img data-size="@(WH)" src="@(qasub.pic3)" style="width: 6rem;height: 6rem;">
+                                    </dd>
+                                }
+                                @if (!string.IsNullOrEmpty(qasub.pic4))
+                                {
+                                    var WH = (qasub.pic4.Split('?').Length >= 2 ? qasub.pic4.Split('?')[1] : "400X600");
+                                    <dd style="width: 6rem; ">
+                                        <img data-size="@(WH)" src="@(qasub.pic4)" style="width: 6rem;height: 6rem;">
+                                    </dd>
+                                }
+                                @if (!string.IsNullOrEmpty(qasub.pic5))
+                                {
+                                    var WH = (qasub.pic5.Split('?').Length >= 2 ? qasub.pic5.Split('?')[1] : "400X600");
+                                    <dd style="width: 6rem; ">
+                                        <img data-size="@(WH)" src="@(qasub.pic5)" style="width: 6rem;height: 6rem;">
+                                    </dd>
+                                }
+                                @if (!string.IsNullOrEmpty(qasub.pic6))
+                                {
+                                    var WH = (qasub.pic6.Split('?').Length >= 2 ? qasub.pic6.Split('?')[1] : "400X600");
+                                    <dd style="width: 6rem; ">
+                                        <img data-size="@(WH)" src="@(qasub.pic6)" style="width: 6rem;height: 6rem;">
+                                    </dd>
+                                }
+                            </dl>
+
+                        </dd>
+
+                    </dl>
+                }
+            </div>
+        }
+            }
+        </li>
+    }
+    @if (qas.Count > 3)
+    {
+        <a href="javascript:;" class="show_all">查看更多</a>
+    }
+</ul>

@@ -1,0 +1,242 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "个人信息";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    users user = ViewBag.user as users;
+    if (user == null)
+    {
+        user = new users();
+    }
+    var company = ViewBag.company as companys;
+    if (company == null)
+    {
+        company = new companys();
+    }
+}
+@section styles{
+    <style>
+        .text-show { width:92%;height:5rem;line-height:5rem;padding:0 8px;text-align:left;}
+    </style>
+}
+<div class="informationwrap">
+    <div class="information">
+        <div class="headertop">
+            <a class="arrow" href="@Url.Action("PerCenter", "MobileUser")">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;"> 
+            </a>
+            <span class="title">个人信息</span>
+        </div>
+        <div class="spline"></div>
+        <div id="showInfo">
+            <div class="per_conter clearfix  flex-v  flex-vw" style="margin-bottom:1rem;">
+                <a href="javascript:;" class="per_msg flex-h flex-vc">
+
+                    <div class="peri_head">
+                        <img src="@(user.photo)" />
+                    </div>
+                    <div class="per_detail flex1">
+                        <h3>@(user.name)</h3>
+                        <h5>@(user.department)</h5>
+                        <h5>@(user.position)</h5>
+                    </div>
+                </a>
+            </div>
+            <ul class="info clearfix">
+                <li>
+                    <div class="t">手机</div>
+                    <div class="v">
+                        <div class="text-show">@(user.tel)</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="t">企业邮箱</div>
+                    <div class="v">
+                        <div class="text-show">@(user.email)</div>
+                    </div>
+                </li>
+            </ul>
+            <div class="btnwrap clearfix">
+                <div class="btn" id="edit_info">编辑</div>
+            </div>
+        </div>
+        <div id="eidtInfo" style="display:none;">
+            <ul class="info clearfix">
+                <li class="tx">
+                    <div class="t">头像</div>
+                    <div class="v" style="height: 8rem; ">
+                        <div class="readmore tx_img">
+                            <div class="u_tx" style="position:relative">
+                                <img id="touxiang" src="@(string.IsNullOrEmpty(user.photo) ? "/assets/img/defaultAvatar.png" : user.photo)" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="t">手机</div>
+                    <div class="v">
+                        <div><input id="txtPhone" class="text-input" type="text" value="@(user.tel)" /></div>
+                        @*<div class="readmore" id="showeditphone">@(!string.IsNullOrEmpty(user.tel) ? user.tel : "未填写")</div>*@
+                    </div>
+                </li>
+                <li>
+                    <div class="t">企业邮箱</div>
+                    <div class="v">
+                        <div><input id="txtEmail" class="text-input" type="text" value="@(user.email)" /></div>
+                        @*<div class="readmore" id="showeditemail">@(!string.IsNullOrEmpty(user.email) ? user.email : "未填写")</div>*@
+                    </div>
+                </li>
+            </ul>
+            <div class="btnwrap clearfix">
+                <div class="btn" id="sava_info">保存</div>
+                <div class="btn" id="cancel_info">取消</div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="http://cdn.staticfile.org/Plupload/2.1.1/moxie.js"></script>
+<script src="http://cdn.staticfile.org/Plupload/2.1.1/plupload.dev.js"></script>
+<script src="~/assets/plugins/qinui/qiniu.js"></script>
+<script>
+
+        $(function () {
+            var uploader = null;
+            $("#cancel_info").click(function () {
+                $("#showInfo").show();
+                $("#eidtInfo").hide();
+            });
+            $("#edit_info").click(function () {
+                $("#showInfo").hide();
+                $("#eidtInfo").show();
+                if (uploader == null) {
+                    uploader = Qiniu.uploader({
+                        runtimes: 'html5,flash,html4',    //上传模式,依次退化
+                        browse_button: 'touxiang',       //上传选择的点选按钮，**必需**
+                        uptoken: '@(ViewBag.upToken)',
+                        domain: QiNiu_Domain,   //bucket 域名，下载资源时用到，**必需**
+                        get_new_uptoken: false,  //设置上传文件的时候是否每次都重新获取新的token
+                        max_file_size: '10mb',           //最大文件体积限制
+                        unique_names: true,
+                        max_retries: 3,                   //上传失败最大重试次数
+                        dragdrop: false,                   //开启可拖曳上传
+                        chunk_size: '4mb',                //分块上传时，每片的体积
+                        auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                        multi_selection: false,//true,可选多个，false每次一个图片
+                        //filters: {
+                        //    mime_types: [ //只允许上传图片  
+                        //        { title: "Image files", extensions: "jpg,jpeg,gif,png" },
+                        //    ],
+                        //    prevent_duplicates: false //不允许选取重复文件  
+                        //},
+                        init: {
+                            'FileUploaded': function (up, file, info) {
+                                var domain = up.getOption('domain');
+                                var res = eval('(' + info + ')');
+                                var sourceLink = domain + res.key; //获取上传成功后的文件的Url
+                                if (file.type.indexOf("image") >= 0) {
+                                    $("#touxiang").attr("src", sourceLink);
+                                    var img = new o.Image();
+                                    img.onload = function () {
+                                        hideloading();
+                                    }
+                                    img.load(sourceLink);
+                                    //var paras = {
+                                    //    txurl: sourceLink,
+                                    //};
+                                    //$.ajax({
+                                    //    type: "POST",
+                                    //    data: JSON.stringify(paras),
+                                    //    url: "/MobileUser/PostSavePersonTouxiang",
+                                    //    dataType: "json",
+                                    //    contentType: 'application/json'
+                                    //}).success(function (res) {
+                                    //    if (res.success) {
+                                    //        $("#touxiang").attr("src", "");
+                                    //        $("#touxiang").attr("src", sourceLink);
+
+                                    //    } else {
+                                    //        alert(res.message);
+                                    //    }
+                                    //    hideloading();
+                                    //}).error(function (xhr, status) {
+                                    //    hideloading();
+                                    //});
+
+                                   
+                                } else {
+                                    showMsg("请上传图片");
+                                    hideloading();
+                                }
+                            },
+                            'Error': function (up, err, errTip) {
+                                showMsg(errTip);
+                                hideloading();
+                            },
+                            'BeforeUpload': function (up, file) {
+                                showloading("");
+                                // 每个文件上传前,处理相关的事情
+                                if (file.type.indexOf("image") < 0) {
+                                    hideloading();
+                                    showMsg("请上传图片");
+                                    uploader.stop();
+                                    return;
+                                }
+                            },
+                        }
+                    });
+                }
+            });
+
+            $("#sava_info").click(function () {
+                var sourceLink = $("#touxiang").attr("src");
+
+                var phone = $("#txtPhone").val();
+                if (phone == "") {
+                    showMsg("手机号码不能为空");
+                    return;
+                } else if (!validatemobile(phone)) {
+                    showMsg("请填写正确的手机号码");
+                    return;
+                }
+
+                var txtEmail = $("#txtEmail").val();
+                if (txtEmail == "") {
+                    showMsg("邮箱不能为空");
+                    return;
+                } else if (!isEmail(txtEmail)) {
+                    showMsg("请填写正确的邮箱");
+                    return;
+                }
+
+                showloading("");
+                var paras = {
+                    txurl: sourceLink,
+                    phone: $("#txtPhone").val(),
+                    email: $("#txtEmail").val()
+                };
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(paras),
+                    url: "/MobileUser/PostSaveInfo",
+                    dataType: "json",
+                    contentType: 'application/json'
+                }).success(function (res) {
+                    if (res.success) {
+                        showMsg("操作成功！");;
+                        window.location.href = window.location.href;
+                    } else {
+                        alert(res.message);
+                    }
+                    hideloading();
+                }).error(function (xhr, status) {
+                    hideloading();
+                });
+            });
+
+           
+
+      });
+
+</script>
+}
+

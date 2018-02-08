@@ -1,0 +1,29 @@
+﻿@using Entity.Entity;
+@{ 
+    Layout = null;
+   var list = ViewBag.list as List<users>;
+   if (list == null)
+   {
+       list = new List<users>();
+   }    
+}
+
+ @if (list.Count > 0)
+{ 
+     <div class="ck_select clearfix" style="float:none">
+        <label><input name="addgroup" type="checkbox" class="js-check-all" />全选</label>
+      </div>
+    <div style="float:left;">
+        
+        @foreach (var item in list)
+        {
+            <div class="ck_select clearfix">
+                <label><input data-value="@(item.id)" name="addgroup" type="checkbox" class="checkbox" />@(item.name)</label>
+            </div>        
+        }
+    </div>
+}
+else
+{
+     <div style="width:290px;">该企业暂无学员可添加，请去“企业”模块先添加学员</div>
+}

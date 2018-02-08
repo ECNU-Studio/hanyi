@@ -1,0 +1,62 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<users>;
+    if (list == null)
+    {
+        list = new List<users>();
+    }
+
+}
+@if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input type="checkbox" name="user" class="js-check-all" /></label>
+                    </div>
+                </th>
+                <th width="100px">姓名</th>
+                <th width="100px">账户</th>
+                <th width="100px">邮箱</th>
+                <th width="100px">手机</th>
+              
+                <th>公司</th>
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td>
+                        <div class="ck_select clearfix">
+                            <label><input type="checkbox" data-value="@(item.id)" name="user" class="checkbox" /></label>
+                        </div>
+                    </td>
+                    <td title="@(item.name)">
+                        @(item.name)
+                    </td>
+                    <td title="@(item.username)">
+                        @(item.username)
+                    </td>
+                    <td title="@(item.email)">
+                        @(item.email)
+                    </td>
+                    <td title="@(item.tel)">
+                        @(item.tel)
+                    </td>
+                    <td title="@(item.company.name)">
+                        @(item.company.name)
+                    </td>
+
+                    
+                </tr>
+            }
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}

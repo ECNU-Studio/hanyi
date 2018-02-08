@@ -1,0 +1,131 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+
+    List<comment> comments = ViewBag.comments as List<comment>;
+    if (comments == null)
+    {
+        comments = new List<comment>();
+    }
+}
+@if (comments.Count > 0)
+{
+    for (int j = 0; j < comments.Count; j++)
+    {
+        var cm = comments[j];
+        <li class="pingjia" style="@(j > 2 ? "display:none;" : "")" data-id="@cm.id" data-name="@(cm.anonymous ? "匿名" : cm.user.name)">
+            <div class="mainlayer">
+                <div class="baseinfo parent-item clearfix">
+                    <div class="ck_select">
+                        <div class="header" style="background-image: url(@(cm.anonymous ? "../../assets/img/defaultAvatar.png" : cm.user.photo)); background-size: 100%;"></div>
+                        <div class="qades">
+                            <div class="name fl">
+                                @(cm.anonymous ? "匿名" : cm.user.name)
+                            </div>
+                            <div class="date fl" style="margin-left: 0.5rem;">@(cm.date.HasValue ? cm.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                            <div class="V clearboth">
+                                @{   double i = 0;
+
+                                   i += (cm.c1 + cm.c2 + cm.c3 + cm.c4 + cm.c5 + cm.c6 + cm.c7 + cm.c8 + cm.c9) / 9.0;
+
+
+                                   if (i >= 1)
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                   }
+                                   else
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                   }
+                                   if (i >= 2)
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                   }
+                                   else
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                   }
+                                   if (i >= 3)
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                   }
+                                   else
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                   }
+                                   if (i >= 4)
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                   }
+                                   else
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                   }
+                                   if (i >= 5)
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe609;</i>
+                                   }
+                                   else
+                                   {
+                                    <i class="iconfont ms_small" data-value="1">&#xe60a;</i>
+                                   }
+                                }
+
+                            </div>
+
+                        </div>
+                        @*<i class="iconfont fr" style="color: #EA5B5B;">&#xe60c;</i>*@
+                    </div>
+                    <div class="content">
+                        @(cm.content)
+                    </div>
+                </div>
+            </div>
+
+            @{
+        if (cm.commentsub != null && cm.commentsub.Count > 0)
+        {
+            cm.commentsub.Sort((x, y) => -x.id.CompareTo(y.id));
+            <div class="sublayer">
+                <dl class="clearfix flex-h flex-hc">
+                    <dd class="sublayer-left"></dd>
+                    <dd class="clearfix flex1" style="border-top: 1px solid #ccc; margin-right: 2rem;"></dd>
+                </dl>
+                @foreach (var smsub in cm.commentsub)
+                {
+                    <dl data-name="answerlist" class="answerlist clearfix flex-h flex-hc">
+                        <dd class="sublayer-left"></dd>
+                        <dd class="clearfix flex1 sublayer-right">
+                            <div class="baseinfo  parent-item answerlist clearfix">
+                                <div class="ck_select clearfix">
+                                    <div class="alhead" style="background-image: url(@(smsub.user!=null?smsub.user.photo:smsub.teacher.header)); background-size: 100%;"></div>
+                                    <div class="alqades">
+                                        <div class="name">@(smsub.user != null ? smsub.user.name : smsub.teacher.name)</div>
+                                        <div class="date">@(smsub.date.HasValue ? smsub.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    @(smsub.content)
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                }
+            </div>
+        }
+            }
+
+
+        </li>
+    }
+    if (comments.Count > 3)
+    {
+        <a href="javascript:;" class="show_all">查看更多</a>
+    }
+}
+else
+{
+    <li class="noData_mobile">暂无信息</li>
+}
+
+

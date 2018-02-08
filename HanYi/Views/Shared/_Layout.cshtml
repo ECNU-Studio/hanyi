@@ -1,0 +1,91 @@
+﻿@{
+    //action和controller用来高亮当前左菜单
+    var action = ViewContext.RouteData.Route.GetRouteData(this.Context).Values["action"].ToString().ToLower();
+    var controller = ViewContext.RouteData.Route.GetRouteData(this.Context).Values["controller"].ToString().ToLower();
+    ViewBag.version = "1.0.0";
+    ViewBag.Title = "后台管理";
+}
+<!DOCTYPE html>
+<div id="beforebox-overlay">
+    <div id="beforebox-loading">
+        <div class=""></div>
+    </div>
+</div>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/assets/css/main.css" rel="stylesheet" />
+    <link href="~/assets/css/jquery.control.css" rel="stylesheet" />
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    @RenderSection("css", false)
+    @RenderSection("styles", required: false)
+    <!-- END PAGE LEVEL STYLES -->
+</head>
+<body>
+    <div class="header" id="header">
+        <div class="h_bg">
+            <p>后台管理平台</p>
+        </div>
+        <div class="sys_info">
+            <div class="box">
+                <div class="huanying">欢迎您，@(ViewBag.name)</div>
+                <div>
+                    <span class="key" data-rurl="@("/" + controller + "/" + action)" data-name="@(ViewBag.name)">修改密码</span>
+                    <span class="split">|</span>
+                    <span class="logout" onclick="sysExit()">退出</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wraper clearfix">
+        <div class="submenu">
+            <div class="top"></div>
+            <ul class="menutreeview clearfix">
+                <li class="lv1 @((controller == "enterprise" && (action == "index" || action == "enterpriseinfo")) ? "active" : "")"><a href="@Url.Action("Index","Enterprise")">企业</a></li>
+                <li class="lv1 @((controller == "teacher" && (action == "index"||action =="teacherinfo")) ? "active" : "")"><a href="@Url.Action("Index","Teacher")">培训师</a></li>
+
+                <li class="lv1 @((controller == "courses" && (action == "index" || action == "coursesinfo")) ? "active" : "")"><a href="@Url.Action("Index", "courses")">课程</a></li>
+                <li class="lv1 @((controller == "class" && (action == "index" || action == "classinfo")) ? "active" : "")"><a href="@Url.Action("Index","Class")">班级</a></li>
+                <li class="lv1 @((controller == "admin" && action == "index"  ) ? "active" : "")"><a href="@Url.Action("Index","Admin")">管理员</a></li>
+
+            </ul>
+            <div class="bottom"></div>
+        </div>
+        <section id="bodywrap">
+            @RenderBody()
+        </section>
+    </div>
+    <div class="footer clearfix">
+        <p>&copy; @DateTime.Now.Year - 瀚熠（上海）企业管理咨询有限公司</p>
+    </div>
+    <script src="~/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="~/assets/js/common.js?vertion=@(ViewBag.version)"></script>
+    <script src="~/assets/js/jquery.control.js"></script>
+    <script>
+        function sysExit() {
+            if (window.confirm('确定退出\n【后台管理】？') == true) {
+                var paras = {
+                };
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(paras),
+                    url: "/Account/LoginOut",
+                    dataType: "json",
+                    contentType: 'application/json'
+                }).success(function (res) {
+                    window.location.href = "@(Url.Action("Login", "Account"))";//服务器
+                }).error(function (xhr, status) {
+                });
+            }
+        }
+        $(".key").click(function () {
+            location.href = "/Home/ChangePwd?name=" + $(this).attr("data-name") + "&returnurl=" + $(this).attr("data-rurl");
+        });
+        
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

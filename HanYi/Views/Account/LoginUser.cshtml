@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "学员";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+
+
+
+<input type="hidden" id="url" value="@(ViewBag.returnurl == "" ? "/MobileUser/Index" : ViewBag.returnurl)" />
+
+<!--<div class="icon halfsize w_logo"></div>-->
+<a href="http://en2.nengli8.com/Account/LoginUser" class="toEnglish"></a>
+<div class="login_wraper">
+    <div  class="logo_list">
+        @*<div class="phone_icon halfsize"></div>*@
+        <i class="iconfont" style="font-size: 2rem;color: #fff;">&#xe61b;</i>
+        <input type="text" id="phone" class="login_text text" placeholder="账户" autocomplete="off" />
+        <div class="clearboth"></div>
+    </div>
+    <div class="logo_list">
+        @*<div class="password_icon halfsize"></div>*@
+        <i class="iconfont" style="font-size: 2rem;color: #fff;">&#xe61a;</i>
+        <input type="password" id="password" class="login_text text" placeholder="密码" autocomplete="off" />
+        <div class="clearboth"></div>
+    </div>
+    <a href="javascript:void(0);" class="login_btn">登&nbsp;录</a>
+</div>
+<div style="padding-top:15px; text-align:center" id="errorMsg"><h5 class="hint">用户名/登录密码有误，请重新输入！</h5></div>
+
+
+@section css{
+    <style>
+        body {
+            background: url(/assets/img/login_back.png) no-repeat;
+            background-size: cover;
+            background-position: 50% 0;
+
+        }
+        ::-webkit-input-placeholder { /* WebKit browsers */
+            color: #ffffff;
+        }
+
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #ffffff;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #ffffff;
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10+ */
+            color: #ffffff;
+        }
+
+    </style>
+}
+
+@section scripts{
+    <script src="~/assets/js/account/loginuser.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

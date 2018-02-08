@@ -1,0 +1,62 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "设置";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    users user = ViewBag.user as users;
+    if (user == null)
+    {
+        user = new users();
+    }
+}
+<div class="settingswrap">
+    <div class="settings">
+        <div class="headertop">
+            <a class="arrow" href="@Url.Action("PerCenter", "MobileUser")">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+            </a>
+            <span class="title">设置</span>
+        </div>
+        <ul class="clearfix settingslist">
+            <li>
+                <span class="T">问答通知</span>
+                <span class="V">
+                    <input data-type="1" class="mui-switch" type="checkbox" @((user.notice_wenda.HasValue && user.notice_wenda.Value) ? "checked" : "") >
+                </span>
+            </li>
+            <li>
+                <span class="T">公开电话</span>
+                <span class="V">
+                    <input data-type="2" class="mui-switch" type="checkbox" @((user.notice_pinglun.HasValue && user.notice_pinglun.Value) ? "checked" : "")>
+                </span>
+            </li>
+            <li>
+                <span class="T">英文</span>
+                <span class="V">
+                    <input data-type="3" class="mui-switch" type="checkbox">
+                </span>
+            </li>
+
+            @*<li>
+        <span class="T">问答评论推送到邮箱</span>
+        <span class="V">
+            <input data-type="3" class="mui-switch" type="checkbox" @((user.notice_sendmail.HasValue && user.notice_sendmail.Value) ? "checked" : "")>
+        </span>
+    </li>
+    <li>
+        <span class="T">公开排名</span>
+        <span class="V">
+            <input class="mui-switch" type="checkbox" checked>
+        </span>
+    </li>*@
+        </ul>
+        @*<ul class="list_show">
+            <li><a href="http://en2.nengli8.com/MobileUser/Settings"><div>English</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+        </ul>*@
+</div>
+</div>
+@section scripts{
+<script src="~/assets/js/mobileuser/settings.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

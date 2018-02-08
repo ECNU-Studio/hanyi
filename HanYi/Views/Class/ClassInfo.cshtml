@@ -1,0 +1,368 @@
+﻿@using Entity.Entity;
+@{
+   
+    var model = ViewBag.model as classes;
+    if (model == null)
+    {
+        model = new classes();
+    }
+    ViewBag.Title = "班级----基本信息----" + (ViewBag.companyname) + "----" + (ViewBag.coursename);
+}
+@section styles{
+    <style>
+        #div_00_content .edit_wrap .edit_ul > li .title { width: 60px; }
+    </style>
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+}
+ <div class="content">
+    <div class="c_title">
+        <h5>@(ViewBag.Title)</h5>
+    </div>
+    <div class="c_inner_wraper" id="form">
+        <div class="back_s margin_pace"><a href="@Url.Action("Index", "Class", new { back = "1" })">< 返回班级</a></div>
+        <div class="tab_ul margin_pace">
+            <ul class="clearfix tab_show">
+                <li class="active">
+                    <a href="javascript:;" data-href="#div_00" data-toggle="tab">基本信息</a>
+                </li>               
+                <li class="">
+                    <a href="javascript:;" data-href="#div_06" data-toggle="tab">上课地址</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_01" data-toggle="tab">学员</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_02" data-toggle="tab">课程模块</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_03" data-toggle="tab">问答</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_04" data-toggle="tab">评价</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_05" data-toggle="tab">相册</a>
+                </li>
+              
+                <li class="">
+                    <a href="javascript:;" data-href="#div_07" data-toggle="tab">进度</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_08" data-toggle="tab">排名</a>
+                </li>
+            </ul>
+        </div>
+        <!--tab切换-->
+        <div class="tab-content">
+            <input type="hidden" id="classid" value="@(ViewBag.classid)" />
+            <div id="div_00" class="tab-pane active">
+                <input type="hidden" id="id" value="@(ViewBag.classid)" />
+                    <div id="div_00_content">
+                        <div class="frame_wrap edit_wrap" style="padding-top: 0; border: none;">
+                            <ul class="edit_ul">
+                              
+                             
+                               
+                                <li class="col-12">
+                                    <div class="title">学分：</div>
+                                    <div class="value" style="position:relative;">
+                                        <div class="fl"><div class="Text_middle"><input id="hour" value="@(model.hour)" placeholder="" class="Text_lt Text_middle vali-Required vali-IntN" type="text" autocomplete="off" /></div></div>
+                                    </div>
+                                    <div class="bitian">（请填写0-6之间的数字）*</div>
+                                </li>
+                               
+                                 
+                            </ul>
+
+                            <div class="clearboth"></div>
+                            <div class="new_btn_frame">
+                                <div class="save btn" id="savebtn_base"><a href="javascript:void(0)">保存</a></div>
+                            </div>
+                        </div>
+                    </div>
+                
+
+            </div>            
+
+            <div id="div_01" class="tab-pane">
+                
+                <input type="hidden" id="companyid" value="@(ViewBag.companyid)" />
+                <div class="clearfix margin_btn">
+                    <div class="fun_btn fl">
+                        <a class="btn_show mr_20px" href="javascript:void" id="showAdd">添加用户</a>
+                        <a class="btn_show mr_20px" href="javascript:void" id="del_user">删除</a>
+                        @*<a class="btn_show mr_20px" href="javascript:void">产生随机密码</a>
+                <a class="btn_show mr_20px" href="javascript:void">下载表单</a>*@
+
+                    </div>
+                    <div class="fr input_sear">
+                        <input type="text" autocomplete="off" id="username" />
+                        <a href="javascript:void(0)" class="sear_btn" id="btn_SearchUser">搜索</a>
+                    </div>
+                </div>
+                <div class="sep_line"></div>
+                <div class="mb_30px clearfix" style="margin-top:-30px;">
+                    <div class="table_tit">
+                        <h5 class="fl">搜索结果</h5>
+                    </div>
+                    <div id="res_user">
+
+                    </div>
+                </div>
+                 
+            </div>
+            
+            <div id="div_02" class="tab-pane">
+                <div class="clearfix margin_btn">
+                    <div class="fun_btn fl">
+                        <a class="btn_show mr_20px" href="javascript:void" id="add_row">添加</a>
+                        <a class="btn_show mr_20px" href="javascript:void" id="del_row">删除</a>
+                    </div>                    
+                </div>
+                <div class="sep_line"></div>
+                <div class="mb_30px clearfix"  >
+                    
+                    <div id="res_classmodels">
+                        <div class="tablelayout">
+                            <table id="module_table" class="mytable">
+                                <tr class="fixThead">
+                                    <th width="50px">
+                                        <div class="ck_select clearfix">
+                                            <label><input type="checkbox" name="module" class="js-check-all" /></label>
+                                        </div>
+                                    </th>
+                                    <th>模块</th>
+                                    <th>链接</th>
+                                    <th>占比</th>
+                                </tr>
+                                <tr class="row">
+                                    <td>
+                                        <div class="ck_select clearfix">
+                                            <label><input type="checkbox" data-value="1" name="module" class="checkbox"></label>
+                                        </div>
+                                    </td>
+                                    <td><input placeholder="模块" class="Text_lt " type="text" value=""></td>
+                                    <td><input placeholder="链接" class="Text_lt " type="text" value=""></td>
+                                    <td>
+                                        <input placeholder="占比" class="Text_lt  vali-Number" type="text" value="">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearboth"></div>
+                    <div class="new_btn_frame">
+                        <div class="save btn" id="savebtn_model" style="float:right;margin-right:40px"><a href="javascript:void(0)">保存</a></div>                        
+                        <div class="clearboth"></div>
+                    </div>
+                </div>
+                      
+            </div>
+            <div id="div_03" class="tab-pane">
+                <div class="clearfix margin_btn">
+                    <div class="fun_btn fl">
+                        <a class="btn_show mr_20px" href="javascript:void" data-all="no" data-href="#div_03" name="AllSelect">全选</a>
+                        <a class="btn_show mr_20px" href="javascript:void" data-href="#div_03" name="AllDel">删除</a>
+                    </div>
+                </div>
+                <ul class="clearfix QAwrap" id="QA_res">
+                    
+                </ul>
+            </div>
+            <div id="div_04" class="tab-pane">
+                <div id="Comment_res">
+
+                </div>
+            </div>
+            <div id="div_05" class="tab-pane">
+                <div class="clearfix margin_btn">
+                    <div class="fun_btn fl">
+                        <a class="btn_show mr_20px" href="javascript:void" data-all="no" data-href="#div_05" name="AllSelect">全选</a>
+                        <a class="btn_show mr_20px" href="javascript:void" data-href="#div_05" name="AllDel">删除</a>
+                    </div>
+                </div>
+                <ul class="clearfix Photowrap" id="Album_res">
+                    @*<li>
+                        <div class="ck_select clearfix">
+                            <label><input name="group" type="checkbox" class="js-check-all" /></label>
+                            <span>张三</span>
+                            <span>问答问题描述</span>
+                            <i class="arr-R rot-r270">收起</i>
+                        </div>
+                        <dl data-name="Photolist">
+                            <dd>
+                                <div class="ck_select clearfix">
+                                    <label><input name="group" type="checkbox" class="checkbox" /></label>
+                                </div>
+                                <img src="~/assets/img/01.jpg" />
+                            </dd>
+                            <dd>
+                                <div class="ck_select clearfix">
+                                    <label><input name="group" type="checkbox" class="checkbox" /></label>
+                                </div>
+                                <img src="~/assets/img/01.jpg" />
+                            </dd>
+                            <dd>
+                                <div class="ck_select clearfix">
+                                    <label><input name="group" type="checkbox" class="checkbox" /></label>
+                                </div>
+                                <img src="~/assets/img/01.jpg" />
+                            </dd>
+                        </dl>
+                    </li>*@
+                </ul>
+            </div>
+            <div id="div_06" class="tab-pane">             
+                <div class="clearfix margin_btn">
+                    <div class="fun_btn fl">
+                        <a class="btn_show mr_20px" href="javascript:void" id="add_address">添加</a>
+                        <a class="btn_show mr_20px" href="javascript:void" id="del_address">删除</a>
+                        @*<a class="btn_show mr_20px" href="javascript:void">产生随机密码</a>
+                <a class="btn_show mr_20px" href="javascript:void">下载表单</a>*@
+
+                    </div>
+                    <div class="fr input_sear" style="display:none;">
+                        <input type="text" autocomplete="off" id="username" />
+                        <a href="javascript:void(0)" class="sear_btn" id="btn_SearchAddress">搜索</a>
+                    </div>
+                </div>
+                <div class="sep_line"></div>
+                <div class="mb_30px clearfix" style="margin-top:-30px;">
+                    <div class="table_tit">
+                        <h5 class="fl">搜索结果</h5>
+                    </div>
+                    <div id="res_address">
+
+                    </div>
+                </div>
+            </div>
+           
+            <div id="div_07" class="tab-pane">
+
+
+                <div class="clearfix margin_btn">
+                    <div class="fun_btn fl">
+
+                    </div>
+                    <div class="fr input_sear">
+                        <input type="text" autocomplete="off" id="username_state" />
+                        <a href="javascript:void(0)" class="sear_btn" id="btn_SearchState">搜索</a>
+                    </div>
+                </div>
+                <div class="sep_line"></div>
+                <div class="mb_30px clearfix" style="margin-top:-30px;">
+                    <div class="table_tit">
+                        <h5 class="fl">搜索结果</h5>
+                    </div>
+                    <div id="res_state">
+
+                    </div>
+                </div>
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn_state" style="float:right;margin-right:40px"><a href="javascript:void(0)">保存</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+            <div id="div_08" class="tab-pane">
+                <div id="res_rank" class="tablewrap">
+
+                </div>
+           </div>
+    </div>
+</div>
+</div>
+@*添加班级弹出框*@
+<div class="frame_panel" id="open_panel" style="display:none;">
+    <div class="frame_box" style="width: 700px; left: 40%; top: 15%;margin-left:-250px;">
+        <div class="frame_close" onclick="$(this).parent().parent().hide(); CloseAllErrorTip();"></div>
+        <div class="frame_title">添加学员</div>
+        <div id="content">
+            <div class="frame_wrap edit_wrap" style="padding-top:0;">
+                <ul class="edit_ul">
+                      
+                    <li class="col-12 multirow">
+                        <div class="title">学员：</div>
+                        <div class="value" style="position:relative;">
+                                                        
+                            <input type="hidden" id="companyid" value="@(ViewBag.companyid)" />
+                        </div>
+                        <div id="user_panel">
+
+                        </div>
+                    </li>
+                </ul>
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn_user"><a href="javascript:void(0)">保存</a></div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="address_panel" class="frame_panel" style="display:none;">
+    <div class="frame_box" style="width: 400px; left: 50%; top: 15%;margin-left:-250px;">
+
+        <div class="frame_close" onclick="$(this).parent().parent().hide(); CloseAllErrorTip();"></div>
+        <div class="frame_title">添加上课地址</div>
+        <div id="content">
+            <div class="frame_wrap edit_wrap" style="padding-top:0;">
+                <ul class="edit_ul">
+                    <input type="hidden" id="addressid"  />
+
+                    <li class="col-12">
+                        <div class="title">上课时间：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="date_mod fl timepicer">
+                                <input type="text" id="datebegin" class="Date_lt vali-Required" />
+
+                            </div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title" style="width:60px">日程：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="period" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                   
+                    <li class="col-12">
+                        <div class="title">上课地点：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="address" value="" placeholder="" class="Text_lt " type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn_address"><a href="javascript:void(0)">保存</a></div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+ 
+
+@section scripts{
+ 
+    <script src="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.js"></script>
+
+    <script src="~/assets/js/jquery-ui-timepicker-addon.js"></script>
+
+ 
+   
+    <script src="~/assets/js/class/classInfo.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

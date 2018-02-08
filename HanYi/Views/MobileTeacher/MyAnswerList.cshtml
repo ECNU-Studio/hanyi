@@ -1,0 +1,42 @@
+﻿ 
+@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<qa>;
+    if (list == null)
+    {
+        list = new List<qa>();
+    }
+}
+@if (list.Count > 0)
+{
+    foreach (var item in list)
+    {
+        <a href="@Url.Action("MyAnswerDetail", "MobileTeacher", new { id = item.id })" class="item  flex-h flex-vc">
+            <div class="leftC flex1">
+                <div class="ck_select">
+                    <div class="head" style="background-image: url(@(item.user != null ? item.user.photo : item.teacher.header)); background-size: 100%;background-reapeat:norepeat;"></div>
+                    <div class="qades">
+                        <div class="name">
+                            @(item.user != null ?item.user.name:item.teacher.name) - @(item.classes.courses.name)
+                            @if (item.teacher != null)
+                            {
+                                <i class="iconfont teacher_icon">&#xe615;</i>
+                            }
+                        </div>
+                        <div class="date">@(item.date.HasValue ? item.date.Value.ToString("yyyy-MM-dd") : "")</div>
+                    </div>
+                </div>
+                <div class="content">
+                    @(item.content)
+                </div>
+            </div>
+            <div class="per_arrow"></div>
+        </a>
+    }
+}
+else
+{
+    <div class="noData">暂无相关信息</div>
+}
+

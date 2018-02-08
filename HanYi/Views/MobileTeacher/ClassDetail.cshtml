@@ -1,0 +1,327 @@
+﻿@using Entity.Entity;
+@using HanYi.Util;
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+    var modle = ViewBag.modle as classes;
+    if (modle == null)
+    {
+        modle = new classes();
+
+    }
+    else
+    {
+        //ViewBag.Title = modle.courses.name;
+    }
+    List<classaddress> classaddressList = ViewBag.classAddress;
+    if (classaddressList == null)
+    {
+        classaddressList = new List<classaddress>();
+    }
+}
+<style>
+    .nav { display: none; }
+
+    .top_back { color: #666666; position: relative; width: 100%; height: 40px; background-color: #fff; }
+
+    .top_back a { font-size: 12px; background: url(../../assets/img/toleft.png) no-repeat 0 center; background-size: 10px 14px; padding-left: 20px; line-height: 40px; margin-left: 10px; left: 0px; width: 40px; height: 40px; display: block; float: left; }
+
+    .top_back a:hover { background-color: #666; }
+
+    .top_back div { margin: 0 auto; width: 200px; text-align: center; height: 40px; line-height: 40px; }
+
+    #markWrap .mark, #markWrapQrcode .mark { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1300; background-color: rgba(0,0,0, .8); filter: alpha(opacity=80); -moz-opacity: 0.8; opacity: 0.8; display: block; }
+
+    #markWrap .content { position: fixed; bottom: 0; width: 100%; z-index: 1301; text-align: center; background-color: #e6e6e8; }
+
+    #markWrap .content li { line-height: 55px; color: #090909; font-size: 16px; background-color: #fff; }
+
+    #markWrapPic .leftBtn { background: url(/assets/img/msya/leftBtn.png) no-repeat; background-size: contain; display: inline-block; float: left; padding: 15px 10px; border-radius: 8px; color: #fff; width: 90px; height: 40px; text-align: center; margin-left: 0px; }
+
+    #markWrapPic .showimg { text-align: center; width: 80px; height: 80px; /*background-color: #EBEBEC;*/ padding: 10px; float: left; position: relative; overflow: hidden; }
+
+    #markWrapPic .showimg .deletebtn { width: 30px; height: 30px; position: absolute; right: 0px; top: 0px; }
+
+    #annulus text { font-size: 14px !important; }
+</style>
+<div id="gallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="pswp__bg"></div>
+
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+
+
+            <div class="pswp__top-bar">
+
+                <div class="pswp__counter"></div>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip">
+                </div>
+            </div>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<div class="headertop">
+    <a class="arrow" href="@Url.Action("Index", "MobileTeacher")">
+        <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+    </a>
+    <span class="title">@(modle.courses.name)</span>
+</div>
+<input id="type" value="@(ViewBag.type)" hidden="hidden" />
+<input id="id" value="@(modle.id)" hidden="hidden" />
+<ul class="indextab">
+    <li class="active">
+        <a data-href="#div_01" href="javascript:;" data-toggle="tab">
+            <h5>课程信息</h5>
+        </a>
+    </li>
+    <li>
+        <a data-href="#div_02" href="javascript:;" data-toggle="tab">
+
+            <h5>课程问答</h5>
+        </a>
+    </li>
+    <li>
+        <a data-href="#div_03" href="javascript:;" data-toggle="tab">
+
+            <h5>课程评价</h5>
+        </a>
+    </li>
+    <li>
+        <a data-href="#div_04" href="javascript:;" data-toggle="tab">
+
+            <h5>班级相册</h5>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">
+
+    <div id="div_01" class="tab-pane active" style="padding:0 0 2rem 0;">
+        <div style="padding:0 2rem 0 2rem">
+            <div class="lable">课程信息</div>
+            <div class="space_show">
+                <div class="intro">@(modle.courses.coursesabstract)</div>
+            </div>
+            @if (classaddressList.Count > 0)
+            {
+                <div class="lable">课程安排</div>
+                <div class="space_show">
+                    @for (int j = 0; j < classaddressList.Count; j++)
+                    {
+                        var addressItem = classaddressList[j];
+                        <ul class="clearfix xian_course" style="@(j > 0 ? "margin-top:1.5rem;border-top:1px solid #ccc;padding-top:0.5rem;":"")">
+                            @if (j == 0)
+                            {
+                                <li>
+                                    <span class="title"><i class="iconfont" style="font-size: 1.5rem; margin-right: 0.5rem; color: #24b1bb;">&#xe636;</i></span>
+                                    <span class="value">@(modle.companys.name)</span>
+                                </li>
+                            }
+                            <li>
+                                <span class="title"><i class="iconfont" style="font-size: 1.5rem; margin-right: 0.5rem; color: #24b1bb;">&#xe634;</i></span>
+                                <span class="value">@(addressItem.datebegin.HasValue ? addressItem.datebegin.Value.ToString("yyyy-MM-dd HH:mm") : "")</span>
+                            </li>
+                            <li>
+                                <span class="title"><i class="iconfont" style="font-size: 1.5rem; margin-right: 0.5rem; color: #24b1bb;">&#xe635;</i></span>
+                                <span class="value">@(addressItem.address)</span>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            }
+
+
+            @*@if (!string.IsNullOrEmpty(ViewBag.svgData))
+            {
+                <div class="lable">课程模块</div>
+                <div class="space_show">
+                    <div style="width:100%; margin-bottom:1rem;" class="flex-v flex-vc ">
+                        <input id="svg_data" value="@(ViewBag.svgData)" hidden="hidden" />
+                        <svg id="annulus" viewBox="0 0 320 260" style="width: 320px; height: 260px;"></svg>
+                    </div>
+                </div>
+            }*@
+
+
+           
+        </div>
+
+        @*<div class="space_show" style="margin:0 2rem 0 2rem"></div>*@
+        <div style="padding:0 2rem 0 2rem">
+            <div class="lable">课程目录</div>
+            @if (modle.courses.catalog != null)
+            {
+                foreach (var item1 in modle.courses.catalog)
+                {
+                    <div class="title">@(item1.name)</div>
+                    if (item1.subcatalog != null)
+                    {
+                        foreach (var item2 in item1.subcatalog)
+                        {
+                            <div class="subtitle">@(item2.name)</div>
+                            if (item2.subcatalogattachment != null && item2.subcatalogattachment.Count > 0)
+                            {
+                                foreach (var item3 in item2.subcatalogattachment)
+                                {
+                                    if (item3.type == "link")
+                                    {<div class="attach">
+                                        <a href="@(item3.path)" style="display: inline-block;">
+                                            <i class="h5icon"></i>
+                                            <div class="right">
+                                                <div class="name" style="height:32px;line-height:32px;">@(item3.name)</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="attach">
+                                            <a href="@(item3.path)">
+                                                @{
+                                        switch (CommonBLL.GetFileType(item3.name))
+                                        {
+                                            case CommonBLL.FileType.DOC:
+                                                <i class="doc">&#xe63a;</i>
+                                                break;
+                                            case CommonBLL.FileType.PDF:
+                                            <i class="pdf">&#xe627;</i>
+                                                break;
+                                            case CommonBLL.FileType.TXT:
+                                            <i class="txt">&#xe627;</i>
+                                                break;
+                                            case CommonBLL.FileType.EXECL:
+                                            <i class="execl">&#xe684;</i>
+                                                break;
+                                            case CommonBLL.FileType.Video:
+                                            <i class="video"></i>
+                                                break;
+                                            case CommonBLL.FileType.Audio:
+                                            <i class="audio"></i>
+                                                break;
+                                            case CommonBLL.FileType.PPT:
+                                            <i class="ppt"></i>
+                                                break;
+                                        }
+                                                }
+                                                @*<div class="filetype1"></div>*@
+                                                <div class="right">
+                                                    <div class="name">@(item3.name)</div>
+                                                    <div class="size">@CommonBLL.CountSize(item3.size.HasValue ? item3.size.Value : 0)</div>
+                                                </div>
+                                            </a>
+                                            <div class="clearboth"></div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            <div class="lable">班级与排名</div>
+        </div>
+
+        <div id="res_markorder">
+
+        </div>
+
+    </div>
+    <div id="div_02" class="tab-pane" style="padding:0 0 5rem 0;">
+        <div class="keysearch flex-h flex-vc clearfix">
+            <div class="input_sear flex1" style="margin:0;">
+                @*float:left;width:75%*@
+                <input id="searchword" class="" type="text" value="" />
+                <i id="searchQA">&#xe631;</i>
+            </div>
+            @*<div style="padding-left: 1rem; width: 4.3rem; ">
+                    <div id="btn_tiwen" class="btn_add font-size-16" style="width:3.5rem;margin-top:0;background-color: #094270; color: white; height: 2.8rem; line-height: 2.7rem;padding:0.2rem 0.4rem;text-align:center;  " onclick="">提问</div>
+                </div>*@
+
+        </div>
+        <div id="hudong_qa" class="hudong clearfix" style="background-color:transparent;">
+
+        </div>
+    </div>
+    <div id="div_03" class="tab-pane" style="padding:0 0 5rem 0;">
+        <div id="hudong_comment" class="hudong" style="background-color: transparent; ">
+
+        </div>
+    </div>
+    <div id="div_04" class="tab-pane" style="padding:0 0 5rem 0;">
+        <div id="hudong_album" class="hudong" style="background-color: transparent; ">
+
+        </div>
+    </div>
+</div>
+
+
+<div id="Comment">
+    <div class="line" style="width:100%;margin :0 0 0 0;"></div>
+    <input id="upToken" value="@(ViewBag.upToken)" hidden="hidden" />
+    <input id="hideImgURLList" type="hidden" />
+    <input id="type" hidden="hidden" />
+    <input id="classid" value="@(ViewBag.classid)" hidden="hidden" />
+    <input id="itemid" hidden="hidden" />
+    <input id="touserid" type="hidden" value="" />
+    <input id="totype" type="hidden" value="-1" />
+
+    <div class="bottomfixd clearfix">
+        <div class="clearfix flex-h flex-vc">
+            <div id="btn_add" class="add " onclick="">
+                <i class="iconfont" style="font-size:2rem">&#xe60e;</i>
+            </div>
+            <textarea id="txtdetail" rows="1" cols="20" class="textare flex1" placeholder="发表下课堂感受吧"></textarea>
+            <div id="btn_send" class="send_txt font-size-16" onclick="">发送</div>
+        </div>
+    </div>
+    <div id="markWrapPic" class="clearfix activeRep">
+    </div>
+</div>
+
+@section css{
+    <link href="~/assets/plugins/photoswipe/photoswipe.css" rel="stylesheet" />
+
+}
+
+@section scripts{
+    <script src="~/assets/plugins/photoswipe/photoswipe-ui-default.js"></script>
+    <script src="~/assets/plugins/photoswipe/photoswipe-ui-default.min.js"></script>
+    <script src="~/assets/plugins/photoswipe/photoswipe.js"></script>
+    <script src="~/assets/plugins/photoswipe/photoswipe.min.js"></script>
+    <script src="http://cdn.staticfile.org/Plupload/2.1.1/moxie.js"></script>
+    <script src="http://cdn.staticfile.org/Plupload/2.1.1/plupload.dev.js"></script>
+    <script src="~/assets/plugins/qinui/qiniu.js"></script>
+    <script src="~/assets/js/MobileTeacher/classdetail.js?v=0.1"></script>
+    <script>
+        pagejs.init();
+
+    </script>
+
+} 

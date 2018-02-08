@@ -1,0 +1,67 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<admin>;
+    if (list == null)
+    {
+        list = new List<admin>();
+    }
+}
+
+@if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input name="group" type="checkbox" class="js-check-all" /></label>
+                    </div>
+                </th>
+                <th> 姓名</th>
+                <th> 用户名</th>
+                <th> 电话</th>
+                <th> 密码</th>
+                 
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td>
+                        <div class="ck_select clearfix">
+                            <label><input data-value="@(item.id)" name="group" type="checkbox" class="checkbox" /></label>
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@(item.name)">
+                            @(item.name)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix" title="@(item.username)">
+                            @(item.username)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@(item.phone)">
+                            @(item.phone)
+                        </div>
+                    </td>
+                   
+                    <td title="">
+                        <div class="edit_btn">
+                            <a href="javascript:void(0)" onclick="PWSet(this,'密码将重置为默认密码：abc123,确定重置？',@(item.id))">重置</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}
+

@@ -1,0 +1,57 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<classmodels>;
+    if (list == null)
+    {
+        list = new List<classmodels>();
+    }
+
+}
+<div class="tablelayout">
+    <table id="module_table" class="mytable">
+        <tbody>
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input type="checkbox" name="module" class="js-check-all"></label>
+                    </div>
+                </th>
+                <th>标题</th>
+                <th>模块</th>              
+                <th>描述</th>
+                <th>链接</th>
+                <th>占比</th>
+            </tr>
+           
+                
+             
+            @if (list.Count > 0)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {      <tr class="row" data-id="@(list[i].id)">
+                           <td>
+                               <div class="ck_select clearfix">
+                                   <label><input type="checkbox" data-value="@(i+1)" name="module" class="checkbox"></label>
+                               </div>
+                           </td>
+                           <td><input placeholder="标题" class="Text_lt " type="text" value="@(list[i].title)"></td>
+                            <td>
+                                <select style="border-radius:4px;" >                                     
+                                    <option value="问卷" @(list[i].type == "问卷" ? "selected=\"selected\"" : "")>问卷</option>
+                                    <option value="测试" @(list[i].type == "测试" ? "selected=\"selected\"" : "")>测试</option>
+                                    <option value="勾选" @(list[i].type == "勾选" ? "selected=\"selected\"" : "")>勾选</option>
+                                    <option value="打分" @(list[i].type == "打分" ? "selected=\"selected\"" : "")>打分</option>
+                                </select>
+                            </td>
+                            <td><input placeholder="模块" class="Text_lt " type="text" value="@(list[i].name)"></td>
+                            <td><input placeholder="链接" class="Text_lt " type="text" value="@(list[i].path)"></td>
+                            <td>
+                                <input style="width:40px" placeholder="占比" class="Text_lt  vali-Number" type="text" value="@(list[i].percent.ToString("#0.##"))">%
+                            </td>
+                        </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div> 

@@ -1,0 +1,202 @@
+﻿@using Entity.Entity;
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "所有成绩与排名";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    users user = ViewBag.user as users;
+    if (user == null)
+    {
+        user = new users();
+    }
+    var mrv= ViewBag.mrv as List<MyRankView>;
+    if(mrv==null)
+    {
+        mrv = new List<MyRankView>();
+    }
+}
+<div class="scorerankwrap">
+    <div class="scorerank">
+        <div class="headertop">
+            <a class="arrow" href="@Url.Action("PerCenter", "MobileUser")">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+            </a>
+            <span class="title">所有成绩与排名</span>
+        </div>
+        @foreach (var rank in mrv) 
+        {
+        <section class="scorelist flex-vc" style="margin-top:10px;">
+            <div class="leftcontent">
+                <div class="base">
+                    <section class="rank">
+                        <div class="num">@(rank.order)</div>
+                    </section>
+                    <img src="@(rank.cover)" />
+                    <span style="@(Regex.Match(rank.classname, "^[a-z]*|[A-Z]*$").Success ? "font-size:10px;" : "")">@(rank.classname)</span>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="middle">
+                <div class="total">
+                    <span class="numU">@(rank.score.ToString("#0"))<em>分</em></span>
+                    <span>总成绩</span>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="rightcontent">
+                @{int i = 0;}
+                @for (i = 0; i < rank.listcm.Count; i++)
+                {
+                    var cm = rank.listcm[i];
+                    var temprv = rank.list.Where(p => p.id == cm.id).FirstOrDefault();
+
+                    if (i % 3 == 0)
+                    {
+                        @Html.Raw("<ul class=\"scoreTest flex-vc\">");
+                    }
+                    <li>
+                        @*@if (cm.type == "勾选")
+                        {
+                            if (rank.gouxuan != null && rank.gouxuan != "")
+                            {
+                                <i class="rw_show">&#xe612;</i>
+                            }
+                            else
+                            {
+                                <i class="rw_show">&#xe611;</i>
+                            }
+                        }
+                        else if (cm.type == "测试")
+                        {
+                            if (rank.ceshi != null && rank.ceshi != "")
+                            {
+                                <i>@(rank.ceshi)</i>
+
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }
+                        else if (cm.type == "问卷")
+                        {
+                           if (rank.wenjuan != null && rank.wenjuan != "")
+                           {
+                                <i class="rw_show">&#xe612;</i>
+                            }
+                            else
+                            {
+                                <i class="rw_show">&#xe611;</i>
+                            }
+                        }
+                        else if (cm.type == "打分")
+                        {
+                            if (rank.dafen != null && rank.dafen != "")
+                            {
+                                <i>@(rank.dafen)</i>
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }
+                        else if (cm.type == "评价")
+                        {
+                            if (rank.pingjia != null && rank.pingjia != "")
+                            {
+                                <i>@(rank.pingjia)</i>
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }*@
+                        @if (cm.type == "勾选")
+                        {
+                            //if (item.gouxuan != null && item.gouxuan != "")
+                            if (temprv != null && temprv.finish)
+                            {
+                                <i class="rw_show">&#xe612;</i>
+                            }
+                            else
+                            {
+                                <i class="rw_show">&#xe611;</i>
+                            }
+                        }
+                        else if (cm.type == "测试")
+                        {
+                            //if (item.ceshi != null && item.ceshi != "")
+                            if (temprv != null && temprv.score != "")
+                            {
+                                @*<i>@(item.ceshi)</i>*@
+                                <i>@(temprv.score)</i>
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }
+                        else if (cm.type == "问卷")
+                        {
+                            //if (item.wenjuan != null && item.wenjuan != "")
+                            if (temprv != null && temprv.score != "")
+                            {
+                                <i class="rw_show">&#xe612;</i>
+                            }
+                            else
+                            {
+                                <i class="rw_show">&#xe611;</i>
+                            }
+                        }
+                        else if (cm.type == "打分")
+                        {
+                            //if (item.dafen != null && item.dafen != "")
+                            if (temprv != null && temprv.score != "")
+                            {
+                                @*<i>@(item.dafen)</i>*@
+                                <i>@(temprv.score)</i>
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }
+                        else if (cm.type == "评价")
+                        {
+                            //if (item.pingjia != null && item.pingjia != "")
+                            if (temprv != null && temprv.score != "")
+                            {
+                                @*<i>@(item.pingjia)</i>*@
+                                <i>@(temprv.score)</i>
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }
+                        <span>@(cm.title)</span>
+                    </li>
+
+                    if (i % 3 == 2)
+                    {
+                        @Html.Raw("</ul>");
+                    }
+
+                }
+
+                @if (i % 3 != 0)
+                {
+                    for (int j = i % 3; j < 3; j++)
+                    {
+                        @Html.Raw("<li>  </li>");
+                    }
+
+                    @Html.Raw("</ul>");
+                }
+                
+            </div>
+        </section>
+        }
+         
+
+    </div>
+</div>

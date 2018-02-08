@@ -1,0 +1,76 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<classes>;
+    if (list == null)
+    {
+        list = new List<classes>();
+    }
+}
+
+ @if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input name="group" type="checkbox" class="js-check-all" /></label>
+                    </div>
+                </th>
+                <th> 公司</th>
+                <th> 课程</th>
+                <th> 培训师</th>
+                
+                <th> 学员数量</th>
+              
+                <th width="48px"></th>        
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td>
+                        <div class="ck_select clearfix">
+                            <label><input data-value="@(item.id)" name="group" type="checkbox" class="checkbox" /></label>
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@(item.companys.name)">
+                            @(item.companys.name)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix" title="@(item.courses.name)">
+                            @(item.courses.name)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@(item.courses.teacher.name)">
+                            @(item.courses.teacher.name)
+                        </div>
+                    </td>
+                    
+                   
+                    <td title="">
+                        <div class="clearfix">
+                            @(item.classstudent.Count)
+                        </div>
+                    </td>
+                     
+                    <td title="">
+                        <div class="fr edit_btn">
+                            <a href="@Url.Action("ClassInfo", "Class", new { id = item.id, companyid = item.companyid, coursename = item.courses.name, companyname = item.companys.name })">管理</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}
+

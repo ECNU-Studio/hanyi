@@ -1,0 +1,222 @@
+﻿@using Entity.Entity;
+@{
+    
+    var model = ViewBag.model as companys;
+    if (model == null)
+    {
+        model = new companys();
+    }
+    ViewBag.Title = "企业----用户与班级----" + model.name;
+}
+@section styles{
+    <link href="~/assets/plugins/uploadify/uploadify.css" rel="stylesheet" />
+    <style>
+        #picList, #picList_xz { border-radius: 50%; }
+        #picList img, #picList_xz img { width: 375px; height: 120px; }
+        #content .edit_wrap .edit_ul > li .title { width: 42px; }
+    </style>
+}
+<div class="content">
+    <div class="c_title">
+        <h5>@(ViewBag.Title)</h5>
+    </div>
+    <div class="c_inner_wraper" id="form">
+        <div class="back_s margin_pace"><a href="@Url.Action("Index", "Enterprise", new { back = "1" })">< 返回所有企业</a></div>
+        <div class="tab_ul margin_pace">
+            <ul class="clearfix tab_show">
+                <li class="active">
+                    <a href="javascript:;" data-href="#div_01" data-toggle="tab">基本信息</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_02" data-toggle="tab">所有用户</a>
+                </li>
+                <li class="">
+                    <a href="javascript:;" data-href="#div_03" data-toggle="tab">所有课程</a>
+                </li>
+            </ul>
+        </div>
+        <!--tab切换-->
+        <div class="tab-content">
+            <input type="hidden" id="companyid" value="@(ViewBag.companyid)" />
+            <div id="div_01" class="tab-pane active">
+                <div class="frame_wrap edit_wrap" style="padding-top: 0; border:none">
+                    <input type="hidden" id="id" value="@(ViewBag.companyid)" />
+                    <ul class="edit_ul">
+                        <li class="col-12">
+                            <div class="title">企业名称：</div>
+                            <div class="value" style="position:relative;">
+                                <div class="fl"><div class="Text_long"><input id="name" value="@(model.name)" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                            </div>
+                            <div class="bitian">*</div>
+                        </li>
+                        <li class="col-12">
+                            <div class="title" style="width:60px;">帐号：</div>
+                            <div class="value" style="position:relative;">
+                                <div class="fl"><div class="Text_long"><input id="account" value="@(model.account)" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                            </div>
+                            <div class="bitian">*</div>
+                        </li>
+                       
+                        <li class="col-12">
+                            <div class="title" style="width:60px;">Email：</div>
+                            <div class="value" style="position:relative;">
+                                <div class="fl"><div class="Text_long"><input id="email" value="@(model.email)" placeholder="" class="Text_lt vali-Email" type="text" autocomplete="off" /></div></div>
+                            </div>
+                        </li>
+                        <li class="col-12">
+                            <div class="title">企业法人：</div>
+                            <div class="value" style="position:relative;">
+                                <div class="fl"><div class="Text_long"><input id="legalperson" value="@(model.legalperson)" placeholder="" class="Text_lt" type="text" autocomplete="off" /></div></div>
+                            </div>
+                        </li>
+                        <li class="col-12">
+                            <div class="title">企业地址：</div>
+                            <div class="value" style="position:relative;">
+                                <div class="fl"><div class="Text_long"><input id="address" value="@(model.address)" placeholder="" class="Text_lt" type="text" autocomplete="off" /></div></div>
+                            </div>
+                        </li>
+                        <li class="col-12 multirow">
+                            <div class="title" style="width:60px;">封面：</div>
+                            <div class="value" style="position: relative; margin-top: 0; width: 72px;">
+                                <div class="fl">
+                                    <div class="btn_upload" id="pic" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                    <input type="file" id="fileupload" name="fileupload" />
+                                    <input id="cover" data-for="pic" value="@(model.cover)" placeholder="" class="Text_lt vali-Required" type="text" hidden="hidden" />
+                                </div>
+                            </div>
+                            <div class="bitian">*</div>
+                            <div id="picList" style="@(!string.IsNullOrEmpty(model.cover) ? "" : "display: none;") clear: both; margin: 50px 50px 20px 50px;">
+                                <div class="upload_img">
+                                    <img src="@(model.cover)" />
+                                    <a href="javascript:void(0)" class="close"></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clearboth"></div>
+                    <div class="new_btn_frame fl">
+                        <div class="save btn" id="savebtn_company"><a href="javascript:void(0)">保存</a></div>
+                        <div class="clearboth"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="div_02" class="tab-pane">
+                <div class="clearfix margin_btn">
+                    <div class="fun_btn fl">
+                        <a class="btn_show mr_20px" href="javascript:void" id="showAdd">添加用户</a>
+                        <a class="btn_show mr_20px" href="javascript:void" id="del_user">删除</a>
+                        @*<a class="btn_show mr_20px" href="javascript:void">产生随机密码</a>
+                        <a class="btn_show mr_20px" href="javascript:void">下载表单</a>*@
+
+                    </div>
+                    <div class="fr input_sear">
+                        <input type="text" autocomplete="off" id="username"/>
+                        <a href="javascript:void(0)" class="sear_btn" id="btn_SearchUser">搜索</a>
+                    </div>
+                </div>
+                <div class="sep_line"></div>
+                <div class="mb_30px clearfix">
+                    <div class="table_tit">
+                        <h5 class="fl">搜索结果</h5>
+                    </div>
+                    <div id="res_user">
+
+                    </div>
+                </div>
+            </div>
+            <div id="div_03" class="tab-pane">
+                <div class="clearfix margin_btn">
+
+                    <div class="fr input_sear">
+                        <input type="text" autocomplete="off" id="coursename" />
+                        <a href="javascript:void(0)" class="sear_btn" id="btn_SearchCourse">搜索</a>
+                    </div>
+                </div>
+                <div class="sep_line"></div>
+                <div class="mb_30px clearfix" style="margin-top:-30px;">
+                    <div class="table_tit">
+                        <h5 class="fl">搜索结果</h5>
+                    </div>
+                    <div id="res_course">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*添加用户弹出框*@
+<div class="frame_panel" id="open_panel" style="display:none;">
+    <input type="hidden" id="companyid" value="@(ViewBag.companyid)" />
+    <input type="hidden" id="userid"  />
+    <div class="frame_box" style="width: 400px; left: 50%; top: 20%;margin-left:-250px;">
+        <div class="frame_close" onclick="$(this).parent().parent().hide(); CloseAllErrorTip();"></div>
+        <div class="frame_title">添加用户</div>
+        <div id="content">
+            <div class="frame_wrap edit_wrap" style="padding-top:0;">
+                <ul class="edit_ul">
+                    <li class="col-12">
+                        <div class="title">姓名：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="name" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">帐号：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="username" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12" id="password-li">
+                        <div class="title">密码：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="password" value="" placeholder="" class="Text_lt vali-Required" type="password" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">Email：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="email" value="" placeholder="" class="Text_lt vali-Email" type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">部门：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="department" value="" placeholder="" class="Text_lt" type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">职能：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="position" value="" placeholder="" class="Text_lt" type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">手机：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="tel" value="" placeholder="" class="Text_lt " type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn"><a href="javascript:void(0)">保存</a></div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="~/assets/plugins/uploadify/jquery.uploadify.min.js"></script>
+<script src="~/assets/plugins/uploadify/swfobject.js"></script>
+<script src="~/assets/js/enterprise/EnterpriseInfo.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

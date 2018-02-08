@@ -1,0 +1,92 @@
+﻿@using HanYi.Util;
+@{
+    ViewBag.Title = "企业";
+}
+<div class="content">
+    <div class="c_title">
+        <h5>@(ViewBag.Title)</h5>
+    </div>
+    <div class="c_inner_wraper">
+        <div class="margin_btn clearfix">
+            <div class="fun_btn fl">
+                <a class="btn_show mr_20px" href="javascript:void" id="showAdd">添加企业</a>
+                <a class="btn_show mr_20px" href="javascript:void" id="delbtn">删除</a>
+            </div>
+        </div>
+        <div class="sep_line"></div>
+        <div class="searchwrap" id="form">
+            <div class="table_tit">
+                <h5 class="fl">搜索结果</h5>
+            </div>
+            <div id="res">
+
+            </div>
+        </div>
+    </div>
+</div>
+@*企业弹出框*@
+<div class="frame_panel" id="open_panel" style="display:none;">
+    <div class="frame_box" style="width: 390px; left: 50%; top: 20%;margin-left:-195px;">
+        <div class="frame_close" onclick="$(this).parent().parent().hide(); CloseAllErrorTip();"></div>
+        <div class="frame_title">添加企业</div>
+        <div id="content">
+            <div class="frame_wrap edit_wrap" style="padding-top:0;">
+                <ul class="edit_ul">
+                    <li class="col-12">
+                        <div class="title">企业名称：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="name" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title" style="width:60px;">帐号：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="account" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title" style="width:60px;">密码：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="password" value="" placeholder="" class="Text_lt vali-Required" type="password" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title" style="width:60px;">Email：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="email" value="" placeholder="" class="Text_lt vali-Email" type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">企业法人：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="legalperson" value="" placeholder="" class="Text_lt" type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">企业地址：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="address" value="" placeholder="" class="Text_lt" type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn"><a href="javascript:void(0)">保存</a></div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="~/assets/js/enterprise/index.js"></script>
+<script>
+    pagejs.init();
+</script>
+}
+
+

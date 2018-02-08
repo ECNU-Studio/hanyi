@@ -1,0 +1,107 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "TeacherList";
+    Layout = null;
+    var list = ViewBag.list as List<teacheres>;
+    if (list == null)
+    {
+        list = new List<teacheres>();
+    }
+    var coursestr = "";
+}
+
+ @if (list.Count > 0)
+{
+    <div class="tablelayout">
+        <table class="mytable">
+            <tr class="fixThead">
+                <th width="15px" style="min-width:0px !important;">
+                    <div class="ck_select clearfix">
+                        <label><input name="group" type="checkbox" class="js-check-all" /></label>
+                    </div>
+                </th>
+                <th>姓名</th>
+                <th>账号</th>
+                <th>邮箱</th>
+                <th>手机</th>
+                <th>微信</th>              
+                @*<th>简历</th>*@
+                <th width="48px">密码</th>
+                <th width="48px"></th>
+            </tr>
+            @foreach (var item in list)
+            {
+                <tr class="row">
+                    <td>
+                        <div class="ck_select clearfix">
+                            <label><input data-value="@(item.id)" name="group" type="checkbox" class="checkbox" /></label>
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix" title="@(item.name)">
+                            @(item.name)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix" title="@(item.username)">
+                            @(item.username)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix" title="@(item.email)">
+                            @(item.email)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix " title="@(item.phone)">
+                            @(item.phone)
+                        </div>
+                    </td>
+                    <td title="">
+                        <div class="clearfix ellipsis" title="@(item.weixin)">
+                            @(item.weixin)
+                        </div>
+                    </td>
+                    @*<td title="">
+                        <div class="clearfix">
+                            <a href="@(item.cv)">下载</a>                             
+                        </div>
+                    </td>*@
+                    <td title="">
+                        <div class="clearfix edit_btn">
+                            <a href="javascript:void(0)" onclick="PWSet(this,'密码将重置为默认密码：abc123,确定重置？',@(item.id))">重置</a>
+                        </div>
+                    </td>
+                    
+                    <td title="">                       
+                        @*@if (item.courses != null)
+                        {
+                            coursestr = "";
+                            for (int i = 0; i < item.courses.Count; i++)
+                            {
+                                if (i < item.courses.Count - 1)
+                                {
+                                    coursestr += (i + 1) + "、" + item.courses[i].name + ",";
+                                }
+                                else
+                                {
+                                    coursestr += (i + 1) + "、" + item.courses[i].name;
+                                }
+                            }
+                            <div class="clearfix" title="@(coursestr)"> @(coursestr)   </div>
+                        }*@
+                        <div class="fr edit_btn">
+                            <a href="@Url.Action("TeacherInfo", "Teacher", new { id = item.id  })">管理</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    @(ViewBag.Pager)
+}
+else
+{
+    <div class="noData">暂无相关数据</div>
+}
+

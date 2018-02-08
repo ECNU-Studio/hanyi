@@ -1,0 +1,136 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<classstudent>;
+    if (list == null)
+    {
+        list = new List<classstudent>();
+    }
+    var state = ViewBag.state as Dictionary<int, int>;
+    if (state == null)
+    {
+        state = new Dictionary<int, int>();
+    }
+
+    var comment = ViewBag.comment as Dictionary<int, bool>;
+    if (comment == null)
+    {
+        comment = new Dictionary<int, bool>();
+    }
+}
+<input type="hidden" id="total" value="@(ViewBag.total)" />
+@*<ul class="@(taskList.Count > 0 ?"indexlist" : "clearfix")" style="padding-bottom:0px;">*@
+@if (list.Count > 0)
+{
+    foreach (var item in list)
+    {
+        <li>
+            <div class="hot4 halfsize"></div>
+            <a class="item" href="@(Url.Action("ClassDetail", "MobileUser", new { id = item.classid }))">
+                <div class="left"><div class="icon_01" style="background-image:url(@(item.classes.courses.cover));background-size:100%;background-repeat: no-repeat;"></div></div>
+                <div class="middle">
+                    <h2>@Html.Raw(item.classes.courses.name.Replace("/","<br/>"))</h2>
+                    <div class="mark_wraper">
+                        <div class="clearboth"></div>
+                    </div>
+                    <h6> @(item.classes.courses.teacher.name)</h6>
+                    <div class="V">
+                        @if (item.classes.comment != null && item.classes.comment.Count > 0)
+                        {
+                            double i = 0;
+                            foreach (var cm in item.classes.comment)
+                            {
+                                i += (cm.c1 + cm.c2 + cm.c3 + cm.c4 + cm.c5 + cm.c6 + cm.c7 + cm.c8 + cm.c9) / 9.0;
+                            }
+                            i = i / item.classes.comment.Count;
+                            if (i >= 1)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (i >= 2)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (i >= 3)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (i >= 4)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                            if (i >= 5)
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe609;</i>
+                            }
+                            else
+                            {
+                                <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            }
+                        }
+                        else
+                        {
+                            <i class="iconfont ms" data-value="1">&#xe60a;</i>
+                            <i class="iconfont ms" data-value="2">&#xe60a;</i>
+                            <i class="iconfont ms" data-value="3">&#xe60a;</i>
+                            <i class="iconfont ms" data-value="4">&#xe60a;</i>
+                            <i class="iconfont ms" data-value="5">&#xe60a;</i>
+                        }
+
+                    </div>
+                </div>
+                <div class="right"></div>
+                <div class="clearboth"></div>
+
+            </a>
+             <!--
+            <div class="line " />
+           
+            <div class="bottom">
+                @if (!comment.ContainsKey(item.classid))
+                {
+                    var finishpercent = item.classes.classmodels.Count() > 0 && state.ContainsKey(item.classid) ? 100.0 * state[item.classid] / item.classes.classmodels.Count() : 0.0;
+                    <h4 class="finish">完成度：@(finishpercent.ToString("#0"))%</h4>
+                    if (finishpercent == 100)
+                    {
+                        <a href="@Url.Action("GoComment", "MobileUser", new { url = Url.Action("Index", "MobileUser"), classid = item.classid })" class="comment">去评价</a>
+                    }
+
+                }
+                else
+                {
+                    //var finishpercent = item.classes.classmodels.Count() > 0 ? 100.0 * (state.ContainsKey(item.classid) ? state[item.classid] : 0 + 1) / item.classes.classmodels.Count() : 0.0;
+                    var finishpercent = item.classes.classmodels.Count() > 0 && state.ContainsKey(item.classid) ? 100.0 * state[item.classid] / item.classes.classmodels.Count() : 0.0;
+
+                    <h4 class="finish">完成度：@(finishpercent.ToString("#0"))%</h4>
+                    <a onclick="showMsg('已评价')" class="comment_gray">已评价</a>
+                    
+                }
+
+            </div>
+                -->
+        </li>
+    }
+}
+else
+{
+    <li class="noData_mobile" style="padding:20px 0 ;">暂无课程</li>
+}
+@*</ul>*@
+

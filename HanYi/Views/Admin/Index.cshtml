@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "管理员";
+}
+@section styles{
+    <style>
+        .edit_wrap .edit_ul > li .title { width: 48px; }
+    </style>
+}
+<div class="content">
+    <div class="c_title">
+        <h5>@(ViewBag.Title)</h5>
+    </div>
+    <div class="c_inner_wraper">
+        <div class="margin_btn clearfix">
+            <div class="fun_btn fl">
+                <a class="btn_show mr_20px" href="javascript:void" id="showAdd">添加</a>
+                <a class="btn_show mr_20px" href="javascript:void" id="delbtn">删除</a>
+            </div>
+        </div>
+        <div class="sep_line"></div>
+        <div class="searchwrap" id="form">
+            <div class="table_tit">
+                <h5 class="fl">搜索结果</h5>
+            </div>
+            <div id="res">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*添加班级弹出框*@
+<div class="frame_panel" id="open_panel" style="display:none;">
+    <div class="frame_box" style="width: 400px; left: 50%; top: 20%;margin-left:-200px;">
+        <div class="frame_close" onclick="$(this).parent().parent().hide(); CloseAllErrorTip();"></div>
+        <div class="frame_title">添加管理员</div>
+        <div id="content">
+            <div class="frame_wrap edit_wrap" style="padding-top:0;">
+                <ul class="edit_ul">
+                    
+                    
+                    <li class="col-12">
+                        <div class="title">用户名：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="username" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">密码：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="password" value="" placeholder="" class="Text_lt Text_long vali-Required" type="text" autocomplete="off" /></div></div>
+                        </div>
+                        <div class="bitian">*</div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">姓名：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="name" value="" placeholder="" class="Text_lt " type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                    <li class="col-12">
+                        <div class="title">电话：</div>
+                        <div class="value" style="position:relative;">
+                            <div class="fl"><div class="Text_long"><input id="phone" value="" placeholder="" class="Text_lt " type="text" autocomplete="off" /></div></div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="clearboth"></div>
+                <div class="new_btn_frame">
+                    <div class="save btn" id="savebtn"><a href="javascript:void(0)">保存</a></div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="clearboth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section css{
+    <link href="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.css" rel="stylesheet">
+}
+
+@section scripts{
+
+    <script src="//cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.min.js"></script>
+    <script src="~/assets/js/jquery-ui-timepicker-addon.js"></script>
+    <script src="~/assets/js/admin/index.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

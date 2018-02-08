@@ -1,0 +1,86 @@
+﻿@using Entity.Entity;
+@using HanYi.Util;
+@{
+    Layout = "~/Views/Shared/_LayoutPC.cshtml";
+    var modle = ViewBag.modle as classes;
+    if (modle == null)
+    {
+        modle = new classes();
+
+    }
+}
+<section class="class-detail">
+    <div class="big-title">课件下载</div>
+    <div class="content box-content">
+        <div class="space_show" style="padding-bottom:0;">
+            @if (modle.courses.catalog != null)
+            {
+                foreach (var item1 in modle.courses.catalog)
+                {
+                    <div class="item">
+                        <div class="title">@(item1.name)</div>
+                        @if (item1.subcatalog != null)
+                        {
+                            <div class="line"></div>
+                            foreach (var item2 in item1.subcatalog)
+                            {
+                                <div class="item-sub">
+                                    <div class="subtitle">@(item2.name)</div>
+                                    @if (item2.subcatalogattachment != null && item2.subcatalogattachment.Count > 0)
+                                    {
+                                        <div class="attach-wrap clearfix">
+                                            <div class="attach-text">线上资料下载：</div>
+                                            <div class="attach-content">
+                                                @foreach (var item3 in item2.subcatalogattachment)
+                                                {
+                                                    <div class="last-attach">
+                                                        <div class="attach">
+                                                            <a download="@(item3.name)" href="@(item3.path)">
+                                                                @{
+                                                    switch (CommonBLL.GetFileType(item3.name))
+                                                    {
+                                                        case CommonBLL.FileType.DOC:
+                                                            <i class="doc">&#xe63a;</i>
+                                                            break;
+                                                        case CommonBLL.FileType.PDF:
+                                                        <i class="pdf">&#xe627;</i>
+                                                            break;
+                                                        case CommonBLL.FileType.TXT:
+                                                        <i class="txt">&#xe627;</i>
+                                                            break;
+                                                        case CommonBLL.FileType.EXECL:
+                                                        <i class="execl">&#xe684;</i>
+                                                            break;
+                                                        case CommonBLL.FileType.Video:
+                                                        <i class="video"></i>
+                                                            break;
+                                                        case CommonBLL.FileType.Audio:
+                                                        <i class="audio"></i>
+                                                            break;
+                                                        case CommonBLL.FileType.PPT:
+                                                        <i class="ppt"></i>
+                                                            break;
+                                                    }
+                                                                }
+                                                                <div class="right">
+                                                                    <div class="name">@(item3.name)</div>
+                                                                </div>
+                                                            </a>
+                                                            <div class="clearboth"></div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
+
+                        }
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+</section>

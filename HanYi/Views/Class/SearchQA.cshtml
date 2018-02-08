@@ -1,0 +1,55 @@
+﻿@using Entity.Entity;
+@{
+    Layout = null;
+    var list = ViewBag.list as List<qa>;
+    if (list == null)
+    {
+        list = new List<qa>();
+    }
+}
+@if (list.Count > 0)
+{
+    var i = 0;
+    foreach (var item in list)
+    {
+        <li>
+            <div class="ck_select clearfix">
+                <label><input name="group@(item.id)" data-parentid="@(item.id)" type="checkbox" class="js-check-all" /></label>
+                <span>@(item.user==null?item.teacher.name: item.user.name)</span>
+                <span>@(item.content)</span>
+                @if (item.qasub != null && item.qasub.Count > 0)
+                {
+                    if (i == 0)
+                    {
+                        <i class="arr-R rot-r270">收起</i>
+                    }
+                    else
+                    {
+                        <i class="arr-R rot-r90">展开</i>
+                    }
+                }
+            </div>
+            @if (item.qasub != null && item.qasub.Count > 0)
+            {
+                <dl data-name="answerlist" style="@(i == 0 ? "" : "display:none;")">
+                    @foreach(var itemsub in item.qasub)
+                    {
+                        <dd>
+                            <div class="ck_select clearfix">
+                                <label><input data-id="@(itemsub.id)" name="group@(item.id)" type="checkbox" class="checkbox" /></label>
+                                <span>@(itemsub.user==null?itemsub.teacher.name: itemsub.user.name)</span>
+                                <span>@(itemsub.content)</span>
+                            </div>
+                        </dd>
+                    }
+                </dl>
+            }
+        </li>
+        i++;
+    }
+}
+else
+{
+    <li class="noData">暂无相关数据</li>
+}
+

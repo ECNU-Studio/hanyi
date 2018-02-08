@@ -1,0 +1,55 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "设置";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+    teacheres teacher = ViewBag.teacher;
+    if (teacher == null)
+    {
+        teacher = new teacheres();
+    }
+}
+<div class="settingswrap">
+    <div class="settings">
+        <div class="headertop">
+            <a class="arrow" href="@Url.Action("PerCenter", "MobileTeacher")">
+                <img src="~/assets/img/arr-l.svg?9149506640f22a21a29f7fadf88db684" class="ar-l" style="height: 1em; width: 1em;">
+            </a>
+            <span class="title">设置</span>
+        </div>
+        <ul class="clearfix settingslist">
+            <li>
+                <span class="T">问答通知</span>
+                <span class="V">
+                    <input data-type="1" class="mui-switch" type="checkbox" @((teacher.notice_wenda.HasValue && teacher.notice_wenda.Value) ? "checked" : "")>
+                </span>
+            </li>
+            <li>
+                <span class="T">评论通知</span>
+                <span class="V">
+                    <input data-type="2" class="mui-switch" type="checkbox" @((teacher.notice_pinglun.HasValue && teacher.notice_pinglun.Value) ? "checked" : "")>
+                </span>
+            </li>
+            <li>
+                <span class="T">英文</span>
+                <span class="V">
+                    <input data-type="3" class="mui-switch" type="checkbox">
+                </span>
+            </li>
+            @*    <li>
+        <span class="T">公开排名</span>
+        <span class="V">
+            <input class="mui-switch" type="checkbox" checked>
+        </span>
+    </li>*@
+        </ul>
+        @*<ul class="list_show">
+            <li><a href="http://en2.nengli8.com/MobileTeacher/Settings"><div>English</div> <div class="item_arrow"></div></a><div class="clearboth"></div></li>
+        </ul>*@
+    </div>
+</div>
+@section scripts{
+    <script src="~/assets/js/mobileteacher/settings.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

@@ -1,0 +1,34 @@
+﻿@using Entity.Entity;
+@{
+    ViewBag.Title = "课程中心";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+    var company = ViewBag.company as companys;
+    if(company == null)
+    {
+        company = new companys();
+    }
+}
+<div class="com_logo">
+    @if (!string.IsNullOrEmpty(company.cover))
+    {
+        <img src="@(company.cover)" />
+    }
+    else
+    {
+        <img src="/assets/img/00.png" />
+    }
+</div>
+ <div style="padding-bottom:7rem;">
+    <ul class="clearfix" id="res"></ul>
+    <div class="load_more" style=" margin-top:20px">
+        <a href="javascript:void(0)" onclick="loadMore()"></a>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/assets/js/mobileuser/index.js"></script>
+
+    <script>
+        pagejs.init();
+    </script>
+}

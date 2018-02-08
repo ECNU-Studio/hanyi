@@ -1,0 +1,208 @@
+﻿@using Entity.Entity;
+@using System.Text.RegularExpressions;
+@{
+    ViewBag.Title = "MarkOrder";
+    Layout = null;
+    var listrank = ViewBag.listrank as List<ClassRankView>;
+    if (listrank == null)
+    {
+        listrank = new List<ClassRankView>();
+    }
+    var listcm = ViewBag.listcm as List<classmodels>;
+    if (listcm == null)
+    {
+        listcm = new List<classmodels>();
+    }
+}
+<div style="">
+@if ((listrank.Count > 0 && listrank[0].score > 0) || (listrank.Count > 1 && listrank[1].score > 0) || (listrank.Count > 2 && listrank[2].score > 0))
+    {
+    <div class="top flex-h flex-hc" style="padding:2rem 0;overflow:hidden;">
+        @if (listrank.Count > 1 && listrank[1].score > 0)
+        {
+            <div class="left" style="margin: 1rem 0 0 1.5rem;">
+                <div class="con-show01" style="width:7rem;height:8.5rem">
+                    <div class="con-show02">
+                        <div class="con-show03">
+                            <img src="@(listrank[1].head)" style="width:7rem;">
+                        </div>
+                    </div>
+                </div>
+                <div class="liu_bg_lr" style="width:8.5rem;height:9rem;bottom:9rem;left:-0.6rem;"></div>
+                <div class="order" style="top: 6.5rem; left: 2.2rem; ">2</div>
+                <div class="name" style="top:8.8rem;@(Regex.Match(listrank[1].username, "^[a-z]*|[A-Z]*$").Success ? "font-size:10px;" : "")">@(listrank[1].username)</div>
+            </div>
+        }
+        else
+        {
+            <div class="left">
+                <div class="con-show01" style="width:7rem;height:8.5rem">
+                </div>
+            </div>
+        }
+        @if (listrank.Count > 0 && listrank[0].score > 0)
+        {
+            <div class="middle">
+                <div class="con-show01_mid">
+                    <div class="con-show02">
+                        <div class="con-show03">
+                            <img src="@(listrank[0].head)">
+                        </div>
+                    </div>
+                </div>
+                <div class="liu_bg"></div>
+                <div class="order">1</div>
+                <div class="name_mid" style="@(Regex.Match(listrank[0].username, "^[a-z]*|[A-Z]*$").Success ? "font-size:10px;" : "")">@(listrank[0].username)</div>
+            </div>
+        }
+        else
+        {
+            <div class="middle">
+                <div class="con-show01_mid">
+                </div>
+            </div>
+        }
+       
+        @if (listrank.Count > 2 && listrank[2].score > 0)
+        {
+            <div class="right" style="margin:1rem 0 0 0;">
+                <div class="con-show01" style="width:7rem;height:8.5rem">
+                    <div class="con-show02">
+                        <div class="con-show03">
+                            <img src="@(listrank[2].head)" style="width:7rem;">
+                        </div>
+                    </div>
+                </div>
+                <div class="liu_bg_lr" style="width:8.5rem;height:9rem;bottom:9rem;left:-0.6rem;"></div>
+                <div class="order" style="top: 6.5rem; left: 2.2rem; ">3</div>
+                <div class="name" style="top: 8.8rem;@(Regex.Match(listrank[2].username, "^[a-z]*|[A-Z]*$").Success ? "font-size:10px;" : "")">@(listrank[2].username)</div>
+            </div>
+        }
+        else
+        {
+            <div class="right">
+                <div class="con-show01" style="width:7rem;height:8.5rem">
+                </div>
+            </div>
+        }
+    </div>
+}
+    @{var index = 0; }
+    @foreach (var item in listrank)
+    {
+        index++;
+        <section class="scorelist flex-vc" style="padding:1rem 0">
+            <div class="leftcontent">
+                <div class="base" style="position:relative;">
+                    <img src="@(!string.IsNullOrEmpty(item.head) ? item.head : "/assets/img/dblank_head_.png")" />
+                    <span style="@(Regex.Match(item.username, "^[a-z]*|[A-Z]*$").Success ? "font-size:1.3rem;" : "")">@(item.username)</span>
+                    <div class="order opt_show" style="">@(index)</div>
+                    @*<div class="opt_show-order"></div>*@
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="middle">
+                <div class="total">
+                    <span class="numU">@(item.score.ToString("#0"))<em>分</em></span>
+                    <span>总成绩</span>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <ul class="rightcontent">
+                @{int i = 0;}
+                @for (i = 0; i < listcm.Count; i++)
+                {
+                    var cm = listcm[i];
+                    var temprv = item.list.Where(p => p.id == cm.id).FirstOrDefault();
+                    if (i % 3 == 0)
+                    {
+                        @Html.Raw("<ul class=\"scoreTest flex-vc\">");
+                    }
+                    <li>
+                        @if (cm.type == "勾选")
+                        {
+                            //if (item.gouxuan != null && item.gouxuan != "")
+                            if (temprv != null && temprv.finish)
+                            {
+                                <i class="rw_show">&#xe612;</i>
+                            }
+                            else
+                            {
+                                <i class="rw_show">&#xe611;</i>
+                            }
+                        }
+                        else if (cm.type == "测试")
+                        {
+                            //if (item.ceshi != null && item.ceshi != "")
+                            if (temprv != null && temprv.score != "")
+                            {
+                                @*<i>@(item.ceshi)</i>*@
+                                <i>@(temprv.score)</i>
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }
+                        else if (cm.type == "问卷")
+                        {
+                            //if (item.wenjuan != null && item.wenjuan != "")
+                            if (temprv != null && temprv.score != "")
+                            {
+                                <i class="rw_show">&#xe612;</i>
+                            }
+                            else
+                            {
+                                <i class="rw_show">&#xe611;</i>
+                            }
+                        }
+                        else if (cm.type == "打分")
+                        {
+                            //if (item.dafen != null && item.dafen != "")
+                            if (temprv != null && temprv.score != "")
+                            {
+                                @*<i>@(item.dafen)</i>*@
+                                <i>@(temprv.score)</i>
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }
+                        else if (cm.type == "评价")
+                        {
+                            //if (item.pingjia != null && item.pingjia != "")
+                            if (temprv != null && temprv.score != "")
+                            {
+                                @*<i>@(item.pingjia)</i>*@
+                                <i>@(temprv.score)</i>
+                            }
+                            else
+                            {
+                                <i>0</i>
+                            }
+                        }
+                        <span>@(cm.title)</span>
+                    </li>
+
+                    if (i % 3 == 2)
+                    {
+                        @Html.Raw("</ul>");
+                    }
+
+                }
+
+                @if (i % 3 != 0)
+                {
+                    for (int j = i % 3; j < 3; j++)
+                    {
+                        @Html.Raw("<li>  </li>");
+                    }
+
+                    @Html.Raw("</ul>");
+                }
+            </ul>
+
+        </section>
+    }
+</div>

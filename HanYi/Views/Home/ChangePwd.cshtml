@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "修改密码";
+}
+
+ <div class="content">
+     <div class="c_title">
+         <h5>@(ViewBag.Title)</h5>
+     </div>
+     <div class="c_inner_wraper" id="form">
+         <div class="back_s margin_pace"><a href="@(ViewBag.returnurl)">< 返回</a></div>
+         <div class="frame_wrap edit_wrap" style="padding-top: 0; border:none">
+             
+             <ul class="edit_ul">
+                 <li class="col-12">
+                     <div class="title">原始密码：</div>
+                     <div class="value" style="position:relative;">
+                         <div class="fl"><div class="Text_long"><input id="oldpass" value="" placeholder="" class="Text_lt vali-Required" type="password" autocomplete="off" /></div></div>
+                     </div>
+                     <div class="bitian">*</div>
+                 </li>
+                 <li class="col-12">
+                     <div class="title">新密码：</div>
+                     <div class="value" style="position:relative;">
+                         <div class="fl"><div class="Text_long"><input id="newpass" value="" placeholder="" class="Text_lt vali-Required" type="password" autocomplete="off" /></div></div>
+                     </div>
+                     <div class="bitian">*</div>
+                 </li>
+                 <li class="col-12">
+                     <div class="title">确认新密码：</div>
+                     <div class="value" style="position:relative;">
+                         <div class="fl"><div class="Text_long"><input id="repass" value="" placeholder="" class="Text_lt vali-Required" type="password" autocomplete="off" /></div></div>
+                     </div>
+                     <div class="bitian">*</div>
+                 </li>
+             </ul>
+             <div class="clearboth"></div>
+             <div class="new_btn_frame fl">
+                 <div class="save btn" id="savebtn"><a href="javascript:void(0)">保存</a></div>
+                 <div class="clearboth"></div>
+             </div>
+         </div>
+     </div>
+</div>
+
+@section scripts{
+    
+    <script src="~/assets/js/home/changepwd.js"></script>
+    <script>
+        pagejs.init();
+    </script>
+}

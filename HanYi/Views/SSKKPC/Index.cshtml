@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutPC.cshtml";
+}
+
+<div class="indexlist">
+    <ul class="clearfix" id="res"></ul>
+    <div class="load_more" style=" margin-top:20px">
+        <a href="javascript:void(0)" onclick="loadMore()"></a>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/assets/js/pc/index.js"></script>
+
+    <script>
+        pagejs.init();
+    </script>
+}
+
