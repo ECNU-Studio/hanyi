@@ -23,6 +23,7 @@ namespace HanYi.Controllers
         {
             ViewBag.returnurl = returnurl;
             ViewBag.name = name;
+            
             return View();
         }
     }

@@ -65,6 +65,7 @@
     <script src="~/assets/js/common.js?vertion=@(ViewBag.version)"></script>
     <script src="~/assets/js/jquery.control.js"></script>
     <script>
+        console.log("@(ViewBag)");
         function sysExit() {
             if (window.confirm('确定退出\n【后台管理】？') == true) {
                 var paras = {
