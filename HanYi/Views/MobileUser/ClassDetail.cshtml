@@ -33,6 +33,7 @@
     {
         classaddressList = new List<classaddress>();
     }
+    var emoc = "http://127.0.0.1:8000";
 
 }
 @section styles{
@@ -121,6 +122,16 @@
     <input id="id" value="@(modle.id)" hidden="hidden" />
     <input id="username" value="@(ViewBag.username)" type="hidden" />
     <ul class="indextab">
+
+        <li>
+            <a data-href="#div_00" href="javascript:;" data-toggle="tab">
+                <h5>课前问卷</h5>
+            </a>
+            <a data-href="#div_00" href="javascript:;" data-toggle="tab">
+                <h5>问卷统计</h5>
+            </a>
+        </li>
+
         <li>
             <a data-href="#div_01" href="javascript:;" data-toggle="tab">
                 <h5>课程信息</h5>
@@ -142,6 +153,14 @@
             <a data-href="#div_04" href="javascript:;" data-toggle="tab">
 
                 <h5>班级排名</h5>
+            </a>
+        </li>
+        <li>
+            <a data-href="#div_05" href="javascript:;" data-toggle="tab">
+                <h5>课后测试</h5>
+            </a>
+            <a data-href="#div_00" href="javascript:;" data-toggle="tab">
+                <h5>测试统计</h5>
             </a>
         </li>
     </ul>

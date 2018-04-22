@@ -1,19 +1,26 @@
 ﻿@using Entity.Entity;
 @{
-    
+
     var model = ViewBag.model as courses;
-    if(model == null)
+    if (model == null)
     {
         model = new courses();
     }
     ViewBag.Title = "课程----基本信息----" + model.name;
+    var courseid = ViewBag.coursesid;
+    var emoc = "http://127.0.0.1:8000";
 }
 @section styles{
-<link href="~/assets/plugins/uploadify/uploadify.css" rel="stylesheet" />
+    <link href="~/assets/plugins/uploadify/uploadify.css" rel="stylesheet" />
     <style>
-        #picList, #picList_xz { border-radius: 50%; }
-        #picList img, #picList_xz img { width: 100px; height: 100px; }
+        #picList, #picList_xz {
+            border-radius: 50%;
+        }
 
+            #picList img, #picList_xz img {
+                width: 100px;
+                height: 100px;
+            }
     </style>
 }
 <div class="content">
@@ -31,29 +38,36 @@
                     <a href="javascript:;" data-href="#div_02" data-toggle="tab">目录与下载</a>
                 </li>
                 @*<li class="">
-                    <a href="#div_03" data-toggle="tab">班级与学员</a>
+                        <a href="#div_03" data-toggle="tab">班级与学员</a>
+                    </li>
+                    <li class="">
+                        <a href="#div_04" data-toggle="tab">课程模块</a>
+                    </li>
+                    <li class="">
+                        <a href="#div_05" data-toggle="tab">问答</a>
+                    </li>
+                    <li class="">
+                        <a href="#div_06" data-toggle="tab">评价</a>
+                    </li>
+                    <li class="">
+                        <a href="#div_07" data-toggle="tab">相册</a>
+                    </li>
+                    <li class="">
+                        <a href="#div_08" data-toggle="tab">学员进度与成绩</a>
+                    </li>*@
+                <li class="">
+                    <a href="javascript:;" data-href="#div_09" data-toggle="tab">问卷</a>
                 </li>
                 <li class="">
-                    <a href="#div_04" data-toggle="tab">课程模块</a>
+                    <a href="javascript:;" data-href="#div_10" data-toggle="tab">测试</a>
                 </li>
-                <li class="">
-                    <a href="#div_05" data-toggle="tab">问答</a>
-                </li>
-                <li class="">
-                    <a href="#div_06" data-toggle="tab">评价</a>
-                </li>
-                <li class="">
-                    <a href="#div_07" data-toggle="tab">相册</a>
-                </li>
-                <li class="">
-                    <a href="#div_08" data-toggle="tab">学员进度与成绩</a>
-                </li>*@
+
             </ul>
         </div>
         <!--tab切换-->
         <div class="tab-content">
             <div id="div_01" class="tab-pane active">
-                <div class="frame_wrap edit_wrap"  style="padding-top: 0; border:none">
+                <div class="frame_wrap edit_wrap" style="padding-top: 0; border:none">
                     <input type="hidden" id="coursesid" value="@(ViewBag.coursesid)" />
                     <ul class="edit_ul">
                         <li class="col-12">
@@ -82,7 +96,7 @@
                                     <input type="hidden" id="filesize_jj" value="@(model.abstractFilesize)" />
                                 </div>
                             </div>
-                            <div id="picList_jj" style="@(!string.IsNullOrEmpty(model.abstractFile) ? "display: block;" : "display: none;") clear: both;">                               
+                            <div id="picList_jj" style="@(!string.IsNullOrEmpty(model.abstractFile) ? "display: block;" : "display: none;") clear: both;">
                                 <div>
                                     <em>@(model.abstractFilename)</em>
                                     <a class="del_btn_jj" href="javascript:void(0)"></a>
@@ -120,29 +134,29 @@
                             </div>
                         </li>
                         @*<li class="col-12 multirow">
-                            <div class="title" style="width:60px;">勋章图：</div>
-                            <div class="value" style="position: relative; margin-top: 0; width: 72px;">
-                                <div class="fl">
-                                    <div class="btn_upload" id="pic_xz" style="width:84px;"><a href="javascript:void(0);"></a></div>
-                                    <input type="file" id="fileupload_xz" name="fileupload" />
-                                    <input id="honor" data-for="pic_xz" value="@(model.honor)" placeholder="" class="Text_lt vali-Required" type="hidden" />
+                                <div class="title" style="width:60px;">勋章图：</div>
+                                <div class="value" style="position: relative; margin-top: 0; width: 72px;">
+                                    <div class="fl">
+                                        <div class="btn_upload" id="pic_xz" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                        <input type="file" id="fileupload_xz" name="fileupload" />
+                                        <input id="honor" data-for="pic_xz" value="@(model.honor)" placeholder="" class="Text_lt vali-Required" type="hidden" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="bitian">*</div>
-                            <div id="picList_xz" style="@(!string.IsNullOrEmpty(model.honor) ? "" : "display: none;") clear: both; margin: 50px 50px 20px 50px;">
-                                <div class="upload_img">
-                                    <img src="@(model.honor)" />
-                                    <a href="javascript:void(0)" class="close"></a>
+                                <div class="bitian">*</div>
+                                <div id="picList_xz" style="@(!string.IsNullOrEmpty(model.honor) ? "" : "display: none;") clear: both; margin: 50px 50px 20px 50px;">
+                                    <div class="upload_img">
+                                        <img src="@(model.honor)" />
+                                        <a href="javascript:void(0)" class="close"></a>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>*@
+                            </li>*@
                     </ul>
                     <div class="clearboth"></div>
                     <div class="new_btn_frame fl">
                         <div class="save btn" id="savebtn"><a href="javascript:void(0)">保存</a></div>
                         <div class="clearboth"></div>
                     </div>
-                </div>  
+                </div>
             </div>
             <div id="div_02" class="tab-pane">
                 <div class="margin_pace">
@@ -151,19 +165,45 @@
                             <div class="fun_btn fl">
                                 <a class="btn_show mr_20px" href="javascript:;" id="addMain">添加章节</a>
                                 <a class="btn_show mr_20px" href="javascript:void" id="delMain">删除</a>
-                        @*<a class="btn_show mr_20px" href="javascript:void">复制</a>*@
+                                @*<a class="btn_show mr_20px" href="javascript:void">复制</a>*@
                             </div>
                         </div>
                     </div>
                     <div class="mb_30px clearfix">
                         <div id="res_main">
-                            
+
                         </div>
                     </div>
                     <div class="clearboth"></div>
                     <div class="new_btn_frame fl">
                         <div class="save btn" id="savebtn_zj"><a href="javascript:void(0)">保存</a></div>
                         <div class="clearboth"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="div_09" class="tab-pane">
+                <div class="margin_pace">
+                    <div class="clearfix">
+                        <div class="clearfix">
+                            <div class="fun_btn fl">
+                                <a class="btn_show mr_20px" href="@emoc/questionnaire/edit/@courseid/" id="addQuestionnaire" target='_blank'>管理问卷</a>
+                                <a class="btn_show mr_20px" href="@emoc/questionnaire/take/@courseid/1/" id="addQuestionnaire" target='_blank'>预览问卷</a>
+                                <a class="btn_show mr_20px" href="@emoc/questionnaire/statistics/@courseid/" id="addQuestionnaire" target='_blank'>统计问卷</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="div_10" class="tab-pane">
+                <div class="margin_pace">
+                    <div class="clearfix">
+                        <div class="clearfix">
+                            <div class="fun_btn fl">
+                                <a class="btn_show mr_20px" href="@emoc/examination/edit/@courseid/" id="addQuestionnaire" target='_blank'>管理试卷</a>
+                                <a class="btn_show mr_20px" href="@emoc/examination/take/@courseid/1/" id="addQuestionnaire" target='_blank'>预览试卷</a>
+                                <a class="btn_show mr_20px" href="@emoc/examination/statistics/@courseid/" id="addQuestionnaire" target='_blank'>统计试卷</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -193,7 +233,7 @@
                                 <div class="btn_upload" id="pic_zl" style="width:84px;"><a href="javascript:void(0);"></a></div>
                                 <input type="file" id="fileupload_zl" name="fileupload" />
                                 <input id="cover_zl" data-for="pic_zl" value="" placeholder="" class="Text_lt vali-Required" type="hidden" />
-                                <input type="hidden" id="coverurl_zl" value=""/>
+                                <input type="hidden" id="coverurl_zl" value="" />
                                 <input type="hidden" id="filesize_zl" value="" />
                             </div>
                         </div>
@@ -251,7 +291,7 @@
 @section scripts{
     <script src="~/assets/plugins/uploadify/jquery.uploadify.min.js"></script>
     <script src="~/assets/plugins/uploadify/swfobject.js"></script>
-<script src="~/assets/js/course/courses.js?v=@(ViewBag.version)"></script>
+    <script src="~/assets/js/course/courses.js?v=@(ViewBag.version)"></script>
     <script>
         pagejs.init();
     </script>
