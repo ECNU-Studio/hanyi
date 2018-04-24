@@ -47,7 +47,7 @@ namespace Entity.DAL
             }
         }
 
-        public static courses getItem(int id)
+        public static courses GetItem(int id)
         {
             using (HanYiContext db = new HanYiContext())
             {

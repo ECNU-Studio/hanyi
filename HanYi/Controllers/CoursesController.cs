@@ -224,7 +224,7 @@ namespace HanYi.Controllers
             courses model = new courses();
             if (id.HasValue)
             {
-                model = CoursesDAL.getItem(id.Value);
+                model = CoursesDAL.GetItem(id.Value);
             }
             else
             {
