@@ -47,7 +47,7 @@ namespace Entity.DAL
             }
         }
 
-        public static courses GetItem(int id)
+        public static courses getItem(int id)
         {
             using (HanYiContext db = new HanYiContext())
             {
@@ -491,7 +491,7 @@ namespace Entity.DAL
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

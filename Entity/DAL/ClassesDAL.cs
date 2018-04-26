@@ -95,8 +95,42 @@ namespace Entity.DAL
                             where  s.id==id 
                             select s;
                  return  query.FirstOrDefault();
+            }
+        }
 
-                
+        /// <summary>
+        /// 问卷详细信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static questionnaire_questionnaire getquestionnaire_questionnaireByClassId(int id)
+        {
+            using (HanYiContext db = new HanYiContext())
+            {
+                var coursesid = from s in db.classes where s.id == id select s;
+                var courses_id = coursesid.FirstOrDefault().coursesid;
+                var query = from s in db.questionnaire_questionnaire
+                            where s.course_id == courses_id
+                            select s;
+                var questionnaire_Questionnaire =  query.FirstOrDefault();
+                return questionnaire_Questionnaire;
+            }
+        }
+
+        /// <summary>
+        /// 是否回答过问卷
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static questionnaire_runinfo getquestionnaire_runinfo(int questionnaire_id,int userid)
+        {
+            using (HanYiContext db = new HanYiContext())
+            {
+                var query = from s in db.questionnaire_runinfo
+                            where s.questionnaire_id == questionnaire_id && s.user_id == userid
+                            select s;
+                var questionnaire_Runinfo = query.FirstOrDefault();
+                return questionnaire_Runinfo;
             }
         }
 

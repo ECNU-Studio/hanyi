@@ -37,5 +37,7 @@ namespace HanYi.Entity
         public virtual DbSet<admin> admin { get; set; }
         public virtual DbSet<classaddress> classaddress { get; set; }
         public virtual DbSet<keyvalue> keyvalue { get; set; }
+        public virtual DbSet<questionnaire_questionnaire> questionnaire_questionnaire { get; set; }
+        public virtual DbSet<questionnaire_runinfo> questionnaire_runinfo { get; set; }
     }        
 }

@@ -103,6 +103,8 @@
     <Compile Include="Entity\MyRankView.cs" />
     <Compile Include="Entity\qa.cs" />
     <Compile Include="Entity\qasub.cs" />
+    <Compile Include="Entity\questionnaire_questionnaire.cs" />
+    <Compile Include="Entity\questionnaire_runinfo.cs" />
     <Compile Include="Entity\scores.cs" />
     <Compile Include="Entity\ScoresView.cs" />
     <Compile Include="Entity\studystate.cs" />

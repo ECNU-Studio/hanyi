@@ -25,6 +25,8 @@
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -524,6 +526,7 @@
     <Content Include="mobileview\HtmlPage1.html" />
     <Content Include="mobileview\Login.html" />
     <Content Include="mobileview\PerCenter.html" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\zhengshi.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
