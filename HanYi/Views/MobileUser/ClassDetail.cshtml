@@ -6,6 +6,7 @@
     var modle = ViewBag.modle as classes;
     var questionnaire = ViewBag.questionnaire;
     var questionruninfo = ViewBag.question_runinfo;
+    var examination = ViewBag.examination; 
     if (modle == null)
     {
         modle = new classes();
@@ -341,14 +342,14 @@
         <div id="div_02" class="tab-pane quest_test" style="padding-bottom: 2rem;">
             @if (questionnaire != null)
             {
-            <div class="lable">课前问卷@modle.id</div>
+            <div class="lable">课前问卷</div>
                 if (questionruninfo != null)
                 {
-            <a href="@emoc/questionnaire/show/@modle.coursesid" class="normal_btn">数据统计 @modle.coursesid</a>
+            <a href="@emoc/questionnaire/statistics/@modle.coursesid" class="normal_btn">数据统计</a>
                 }
                 else
                 {
-                    <a href = "http://127.0.0.1:8000/questionnaire/take/@modle.coursesid/1/?user_id=@ViewBag.userid" class="normal_btn" >填问卷</a>
+                    <a href = "@emoc/questionnaire/take/@modle.coursesid/1/?user_id=@ViewBag.userid" class="normal_btn" >填问卷</a>
                 }
             }
             else
@@ -538,6 +539,31 @@
                 }
 
             }*@
+            @*测试*@
+            @if (ViewBag.examination_exist != null)
+            {
+                <div class="lable">课后测试</div>
+                if (examination != null)
+                {
+                    if (examination.score == null)
+                    {
+                        <a href="javascript:;" class="normal_btn" style="background:#ccc;">已完成</a>
+                    }
+                    else
+                    {
+                        <a href="@emoc/examination/statistics/@modle.coursesid" class="normal_btn" style="background:#24B1BB;">查看试卷 &nbsp; @examination.score</a>
+                    }
+
+                }
+                else
+                {
+                    <a href="@emoc/examination/take/@modle.coursesid/1/?user_id=@ViewBag.userid" class="normal_btn">做测试</a>
+                }
+            }
+            else
+            {
+
+            }
 
             <div class="lable">课程评价<em style="margin-left:0.5rem;font-weight: normal; font-size: 1.2rem; color: #797979; ">(课程结束后可以评价)</em></div>
 

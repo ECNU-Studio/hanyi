@@ -39,5 +39,7 @@ namespace HanYi.Entity
         public virtual DbSet<keyvalue> keyvalue { get; set; }
         public virtual DbSet<questionnaire_questionnaire> questionnaire_questionnaire { get; set; }
         public virtual DbSet<questionnaire_runinfo> questionnaire_runinfo { get; set; }
+        public virtual DbSet<examination_examination> examination_examination { get; set; }
+        public virtual DbSet<examination_takeinfo> examination_takeinfo { get; set; }
     }        
 }

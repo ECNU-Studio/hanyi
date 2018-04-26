@@ -69,6 +69,10 @@ namespace HanYi.Controllers
                 var modle = ClassesDAL.getClassById(id);
                 var questionnaire = ClassesDAL.getquestionnaire_questionnaireByClassId(id);
                 var question_runinfo = ClassesDAL.getquestionnaire_runinfo(questionnaire.id,user.id);
+                var examination_exist = ClassesDAL.GetExaminationID(id);
+                ViewBag.examination_exist = examination_exist;
+                var examination_takeinfo = ClassesDAL.GetExamination(id,user.id);
+                ViewBag.examination = examination_takeinfo;
                 ViewBag.question_runinfo = question_runinfo;
                 ViewBag.questionnaire = questionnaire;
                 var classAddress = ClassaddressDAL.getClassAddress(id, 1, int.MaxValue);

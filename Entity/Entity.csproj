@@ -96,6 +96,8 @@
     <Compile Include="Entity\commentsub.cs" />
     <Compile Include="Entity\companys.cs" />
     <Compile Include="Entity\courses.cs" />
+    <Compile Include="Entity\examination_examination.cs" />
+    <Compile Include="Entity\examination_takeinfo.cs" />
     <Compile Include="Entity\HanYiContext.cs" />
     <Compile Include="Entity\keyvalue.cs" />
     <Compile Include="Entity\medal.cs" />

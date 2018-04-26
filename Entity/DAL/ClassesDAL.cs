@@ -133,7 +133,44 @@ namespace Entity.DAL
                 return questionnaire_Runinfo;
             }
         }
-
+        ///<summary>
+        ///获取examinationid
+        ///</summary>
+        ///<param name="classesid"></param>
+        ///<return></return>
+        public static examination_examination GetExaminationID(int classesid)
+        {
+            var classes_info = getClassById(classesid);
+            var coures_id = classes_info.coursesid;
+            using (HanYiContext db = new HanYiContext())
+            {
+                var examinationid = from s in db.examination_examination where s.course_id == coures_id select s;
+                var examination = examinationid.FirstOrDefault();
+                return examination;
+            }
+        }
+        /// <summary>
+        /// 是否填写测试
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static examination_takeinfo GetExamination(int classesid, int userid)
+        {
+            var examination = GetExaminationID(classesid);
+            if (examination == null)
+            {
+                return null;
+            }
+            var examination_id = examination.id;
+            using (HanYiContext db = new HanYiContext())
+            {
+                var query = from s in db.examination_takeinfo
+                            where s.examination_id == examination_id && s.user_id == userid
+                            select s;
+                var examination_takeinfo = query.FirstOrDefault();
+                return examination_takeinfo;
+            }
+        }
         /// <summary>
         /// 根据培训师id获取培训师 课程
         /// </summary>
