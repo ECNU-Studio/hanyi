@@ -291,3 +291,4 @@ __pycache__/
 HanYi/Web.config
 *.bat
 **/user-doc/*
+*.csproj

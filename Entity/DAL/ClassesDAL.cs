@@ -3,11 +3,15 @@ using HanYi.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using MySql.Data.MySqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity.DAL
 {
+    
+
     public class ClassesDAL : BaseDAL
     {
         /// <summary>
@@ -149,7 +153,8 @@ namespace Entity.DAL
             var coures_id = classes_info.coursesid;
             using (HanYiContext db = new HanYiContext())
             {
-                var examinationid = from s in db.examination_examination where s.course_id == coures_id select s;
+                var examinationid = from s in db.examination_examination
+                                    where s.course_id == coures_id select s;
                 var examination = examinationid.FirstOrDefault();
                 return examination;
             }
@@ -166,14 +171,14 @@ namespace Entity.DAL
             {
                 return null;
             }
-            var examination_id = examination.id;
-            using (HanYiContext db = new HanYiContext())
-            {
-                
-                var examinationtakeinfo = from s in db.examination_takeinfo where s.examination_id == examination_id && s.user_id == userid select s;
-                var examination_takeinfo = examinationtakeinfo.FirstOrDefault();
-                return examination_takeinfo;
-            }
+            string strSql = "select * from examination_takeinfo where user_id="+userid.ToString()+ " and examination_id="+examination.id.ToString();
+            DataSet ds = new DataSet();
+            ds = MySqlHelper.GetDataSet(MySqlHelper.Conn, CommandType.Text, strSql, null);
+            DataTable dt = ds.Tables[0];
+            examination_takeinfo model = new examination_takeinfo();
+            model.id = Int16.Parse(dt.Rows[0]["id"].ToString().Trim());
+            model.score = Int16.Parse(dt.Rows[0]["score"].ToString().Trim());
+            return model;
         }
         /// <summary>
         /// 根据培训师id获取培训师 课程
