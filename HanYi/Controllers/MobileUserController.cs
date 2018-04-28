@@ -67,14 +67,18 @@ namespace HanYi.Controllers
                // string svgData = "[]";
              //   List<Dictionary<string, object>> res = new List<Dictionary<string, object>>();
                 var modle = ClassesDAL.getClassById(id);
+                //获取问卷信息
                 var questionnaire = ClassesDAL.getquestionnaire_questionnaireByClassId(id);
-                var question_runinfo = ClassesDAL.getquestionnaire_runinfo(questionnaire.id,user.id);
+                ViewBag.questionnaire = questionnaire;
+                //获取是否做过问卷信息
+                var question_runinfo = ClassesDAL.getquestionnaire_runinfo(id,user.id);
+                ViewBag.question_runinfo = question_runinfo;
+                //试卷是否存在
                 var examination_exist = ClassesDAL.GetExaminationID(id);
                 ViewBag.examination_exist = examination_exist;
-                var examination_takeinfo = ClassesDAL.GetExamination(id,user.id);
+                //学生是否做完试卷
+                var examination_takeinfo = ClassesDAL.GetExamination(id, user.id);
                 ViewBag.examination = examination_takeinfo;
-                ViewBag.question_runinfo = question_runinfo;
-                ViewBag.questionnaire = questionnaire;
                 var classAddress = ClassaddressDAL.getClassAddress(id, 1, int.MaxValue);
                 List<classaddress> classAddresslist = new List<classaddress>();
                 if (classAddresslist != null)
@@ -142,7 +146,7 @@ namespace HanYi.Controllers
                     newalbum = AlbumDAL.getAlbumById(temp.id);
                 }
                 ViewBag.newalbum = newalbum;
-
+               
             }
             catch { }
             return View();

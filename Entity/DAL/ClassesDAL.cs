@@ -122,12 +122,17 @@ namespace Entity.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static questionnaire_runinfo getquestionnaire_runinfo(int questionnaire_id,int userid)
+        public static questionnaire_runinfo getquestionnaire_runinfo(int id,int userid)
         {
+            var questionnaire_id = getquestionnaire_questionnaireByClassId(id);
+            if (questionnaire_id == null)
+            {
+                return null;
+            }
             using (HanYiContext db = new HanYiContext())
             {
                 var query = from s in db.questionnaire_runinfo
-                            where s.questionnaire_id == questionnaire_id && s.user_id == userid
+                            where s.questionnaire_id == questionnaire_id.id && s.user_id == userid
                             select s;
                 var questionnaire_Runinfo = query.FirstOrDefault();
                 return questionnaire_Runinfo;
@@ -164,10 +169,10 @@ namespace Entity.DAL
             var examination_id = examination.id;
             using (HanYiContext db = new HanYiContext())
             {
-                var query = from s in db.examination_takeinfo
-                            where s.examination_id == examination_id && s.user_id == userid
+                var examinationtakeinfo = from s in db.examination_takeinfo
+                            //where s.examination_id == examination_id && s.user_id == userid
                             select s;
-                var examination_takeinfo = query.FirstOrDefault();
+                var examination_takeinfo = examinationtakeinfo.First();
                 return examination_takeinfo;
             }
         }
