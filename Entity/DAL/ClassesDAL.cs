@@ -169,10 +169,9 @@ namespace Entity.DAL
             var examination_id = examination.id;
             using (HanYiContext db = new HanYiContext())
             {
-                var examinationtakeinfo = from s in db.examination_takeinfo
-                            //where s.examination_id == examination_id && s.user_id == userid
-                            select s;
-                var examination_takeinfo = examinationtakeinfo.First();
+                
+                var examinationtakeinfo = from s in db.examination_takeinfo where s.examination_id == examination_id && s.user_id == userid select s;
+                var examination_takeinfo = examinationtakeinfo.FirstOrDefault();
                 return examination_takeinfo;
             }
         }
