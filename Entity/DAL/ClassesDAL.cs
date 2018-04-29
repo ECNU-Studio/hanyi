@@ -104,6 +104,7 @@ namespace Entity.DAL
 
         /// <summary>
         /// 问卷详细信息
+        /// 通过classId查询questionnaire_questionnaire表中是否存该课程的问卷还有是否发布
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -114,7 +115,7 @@ namespace Entity.DAL
                 var coursesid = from s in db.classes where s.id == id select s;
                 var courses_id = coursesid.FirstOrDefault().coursesid;
                 var query = from s in db.questionnaire_questionnaire
-                            where s.course_id == courses_id
+                            where s.course_id == courses_id && s.is_published == 1
                             select s;
                 var questionnaire_Questionnaire =  query.FirstOrDefault();
                 return questionnaire_Questionnaire;
@@ -123,6 +124,7 @@ namespace Entity.DAL
 
         /// <summary>
         /// 是否回答过问卷
+        /// 查询questionnaire_runinfo表查看用户是否做过问卷
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -144,17 +146,18 @@ namespace Entity.DAL
         }
         ///<summary>
         ///获取examinationid
+        ///查询examination_examination表是否存在该课程问卷
         ///</summary>
         ///<param name="classesid"></param>
         ///<return></return>
         public static examination_examination GetExaminationID(int classesid)
         {
             var classes_info = getClassById(classesid);
-            var coures_id = classes_info.coursesid;
+            var coures_id = classes_info.coursesid;//获取该课程id
             using (HanYiContext db = new HanYiContext())
             {
                 var examinationid = from s in db.examination_examination
-                                    where s.course_id == coures_id select s;
+                                    where s.course_id == coures_id && s.is_published == 1 select s;
                 var examination = examinationid.FirstOrDefault();
                 return examination;
             }
