@@ -8,7 +8,8 @@
     }
     ViewBag.Title = "课程----基本信息----" + model.name;
     var courseid = ViewBag.coursesid;
-    var emoc = "http://123.207.228.35:8008";
+    //var emoc = "http://123.207.228.35:8008";
+    var emoc = "http://127.0.0.1:8000";
 }
 @section styles{
     <link href="~/assets/plugins/uploadify/uploadify.css" rel="stylesheet" />
@@ -187,7 +188,7 @@
                         <div class="clearfix">
                             <div class="fun_btn fl">
                                 <a class="btn_show mr_20px" href="@emoc/questionnaire/edit/@courseid/" id="addQuestionnaire" target='_blank'>管理问卷</a>
-                                <a class="btn_show mr_20px" href="@emoc/questionnaire/take/@courseid/1/" id="addQuestionnaire" target='_blank'>预览问卷</a>
+                                <a class="btn_show mr_20px" href="@emoc/questionnaire/take/@courseid/0/" id="addQuestionnaire" target='_blank'>预览问卷</a>
                                 <a class="btn_show mr_20px" href="@emoc/questionnaire/statistics/@courseid/" id="addQuestionnaire" target='_blank'>统计问卷</a>
                             </div>
                         </div>
@@ -200,7 +201,7 @@
                         <div class="clearfix">
                             <div class="fun_btn fl">
                                 <a class="btn_show mr_20px" href="@emoc/examination/edit/@courseid/" id="addQuestionnaire" target='_blank'>管理试卷</a>
-                                <a class="btn_show mr_20px" href="@emoc/examination/take/@courseid/1/" id="addQuestionnaire" target='_blank'>预览试卷</a>
+                                <a class="btn_show mr_20px" href="@emoc/examination/take/@courseid/0/" id="addQuestionnaire" target='_blank'>预览试卷</a>
                                 <a class="btn_show mr_20px" href="@emoc/examination/statistics/@courseid/" id="addQuestionnaire" target='_blank'>统计试卷</a>
                             </div>
                         </div>
