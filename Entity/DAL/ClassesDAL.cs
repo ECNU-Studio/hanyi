@@ -123,6 +123,24 @@ namespace Entity.DAL
         }
 
         /// <summary>
+        /// 问卷详细信息
+        /// 通过courseid查询questionnaire_questionnaire表中是否存该课程的问卷
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static questionnaire_questionnaire getquestionnaire_questionnaireByCourseId(int id)
+        {
+            using (HanYiContext db = new HanYiContext())
+            {
+                var query = from s in db.questionnaire_questionnaire
+                            where s.course_id == id 
+                            select s;
+                var questionnaire_Questionnaire = query.FirstOrDefault();
+                return questionnaire_Questionnaire;
+            }
+        }
+
+        /// <summary>
         /// 是否回答过问卷
         /// 查询questionnaire_runinfo表查看用户是否做过问卷
         /// </summary>
@@ -162,6 +180,8 @@ namespace Entity.DAL
                 return examination;
             }
         }
+
+
         /// <summary>
         /// 是否填写测试
         /// </summary>
@@ -183,6 +203,25 @@ namespace Entity.DAL
             model.score = Int16.Parse(dt.Rows[0]["score"].ToString().Trim());
             return model;
         }
+
+        ///<summary>
+        ///获取examination信息
+        ///查询examination_examination表是否存在该课程问卷
+        ///</summary>
+        ///<param name="classesid"></param>
+        ///<return></return>
+        public static examination_examination getExaminationByCourseid(int id)
+        {
+            using (HanYiContext db = new HanYiContext())
+            {
+                var examinationid = from s in db.examination_examination
+                                    where s.course_id == id
+                                    select s;
+                var examination = examinationid.FirstOrDefault();
+                return examination;
+            }
+        }
+
         /// <summary>
         /// 根据培训师id获取培训师 课程
         /// </summary>

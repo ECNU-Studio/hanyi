@@ -230,8 +230,12 @@ namespace HanYi.Controllers
             {
                 return Redirect("/Courses/Index");
             }
+            var questionnaire = ClassesDAL.getquestionnaire_questionnaireByCourseId(model.id);
+            var examination = ClassesDAL.getExaminationByCourseid(model.id);
             ViewBag.model = model;
             ViewBag.coursesid = id;
+            ViewBag.questionnaire = questionnaire;
+            ViewBag.examination = examination;
             return View();
         }
 
