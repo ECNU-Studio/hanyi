@@ -8,8 +8,8 @@
     }
     ViewBag.Title = "课程----基本信息----" + model.name;
     var courseid = ViewBag.coursesid;
-    //var emoc = "http://123.207.228.35:8008";
     var emoc = "http://127.0.0.1:8000";
+    //var emoc = "http://123.207.228.35:8008";
 }
 @section styles{
     <link href="~/assets/plugins/uploadify/uploadify.css" rel="stylesheet" />
@@ -29,7 +29,9 @@
         <h5>@(ViewBag.Title)</h5>
     </div>
     <div class="c_inner_wraper" id="form">
-        <div class="back_s margin_pace"><a href="@Url.Action("Index", "Courses", new { back = "1" })">< 返回课程</a></div>
+        <div class="back_s margin_pace">
+            <a href="@Url.Action("Index", "Courses", new { back = "1" })">< 返回课程</a>
+        </div>
         <div class="tab_ul margin_pace">
             <ul class="clearfix tab_show">
                 <li class="active">
@@ -74,7 +76,11 @@
                         <li class="col-12">
                             <div class="title">课程名称：</div>
                             <div class="value" style="position:relative;">
-                                <div class="fl"><div class="Text_long"><input id="name" value="@(model.name)" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                                <div class="fl">
+                                    <div class="Text_long">
+                                        <input id="name" value="@(model.name)" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="bitian">*</div>
                         </li>
@@ -89,7 +95,9 @@
                             <div class="title">简介附件：</div>
                             <div class="value" style="position: relative; margin-top: 0; width: 72px;">
                                 <div class="fl">
-                                    <div class="btn_upload" id="pic_jj" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                    <div class="btn_upload" id="pic_jj" style="width:84px;">
+                                        <a href="javascript:void(0);"></a>
+                                    </div>
                                     <input type="file" id="fileupload_jj" name="fileupload" />
                                     <input id="cover_jj" data-for="pic_jj" value="" placeholder="" class="Text_lt" type="hidden" />
                                     <input type="hidden" id="name_jj" value="@(model.abstractFilename)" />
@@ -121,7 +129,9 @@
                             <div class="title" style="width:60px;">封面：</div>
                             <div class="value" style="position: relative; margin-top: 0; width: 72px;">
                                 <div class="fl">
-                                    <div class="btn_upload" id="pic" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                    <div class="btn_upload" id="pic" style="width:84px;">
+                                        <a href="javascript:void(0);"></a>
+                                    </div>
                                     <input type="file" id="fileupload" name="fileupload" />
                                     <input id="cover" data-for="pic" value="@(model.cover)" placeholder="" class="Text_lt vali-Required" type="hidden" />
                                 </div>
@@ -154,7 +164,9 @@
                     </ul>
                     <div class="clearboth"></div>
                     <div class="new_btn_frame fl">
-                        <div class="save btn" id="savebtn"><a href="javascript:void(0)">保存</a></div>
+                        <div class="save btn" id="savebtn">
+                            <a href="javascript:void(0)">保存</a>
+                        </div>
                         <div class="clearboth"></div>
                     </div>
                 </div>
@@ -177,7 +189,9 @@
                     </div>
                     <div class="clearboth"></div>
                     <div class="new_btn_frame fl">
-                        <div class="save btn" id="savebtn_zj"><a href="javascript:void(0)">保存</a></div>
+                        <div class="save btn" id="savebtn_zj">
+                            <a href="javascript:void(0)">保存</a>
+                        </div>
                         <div class="clearboth"></div>
                     </div>
                 </div>
@@ -237,7 +251,11 @@
                     <li class="col-12">
                         <div class="title">标题：</div>
                         <div class="value" style="position:relative;">
-                            <div class="fl"><div class="Text_long"><input id="name_zl" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                            <div class="fl">
+                                <div class="Text_long">
+                                    <input id="name_zl" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" />
+                                </div>
+                            </div>
                         </div>
                         <div class="bitian">*</div>
                     </li>
@@ -245,7 +263,9 @@
                         <div class="title">资料：</div>
                         <div class="value" style="position: relative; margin-top: 0; width: 72px;">
                             <div class="fl">
-                                <div class="btn_upload" id="pic_zl" style="width:84px;"><a href="javascript:void(0);"></a></div>
+                                <div class="btn_upload" id="pic_zl" style="width:84px;">
+                                    <a href="javascript:void(0);"></a>
+                                </div>
                                 <input type="file" id="fileupload_zl" name="fileupload" />
                                 <input id="cover_zl" data-for="pic_zl" value="" placeholder="" class="Text_lt vali-Required" type="hidden" />
                                 <input type="hidden" id="coverurl_zl" value="" />
@@ -260,8 +280,12 @@
                 </ul>
                 <div class="clearboth"></div>
                 <div class="new_btn_frame">
-                    <div class="save btn" id="savebtn_zl"><a href="javascript:void(0)">保存</a></div>
-                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="save btn" id="savebtn_zl">
+                        <a href="javascript:void(0)">保存</a>
+                    </div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();">
+                        <a href="javascript:void(0)">取消</a>
+                    </div>
                     <div class="clearboth"></div>
                 </div>
             </div>
@@ -280,22 +304,34 @@
                     <li class="col-12">
                         <div class="title">标题：</div>
                         <div class="value" style="position:relative;">
-                            <div class="fl"><div class="Text_long"><input id="name_zl_link" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                            <div class="fl">
+                                <div class="Text_long">
+                                    <input id="name_zl_link" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" />
+                                </div>
+                            </div>
                         </div>
                         <div class="bitian">*</div>
                     </li>
                     <li class="col-12">
                         <div class="title">外链：</div>
                         <div class="value" style="position:relative;">
-                            <div class="fl"><div class="Text_long"><input id="cover_zl_link" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" /></div></div>
+                            <div class="fl">
+                                <div class="Text_long">
+                                    <input id="cover_zl_link" value="" placeholder="" class="Text_lt vali-Required" type="text" autocomplete="off" />
+                                </div>
+                            </div>
                         </div>
                         <div class="bitian">*</div>
                     </li>
                 </ul>
                 <div class="clearboth"></div>
                 <div class="new_btn_frame">
-                    <div class="save btn" id="savebtn_zl_link"><a href="javascript:void(0)">保存</a></div>
-                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();"><a href="javascript:void(0)">取消</a></div>
+                    <div class="save btn" id="savebtn_zl_link">
+                        <a href="javascript:void(0)">保存</a>
+                    </div>
+                    <div class="cancel btn" onclick="$('.frame_panel').hide(); CloseAllErrorTip();">
+                        <a href="javascript:void(0)">取消</a>
+                    </div>
                     <div class="clearboth"></div>
                 </div>
             </div>

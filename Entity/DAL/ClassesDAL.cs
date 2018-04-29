@@ -198,10 +198,18 @@ namespace Entity.DAL
             DataSet ds = new DataSet();
             ds = MySqlHelper.GetDataSet(MySqlHelper.Conn, CommandType.Text, strSql, null);
             DataTable dt = ds.Tables[0];
-            examination_takeinfo model = new examination_takeinfo();
-            model.id = Int16.Parse(dt.Rows[0]["id"].ToString().Trim());
-            model.score = Int16.Parse(dt.Rows[0]["score"].ToString().Trim());
-            return model;
+            if (dt.Rows.Count > 0)
+            {
+                examination_takeinfo model = new examination_takeinfo();
+                model.id = Int16.Parse(dt.Rows[0]["id"].ToString().Trim());
+                model.score = Int16.Parse(dt.Rows[0]["score"].ToString().Trim());
+                return model;
+            }
+            else {
+                return null;
+            }
+           
+           
         }
 
         ///<summary>
