@@ -12,7 +12,7 @@ using System.Data;
 public abstract class MySqlHelper
 {
     //数据库连接字符串
-    public static string Conn = "Data Source = 60.205.207.44;port=33306;Initial Catalog=test; user id = root; password = root;Allow Zero Datetime=True;Character Set=utf8;";
+    public static string Conn = "Data Source = 127.0.0.1;port=3306;Initial Catalog=hanyi; user id = root; password = root;Allow Zero Datetime=True;Character Set=utf8;";
     // 用于缓存参数的HASH表
     private static Hashtable parmCache = Hashtable.Synchronized(new Hashtable());
 

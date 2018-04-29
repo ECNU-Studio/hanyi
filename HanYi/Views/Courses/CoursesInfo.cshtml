@@ -201,15 +201,15 @@
                     <div class="clearfix">
                         <div class="clearfix">
                             <div class="fun_btn fl">
-                                @if (ViewBag.questionnaire.is_published == 0 || ViewBag.questionnaire == null)
+                                @if (ViewBag.questionnaire == null || ViewBag.questionnaire.is_published == 0)
                                 {
-                                    <a class="btn_show mr_20px" href="@emoc/questionnaire/edit/@courseid/" id="addQuestionnaire" target='_blank'>管理问卷</a>
-                                    <a class="btn_show mr_20px" href="@emoc/questionnaire/take/@courseid/0/" id="addQuestionnaire" target='_blank'>预览问卷</a>
+                                    <a class="btn_show mr_20px" href="@emoc/questionnaire/edit/@courseid/" target='_blank'>管理问卷</a>
+                                    <a class="btn_show mr_20px" href="@emoc/questionnaire/take/@courseid/0/" target='_blank'>预览问卷</a>
                                 }
                                 else if (ViewBag.questionnaire.is_published == 1)
                                 {
-                                    <a class="btn_show mr_20px" href="@emoc/questionnaire/take/@courseid/0/" id="addQuestionnaire" target='_blank'>预览问卷</a>
-                                    <a class="btn_show mr_20px" href="@emoc/questionnaire/statistics/@courseid/" id="addQuestionnaire" target='_blank'>统计问卷</a>
+                                    <a class="btn_show mr_20px" href="@emoc/questionnaire/take/@courseid/0/" target='_blank'>预览问卷</a>
+                                    <a class="btn_show mr_20px" href="@emoc/questionnaire/statistics/@courseid/" target='_blank'>统计问卷</a>
                                 }
                             </div>
                         </div>
@@ -221,15 +221,15 @@
                     <div class="clearfix">
                         <div class="clearfix">
                             <div class="fun_btn fl">
-                                @if (ViewBag.examination.is_published == 0 || ViewBag.questionnaire == null)
+                                @if (ViewBag.examination == null || ViewBag.examination.is_published == 0)
                                 {
-                                    <a class="btn_show mr_20px" href="@emoc/examination/edit/@courseid/" id="addQuestionnaire" target='_blank'>管理试卷</a>
-                                    <a class="btn_show mr_20px" href="@emoc/examination/take/@courseid/0/" id="addQuestionnaire" target='_blank'>预览试卷</a>
+                                    <a class="btn_show mr_20px" href="@emoc/examination/edit/@courseid/" target='_blank'>管理试卷</a>
+                                    <a class="btn_show mr_20px" href="@emoc/examination/take/@courseid/0/" target='_blank'>预览试卷</a>
                                 }
                                 else if (ViewBag.examination.is_published == 1)
                                 {
-                                    <a class="btn_show mr_20px" href="@emoc/examination/take/@courseid/0/" id="addQuestionnaire" target='_blank'>预览试卷</a>
-                                    <a class="btn_show mr_20px" href="@emoc/examination/statistics/@courseid/" id="addQuestionnaire" target='_blank'>统计试卷</a>
+                                    <a class="btn_show mr_20px" href="@emoc/examination/take/@courseid/0/" target='_blank'>预览试卷</a>
+                                    <a class="btn_show mr_20px" href="@emoc/examination/statistics/@courseid/" target='_blank'>统计试卷</a>
                                 }
                             </div>
                         </div>
