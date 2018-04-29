@@ -6,7 +6,7 @@
     var modle = ViewBag.modle as classes;
     var questionnaire = ViewBag.questionnaire;
     var questionruninfo = ViewBag.question_runinfo;
-    var examination = ViewBag.examination; 
+    var examination = ViewBag.examination;
     if (modle == null)
     {
         modle = new classes();
@@ -36,7 +36,8 @@
     {
         classaddressList = new List<classaddress>();
     }
-    var emoc = "http://123.207.228.35:8008";
+    //var emoc = "http://123.207.228.35:8008";
+    var emoc = "http://127.0.0.1:8000";
 
 }
 @section styles{
@@ -557,7 +558,7 @@
                 }
                 else
                 {
-                    <a href="@emoc/examination/take/@modle.coursesid/0/?user_id=@ViewBag.userid" class="normal_btn">做测试</a>
+                    <a href="@emoc/examination/take/@modle.coursesid/1/?user_id=@ViewBag.userid" class="normal_btn">做测试</a>
                 }
             }
             else

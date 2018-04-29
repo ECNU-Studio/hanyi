@@ -77,6 +77,7 @@
     <Compile Include="DAL\KeyValueDAL.cs" />
     <Compile Include="DAL\MedalDAL.cs" />
     <Compile Include="DAL\MedaluserDAL.cs" />
+    <Compile Include="DAL\MySqlHelper.cs" />
     <Compile Include="DAL\QaDAL.cs" />
     <Compile Include="DAL\ScoresDAL.cs" />
     <Compile Include="DAL\StudystateDAL.cs" />
