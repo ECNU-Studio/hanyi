@@ -181,7 +181,44 @@ input:-webkit-autofill { background-color: transparent; background-image: none; 
 .socre { display: block; font-size: 2.5rem; margin: 1rem 0; color: #24b1bb;font-weight:bold;}
 .socre .num { font-size:1rem;}
 
-.normal_btn { width: 10rem; background: #094270; text-align: center; color: white; display: block; font-size: 1.5rem; padding: 1rem 0; margin: 1.5rem 0; letter-spacing: 0.3rem; }
+.normal_btn {
+   
+    width: 10rem;
+    background: #094270;
+    text-align: center;
+    color: white;
+    display: block;
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    margin: 1.5rem 0;
+    letter-spacing: 0.3rem;
+}
+.normal_btn1 {
+    display: inline-block;
+    background: #666;
+}
+
+.normal_btn2 {
+    display: inline-block;
+}
+.normal_btn3 {
+    display: inline-block;
+    background: #666;
+}
+
+.normal_btn4 {
+    display: inline-block;
+}
+.number {
+    font-size: 35px;
+    /*display: block;*/
+    margin-left: 10px;
+    color: red
+}
+.fenshu {
+    font-size: 16px;
+    color: #000;
+}
 .line{ height: 1px; background-color: #cccccc;}
 .tab-content .quest_test .intro { position: relative;}
 .tab-content .quest_test .q_cont { border-bottom:1px solid #ccc;}

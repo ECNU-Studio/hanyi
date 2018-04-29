@@ -346,8 +346,8 @@
             <div class="lable">课前问卷</div>
                 if (questionruninfo != null)
                 {
-                    <a href="@emoc/questionnaire/show/@questionruninfo.id/" class="normal_btn">详细</a>
-                    <a href="@emoc/questionnaire/statistics/@modle.coursesid" class="normal_btn">统计</a>
+                    <a href="@emoc/questionnaire/show/@questionruninfo.id/" class="normal_btn normal_btn1">已完成</a>
+                    <a href="@emoc/questionnaire/statistics/@modle.coursesid" class="normal_btn normal_btn2">统计数据</a>
                 }
                 else
                 {
@@ -554,8 +554,9 @@
                         else
                         {
                             
-                            <a href="@emoc/examination/show/@examination.id/" class="normal_btn">详细</a>
-                            <a href="@emoc/examination/statistics/@modle.coursesid" class="normal_btn" style="background:#24B1BB;">统计 &nbsp; @examination.score</a>
+                            <a href="@emoc/examination/show/@examination.id/" class="normal_btn normal_btn3">已完成</a>
+                            <a href="@emoc/examination/statistics/@modle.coursesid" class="normal_btn normal_btn4" >统计数据</a><br>
+                            <span>得分：</span><span class="number">@examination.score <span class="fenshu">分</span></span>
                     }
 
                 }
