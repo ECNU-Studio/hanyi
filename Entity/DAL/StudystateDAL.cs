@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Entity.DAL
 {
@@ -82,6 +84,34 @@ namespace Entity.DAL
                 return res;
             }
         }
+
+        /// <summary>
+        /// 获取问卷测试模块完成状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool getQuestionnaireExamination(int courseid ,int userid)
+        {
+            bool res = false;
+            var examination = ClassesDAL.getExaminationByCourseid(courseid);
+            string strSql1 = "select * from examination_takeinfo where user_id=" + userid.ToString() + " and examination_id=" + examination.id.ToString();
+            DataSet ds1 = new DataSet();
+            ds1 = MySqlHelper.GetDataSet(MySqlHelper.Conn, CommandType.Text, strSql1, null);
+            DataTable dt1 = ds1.Tables[0];
+            if (dt1.Rows.Count > 0)
+            {
+                var questionnaire = ClassesDAL.getquestionnaire_questionnaireByCourseId(courseid);
+                string strSql2 = "select * from questionnaire_runinfo where user_id=" + userid.ToString() + " and questionnaire_id=" + questionnaire.id.ToString();
+                DataSet ds2 = new DataSet();
+                ds2 = MySqlHelper.GetDataSet(MySqlHelper.Conn, CommandType.Text, strSql2, null);
+                DataTable dt2 = ds2.Tables[0];
+                if (dt2.Rows.Count > 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// 获取班级的学生进度

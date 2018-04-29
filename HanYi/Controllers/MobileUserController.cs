@@ -388,23 +388,33 @@ namespace HanYi.Controllers
                 var modle = ClassesDAL.getClassById(id);
                 bool isComment = false;
                 bool hasComment = false;
-                Dictionary<int, int> state = StudystateDAL.getStudentState(user.id);
-                var finishpercent = modle.classmodels.Count() > 0 ? 100.0 * (state.ContainsKey(modle.id) ? state[modle.id] : 0 + 1) / modle.classmodels.Count() : 0.0;
-                if (state.Keys.Contains(id))
-                {
-                    if (modle.classmodels.Count() == state[id])
+                bool is_finished = StudystateDAL.getQuestionnaireExamination(modle.coursesid,user.id);
+                //Dictionary<int, int> state = StudystateDAL.getStudentState(user.id);
+                //var finishpercent = modle.classmodels.Count() > 0 ? 100.0 * (state.ContainsKey(modle.id) ? state[modle.id] : 0 + 1) / modle.classmodels.Count() : 0.0;
+                //if (state.Keys.Contains(id))
+                //{
+                //    if (modle.classmodels.Count() == state[id])
+                //    {
+                //        //课程已完成
+                //        isComment = true;
+                //        Dictionary<int, bool> comment = CommentDAL.getUserCommentStatic(user.id);
+                //        if (comment != null && comment.Keys.Contains(id))
+                //        {
+                //            hasComment = true;
+                //        }
+                //    }
+                //}
+                if (is_finished) {
+                    isComment = true;
+                    Dictionary<int, bool> comment = CommentDAL.getUserCommentStatic(user.id);
+                    if (comment != null && comment.Keys.Contains(id))
                     {
-                        //课程已完成
-                        isComment = true;
-                        Dictionary<int, bool> comment = CommentDAL.getUserCommentStatic(user.id);
-                        if (comment != null && comment.Keys.Contains(id))
-                        {
-                            hasComment = true;
-                        }
+                        hasComment = true;
                     }
                 }
                 ViewBag.isComment = isComment; 
                 ViewBag.hasComment = hasComment;
+                ViewBag.isFinished = is_finished;
             }
             catch (Exception e) { }
             ViewBag.classid = id;
